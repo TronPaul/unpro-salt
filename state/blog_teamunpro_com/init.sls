@@ -10,6 +10,7 @@ extend:
         - file: /etc/nginx/sites-available/blog.teamunpro.com.conf
     service:
       - watch:
+        - file: /etc/nginx/sites-enabled/blog.teamunpro.com.conf
         - file: /etc/nginx/sites-available/blog.teamunpro.com.conf
 
 /etc/nginx/sites-available/blog.teamunpro.com.conf:
