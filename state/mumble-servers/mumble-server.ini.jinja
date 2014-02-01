@@ -1,4 +1,4 @@
-{% set database = mumble_server.get('database', '/var/lib/mumble-server/mumble-server.sqlite') -%}
+{% set database_dir = mumble_server.get('database_dir', '/var/lib/mumble-server') -%}
 {% set welcometext = mumble_server.get('welcometext', '<br />Welcome to this server running <b>Murmur</b>.<br />Enjoy your stay!<br />') -%}
 {% set port = mumble_server.get('port', 64738) -%}
 {% set users = mumble_server.get('users', 100) -%}
@@ -7,7 +7,7 @@
 
 # Path to database. If blank, will search for
 # murmur.sqlite in default locations or create it if not found.
-database={{ database }}
+database={{ database }}/{{ server_name }}
 
 # If you wish to use something other than SQLite, you'll need to set the name
 # of the database above, and also uncomment the below.
