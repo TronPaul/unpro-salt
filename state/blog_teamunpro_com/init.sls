@@ -33,5 +33,5 @@ pelican:
     - require:
       - pkg: nginx
   ssh_auth.present:
-    - source: salt://ssh-keys/tron_linode.id_rsa.pub
+    - source: salt://ssh_keys/tron_linode.id_rsa.pub
     - user: pelican
