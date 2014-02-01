@@ -12,3 +12,11 @@ nginx:
   file.absent:
     - require_in:
       - service: nginx
+
+/srv/http:
+  file.directory:
+    - user: www-data
+    - group: www-data
+    - mode: 755
+    - require_in:
+      - service: nginx
