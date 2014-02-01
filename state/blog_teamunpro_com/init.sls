@@ -32,3 +32,6 @@ pelican:
       - www-data
     - require:
       - pkg: nginx
+  ssh_auth.present:
+    - source: salt://ssh-keys/tron_linode.id_rsa.pub
+    - user: pelican
