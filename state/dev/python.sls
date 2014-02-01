@@ -6,10 +6,6 @@ python-virtualenv:
   pkg:
     - installed
 
-python3-virtualenv:
-  pkg:
-    - installed
-
 python3-dev:
   pkg:
     - installed
