@@ -36,3 +36,6 @@ pelican:
   ssh_auth.present:
     - source: salt://ssh_keys/tron_linode.id_rsa.pub
     - user: pelican
+  ssh_auth.present:
+    - source: salt://ssh_keys/tron_laptop.id_rsa.pub
+    - user: pelican
