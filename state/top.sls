@@ -5,6 +5,8 @@ file_roots:
 base:
   '*':
     - edit.vim
+  '* and not G@virtual:VirtualBox':
+    - match: compound
     - unpro-salt
   'teamunpro.com*':
     - users
