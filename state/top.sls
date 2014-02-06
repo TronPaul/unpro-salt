@@ -5,6 +5,7 @@ file_roots:
 base:
   '*':
     - edit.vim
+    - unpro-salt
   'teamunpro.com*':
     - users
     - nginx

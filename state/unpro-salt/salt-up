@@ -1,0 +1,10 @@
+#!/bin/bash
+DIR=`mktemp -d`
+cd $DIR
+wget -q https://github.com/TronPaul/unpro-salt/archive/master.zip
+unzip -q master.zip
+rm -rf /srv/salt
+rm -rf /srv/pillar
+cp -r unpro-salt-master/state /srv/salt
+cp -r unpro-salt-master/pillar /srv/pillar
+rm -rf $DIR
