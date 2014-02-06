@@ -11,3 +11,5 @@ base:
     - blog_teamunpro_com
     - mumble-servers
     - dev.python
+    - openssh
+    - openssh.config

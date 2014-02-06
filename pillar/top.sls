@@ -8,3 +8,4 @@ base:
   'teamunpro.com*':
     - mumble-servers
     - unpro_users
+    - openssh
