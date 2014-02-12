@@ -13,3 +13,7 @@ users:
   stolentoast:
     groups:
       - users
+    ssh_auth:
+      stolentoast:
+        enc: ssh-rsa
+        source: salt://ssh_keys/stolentoast.id_rsa.pub
