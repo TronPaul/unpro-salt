@@ -8,11 +8,18 @@ base:
   '* and not G@virtual:VirtualBox':
     - match: compound
     - unpro-salt
-  'teamunpro.com*':
-    - users
+  'roles:webserver':
+    - match: grain
     - nginx
-    - blog_teamunpro_com
+  'roles:voiceserver':
+    - match: grain
     - mumble-servers
+  'roles:pythondev':
+    - match: grain
     - dev.python
+  'roles:sshserver':
     - openssh
     - openssh.config
+  'teamunpro.com*':
+    - users
+    - blog_teamunpro_com
