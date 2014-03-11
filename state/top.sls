@@ -18,8 +18,12 @@ base:
     - match: grain
     - dev.python
   'roles:sshserver':
+    - match: grain
     - openssh
     - openssh.config
+  'roles:torrentserver':
+    - match: grain
+    - deluge
   'teamunpro.com*':
     - users
     - blog_teamunpro_com
