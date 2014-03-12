@@ -23,7 +23,8 @@ base:
     - openssh.config
   'roles:torrentserver':
     - match: grain
-    - deluge
+    - deluge.deluged
+    - deluge.deluge-web
   'teamunpro.com*':
     - users
     - blog_teamunpro_com
