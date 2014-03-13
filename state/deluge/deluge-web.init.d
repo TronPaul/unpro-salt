@@ -144,7 +144,7 @@ case "$1" in
    esac
    ;;
   status)
-   status_of_proc -p /var/run/$NAME.pid "$DAEMON" nginx && exit 0 || exit $?
+   status_of_proc -p /var/run/$NAME.pid "$DAEMON" deluge-web && exit 0 || exit $?
    ;;
   *)
    echo "Usage: $SCRIPTNAME {start|stop|restart|force-reload}" >&2

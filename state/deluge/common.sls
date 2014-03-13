@@ -9,3 +9,10 @@ deluge-ppa:
 deluge:
   user.present:
     - system: True
+
+/srv/deluge:
+  file.directory:
+    - user: deluge
+    - group: deluge
+    - mode: 755
+    - makedirs: True

@@ -23,7 +23,11 @@ deluged:
   service:
     - running
     - require:
-      - cmd: deluged
+      - file: deluged-set-downloading
+      - file: deluged-set-completed
+      - file: deluged-set-torrents
+      - file: deluged-set-move-completed
+      - file: deluged-set-autoadd
   cmd.run:
     - name: /etc/init.d/deluged start && sleep .5 && /etc/init.d/deluged stop
     - unless: test -f /home/deluge/.config/deluge/core.conf
@@ -32,3 +36,54 @@ deluged:
       - file: /etc/default/deluged
       - pkg: deluged
       - user: deluge
+
+deluged-stop:
+  service:
+    - name: deluged
+    - dead
+    - require_in:
+      - file: deluged-set-downloading
+      - file: deluged-set-completed
+      - file: deluged-set-torrents
+      - file: deluged-set-move-completed
+      - file: deluged-set-autoadd
+
+deluged-set-downloading:
+  file.replace:
+    - name: /home/deluge/.config/deluge/core.conf
+    - pattern: '"download_location": "[^"]*?",'
+    - repl: '"download_location": "/srv/deluge/downloading",'
+    - require:
+      - cmd: deluged
+
+deluged-set-completed:
+  file.replace:
+    - name: /home/deluge/.config/deluge/core.conf
+    - pattern: '"move_completed_path": "[^"]*?",'
+    - repl: '"move_completed_path": "/srv/deluge/completed",'
+    - require:
+      - cmd: deluged
+  
+deluged-set-torrents:
+  file.replace:
+    - name: /home/deluge/.config/deluge/core.conf
+    - pattern: '"torrentfiles_location": "[^"]*?",'
+    - repl: '"torrentfiles_location": "/srv/deluge/torrents",'
+    - require:
+      - cmd: deluged
+  
+deluged-set-move-completed:
+  file.replace:
+    - name: /home/deluge/.config/deluge/core.conf
+    - pattern: '"move_completed": [^,]*?,'
+    - repl: '"move_completed": true,'
+    - require:
+      - cmd: deluged
+  
+deluged-set-autoadd:
+  file.replace:
+    - name: /home/deluge/.config/deluge/core.conf
+    - pattern: '"autoadd_location": "[^"]*?",'
+    - repl: '"autoadd_location": "/srv/deluge/queue",'
+    - require:
+      - cmd: deluged

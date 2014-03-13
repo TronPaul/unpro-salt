@@ -22,7 +22,7 @@ deluge-web:
       - pkgrepo: deluge-ppa
   service:
     - running
-    - watch:
+    - require:
       - file: deluge-web-modify-config
   cmd.run:
     - name: /etc/init.d/deluge-web start && sleep .5 && /etc/init.d/deluge-web stop
@@ -33,10 +33,17 @@ deluge-web:
       - pkg: deluge-web
       - user: deluge
 
+deluge-web-stopped:
+  service:
+    - name: deluge-web
+    - dead
+    - require_in:
+      - file: deluge-web-modify-config
+
 deluge-web-modify-config:
   file.replace:
     - name: /home/deluge/.config/deluge/web.conf
-    - pattern: '"https": false,'
+    - pattern: '"https": [^,]*?,'
     - repl: '"https": true,'
     - require:
       - cmd: deluge-web
