@@ -33,9 +33,7 @@ deluge-web:
       - pkg: deluge-web
       - user: deluge
 
-deluge-web-stopped:
-  service:
-    - name: deluge-web
-    - dead
-    - require_in:
-      - file: deluge-web-modify-config
+#deluge-web-stopped:
+#  service:
+#    - name: deluge-web
+#    - dead
