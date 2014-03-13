@@ -22,8 +22,6 @@ deluge-web:
       - pkgrepo: deluge-ppa
   service:
     - running
-    - require:
-      - file: deluge-web-modify-config
   cmd.run:
     - name: /etc/init.d/deluge-web start && sleep .5 && /etc/init.d/deluge-web stop
     - unless: test -f /home/deluge/.config/deluge/web.conf
