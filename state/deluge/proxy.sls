@@ -15,4 +15,4 @@ extend:
 
 /etc/nginx/sites-available/deluge.nasus.conf:
   file.managed:
-    - source: salt://salt/deluge.nasus.conf
+    - source: salt://deluge/deluge.nasus.conf
