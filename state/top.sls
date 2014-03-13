@@ -25,6 +25,7 @@ base:
     - match: grain
     - deluge.deluged
     - deluge.deluge-web
+    - deluge.proxy
   'teamunpro.com*':
     - users
     - blog_teamunpro_com
