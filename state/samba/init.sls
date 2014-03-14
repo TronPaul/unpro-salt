@@ -1,6 +1,8 @@
 samba:
   package:
     - installed
+
+smbd:
   service:
     - running
     - watch:
