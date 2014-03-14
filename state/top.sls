@@ -26,6 +26,9 @@ base:
     - deluge.deluged
     - deluge.deluge-web
     - deluge.proxy
+  'roles:windowsfileserver':
+    - match: grain
+    - samba
   'teamunpro.com*':
     - users
     - blog_teamunpro_com
