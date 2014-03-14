@@ -1,5 +1,5 @@
 samba:
-  package:
+  pkg:
     - installed
 
 smbd:
