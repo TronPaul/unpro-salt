@@ -1,0 +1,5 @@
+roles:
+  - webserver
+  - voiceserver
+  - sshserver
+  - pythondev

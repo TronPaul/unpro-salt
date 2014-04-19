@@ -1,0 +1,8 @@
+#!/bin/bash 
+
+mkdir -p /etc/salt
+GRAIN_PATH="/srv/grains/`hostname`"
+if [ -f $GRAIN_PATH ]
+then
+  cp $GRAIN_PATH /etc/salt/grains
+fi
