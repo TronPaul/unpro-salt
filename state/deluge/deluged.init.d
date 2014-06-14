@@ -18,8 +18,9 @@
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DESC="Deluge Daemon"
 NAME="deluged"
+LOGFILE="/var/log/deluge.log"
 DAEMON=/usr/bin/deluged
-DAEMON_ARGS="-d"             # Consult `man deluged` for more options
+DAEMON_ARGS="-d -L INFO -l $LOGFILE"             # Consult `man deluged` for more options
 PIDFILE=/var/run/$NAME.pid
 UMASK=022                     # Change this to 0 if running deluged as its own user
 PKGNAME=deluged
