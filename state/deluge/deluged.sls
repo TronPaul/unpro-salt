@@ -19,7 +19,7 @@ include:
   file.directory:
     - user: deluge
     - group: deluge
-    - mode: 644
+    - mode: 755
     - require:
       - user: deluge
 
