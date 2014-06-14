@@ -15,6 +15,14 @@ include:
     - mode: 644
     - source: salt://deluge/deluge-all.default
 
+/var/log/deluge:
+  file.directory:
+    - user: deluge
+    - group: deluge
+    - mode: 644
+    - require:
+      - user: deluge
+
 deluged:
   pkg:
     - installed
