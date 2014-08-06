@@ -29,9 +29,6 @@ base:
   'roles:windowsfileserver':
     - match: grain
     - samba
-  'roles:trandpaul':
-    - match: grain
-    - trandpaul
   'teamunpro.com*':
     - users
     - blog_teamunpro_com
