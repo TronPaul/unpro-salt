@@ -7,5 +7,5 @@ base:
     - users
   'teamunpro.com*':
     - mumble-servers
-    - unpro_users
     - openssh
+    - docker
