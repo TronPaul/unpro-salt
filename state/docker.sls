@@ -18,16 +18,3 @@ docker-py:
   pip.installed:
     - require:
       - pkg: python-pip
-
-trandpaul-container:
-  docker.installed:
-    - name: trandpaul
-    - hostname: trandpaul
-    - image: tronpaul/trandpaul
-
-trandpaul:
-  docker.running:
-    - container: trandpaul
-    - require:
-      - pip: docker-py
-      - pkg: lxc-docker

@@ -8,4 +8,3 @@ base:
   'teamunpro.com*':
     - mumble-servers
     - openssh
-    - docker

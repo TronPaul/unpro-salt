@@ -2,3 +2,4 @@ roles:
   - webserver
   - torrentserver
   - nas  
+  - docker

@@ -29,6 +29,9 @@ base:
   'roles:windowsfileserver':
     - match: grain
     - samba
+  'roles:dockman':
+    - match: grain
+    - dockman
   'teamunpro.com*':
     - users
     - blog_teamunpro_com
