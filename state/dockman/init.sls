@@ -1,5 +1,17 @@
 include:
+  - .common
+  - nginx
   - docker
+
+uwsgi:
+    pip.installed:
+        - require:
+            - pkg: python-dev
+            - pkg: python-pip
+
+/etc/init/uwsgi:
+  file.managed:
+    - source: salt://dockman/dockman.conf
 
 /etc/dockman/config.json:
   file.managed:
@@ -14,7 +26,3 @@ dockman:
   pip.installed:
     - require:
       - pkg: python-pip
-  service:
-    - running
-    - watch:
-      - file: /etc/dockman/config.json
