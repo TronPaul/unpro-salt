@@ -19,9 +19,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder "state", "/srv/salt/"
     config.vm.synced_folder "pillar", "/srv/pillar/"
     config.vm.synced_folder "grains", "/srv/grains/"
-    config.vm.provision "shell", path: "grain-up"
+    config.vm.provision "shell", path: "vagrant/grain-up"
     config.vm.provision :salt do |salt|
-        salt.minion_config = "minion"
+        salt.minion_config = "vagrant/minion"
         salt.run_highstate = true
     end
   end
@@ -39,9 +39,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder "state", "/srv/salt/"
     config.vm.synced_folder "pillar", "/srv/pillar/"
     config.vm.synced_folder "grains", "/srv/grains/"
-    config.vm.provision "shell", path: "grain-up"
+    config.vm.provision "shell", path: "vagrant/grain-up"
     config.vm.provision :salt do |salt|
-        salt.minion_config = "minion"
+        salt.minion_config = "vagrant/minion"
         salt.run_highstate = true
     end    
   end
