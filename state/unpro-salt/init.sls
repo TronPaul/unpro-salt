@@ -1,4 +1,4 @@
-/usr/bin/salt-up:
+/usr/local/bin/salt-up:
   file.managed:
     - source: salt://unpro-salt/salt-up
     - user: root
@@ -7,7 +7,7 @@
   cron.present:
     - user: root
     - minute: random
-    - hour: 4
+    - hour: 20
     - comment: 'Update salt data from git'
     - require:
-      - file: /usr/bin/salt-up
+      - file: /usr/local/bin/salt-up
