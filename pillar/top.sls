@@ -8,3 +8,5 @@ base:
   'teamunpro.com*':
     - mumble-servers
     - openssh
+  'nasus':
+    - nasus_samba

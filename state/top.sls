@@ -26,7 +26,7 @@ base:
     - deluge.deluged
     - deluge.deluge-web
     - deluge.proxy
-  'roles:windowsfileserver':
+  'roles:nas':
     - match: grain
     - samba
   'roles:dockman':
