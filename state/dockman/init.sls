@@ -4,7 +4,7 @@ include:
 
 /usr/share/virtualenvs/dockman:
   virtualenv.manage:
-    - python: /usr/bin/python3.4
+    - python: /usr/bin/python2.7
 
 dockman:
   user.present:
@@ -14,10 +14,14 @@ dockman:
     - require:
       - group: docker
       - pkg: nginx
-  file.managed:
-    - name: /usr/share/dockman/dockman.py
-    - source: https://raw.githubusercontent.com/TronPaul/dockman/master/dockman.py
-    - source_hash: md5=aa0d7ce78bc968a25e78f301088359ae
+    - require_in:
+      - service: uwsgi
+  pip.installed:
+    - bin_env: /usr/share/virtualenvs/dockman
+    - require:
+      - virtualenv: /usr/share/virtualenvs/dockman
+    - require_in:
+      - service: uwsgi
 
 /usr/share/dockman/config.json:
   file.managed:
@@ -27,6 +31,9 @@ dockman:
     - replace: False
     - makedirs: True
     - dir_mode: 755
+    - contents: {}
+    - require_in:
+      - service: uwsgi
 
 dockman-uwsgi:
   file.managed:
@@ -36,6 +43,10 @@ dockman-uwsgi:
     - user: root
     - group: root
     - mode: 644
+    - require_in:
+      - service: uwsgi
+    - require:
+      - file: /etc/uwsgi/apps-available
 
 dockman-nginx:
   file.managed:
@@ -47,6 +58,8 @@ dockman-nginx:
     - mode: 644
     - watch_in:
       service: nginx
+    - require_in:
+      - service: nginx
 
 dockman-uwsgi-enabled:
   file.symlink:
@@ -54,6 +67,9 @@ dockman-uwsgi-enabled:
     - target: /etc/uwsgi/apps-available/dockman.ini
     - require:
       - file: dockman-uwsgi
+      - file: /etc/uwsgi/apps-enabled
+    - require_in:
+      - service: uwsgi
 
 dockman-nginx-enabled:
   file.symlink:
@@ -62,4 +78,6 @@ dockman-nginx-enabled:
     - require:
       - file: dockman-nginx
     - watch_in:
+      - service: nginx
+    - require_in:
       - service: nginx

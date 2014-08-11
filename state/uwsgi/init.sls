@@ -5,6 +5,9 @@ uwsgi:
   service.running:
     - require:
       - file: /etc/init/uwsgi.conf
+      - file: /var/log/uwsgi/emporer.log
+      - file: /etc/uwsgi/uwsgi.ini
+      - file: /var/log/uwsgi/app
       - pip: uwsgi
   pip.installed:
     - require:
