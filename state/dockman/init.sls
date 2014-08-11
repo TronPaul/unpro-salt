@@ -17,6 +17,7 @@ dockman:
     - require_in:
       - service: uwsgi
   pip.installed:
+    - name: dockman == 0.4
     - bin_env: /usr/share/virtualenvs/dockman
     - require:
       - virtualenv: /usr/share/virtualenvs/dockman
@@ -35,10 +36,21 @@ dockman:
     - require_in:
       - service: uwsgi
 
+/usr/share/dockman/dockman.ini:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: 644
+    - source: salt://dockman/dockman.ini.flask
+    - makedirs: True
+    - dir_mode: 755
+    - require_in:
+      - service: uwsgi
+
 dockman-uwsgi:
   file.managed:
     - name: /etc/uwsgi/apps-available/dockman.ini
-    - source: salt://dockman/dockman.ini
+    - source: salt://dockman/dockman.ini.uwsgi
     - template: jinja
     - user: root
     - group: root

@@ -1,7 +1,7 @@
 [uwsgi]
 uid = dockman
 gid = www-data
-env = DOCKMAN_CONFIG=/usr/share/dockman/config.json
+env = DOCKMAN_CONFIG=/usr/share/dockman/dockman.ini
 env = DEBUG=true
 home = /usr/share/virtualenvs/dockman
 module = dockman
