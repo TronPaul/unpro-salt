@@ -1,21 +1,20 @@
 include:
   - nginx
 
-extend:
-  nginx:
-    file.symlink:
-      - name: /etc/nginx/sites-enabled/blog.teamunpro.com.conf
-      - target: /etc/nginx/sites-available/blog.teamunpro.com.conf
-      - require:
-        - file: /etc/nginx/sites-available/blog.teamunpro.com.conf
-    service:
-      - watch:
-        - file: /etc/nginx/sites-enabled/blog.teamunpro.com.conf
-        - file: /etc/nginx/sites-available/blog.teamunpro.com.conf
+nginx-enabled:
+  file.symlink:
+    - name: /etc/nginx/sites-enabled/blog.teamunpro.com.conf
+    - target: /etc/nginx/sites-available/blog.teamunpro.com.conf
+    - require:
+      - file: /etc/nginx/sites-available/blog.teamunpro.com.conf
+    - watch_in:
+      - service: nginx
 
 /etc/nginx/sites-available/blog.teamunpro.com.conf:
   file.managed:
     - source: salt://blog_teamunpro_com/blog.teamunpro.com.conf
+    - watch_in:
+      - service: nginx
 
 /srv/http/blog.teamunpro.com/html:
   file.directory:
