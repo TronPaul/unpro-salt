@@ -1,1 +1,1 @@
-REPOS_CONFIG=/usr/share/dockman/config.json
+REPOS_CONFIG = '/usr/share/dockman/config.json'
