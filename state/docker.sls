@@ -1,6 +1,3 @@
-python-pip:
-  pkg.installed
-
 docker-ppa:
   pkgrepo.managed:
     - humanname: Docker PPA
@@ -18,3 +15,6 @@ docker-py:
   pip.installed:
     - require:
       - pkg: python-pip
+
+docker:
+  group.present
