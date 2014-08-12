@@ -17,7 +17,7 @@ dockman:
     - require_in:
       - service: uwsgi
   pip.installed:
-    - name: dockman == 0.4
+    - name: dockman == 0.4.1
     - bin_env: /usr/share/virtualenvs/dockman
     - require:
       - virtualenv: /usr/share/virtualenvs/dockman
