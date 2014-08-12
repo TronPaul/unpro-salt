@@ -19,6 +19,16 @@ mumble-server_{{ name }}:
       - file: /etc/init.d/mumble-server_{{ name }}
       - file: /etc/default/mumble-server_{{ name }}
 
+/etc/logrotate.d/mumble-server_{{ name }}:
+  file.managed:
+    - template: jinja
+    - user: root
+    - group: root
+    - mode: 644
+    - source: salt://mumble-servers/mumble-server.logrotate.jinja
+    - context:
+      server_name: '{{ name }}'
+
 /etc/mumble-server/{{ name }}.ini:
   file.managed:
     - template: jinja

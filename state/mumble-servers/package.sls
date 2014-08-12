@@ -7,20 +7,23 @@ mumble-server:
       - file: /etc/init.d/mumble-server
 
 /etc/mumble-server.ini:
-  file:
-    - absent
+  file.absent:
     - require:
       - pkg: mumble-server
 
+/etc/logrotate.d/mumble-server:
+  file.absent:
+    - require:
+      - pkg: mumble-server
+  
+
 /etc/default/mumble-server:
-  file:
-    - absent
+  file.absent:
     - require:
       - pkg: mumble-server
 
 /etc/init.d/mumble-server:
-  file:
-    - absent
+  file.absent:
     - require:
       - pkg: mumble-server
 
