@@ -22,7 +22,7 @@ znc-container:
     - name: znc
     - image: jimeh/znc
     - ports:
-      - 61753:6667
+      - "6667/tcp"
     - require:
       - docker: znc-data-container
 
@@ -34,9 +34,14 @@ znc-data:
     - require:
       - docker: znc-data-container
 
+# salt is stupid about indenting for port_bindings
 znc:
   docker.running:
     - container: znc
+    - port_bindings:
+        "6667/tcp":
+            HostIp: "0.0.0.0"
+            HostPort: "61753"
     - volumes_from:
       - znc-data
     - require:
