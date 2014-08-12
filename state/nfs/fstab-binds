@@ -1,0 +1,3 @@
+{% for name, mount_conf in salt['pillar.get']('nfs:mounts', {}).items() %}
+{{ mount_conf['source'] }}	/export/{{ name }}	none	bind	0	0
+{% endfor %}

@@ -10,3 +10,4 @@ base:
     - openssh
   'nasus':
     - nasus_samba
+    - nasus_nfs

@@ -29,6 +29,7 @@ base:
   'roles:nas':
     - match: grain
     - samba
+    - nfs.server
   'roles:dockman':
     - match: grain
     - dockman
