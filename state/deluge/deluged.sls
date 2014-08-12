@@ -24,13 +24,20 @@ include:
       - user: deluge
 
 deluged:
-  pkg:
-    - installed
+  pkg.installed:
     - require:
       - pkgrepo: deluge-ppa
-  service:
-    - running
+  service.running:
     - require:
+      - file: /var/log/deluge
+      - file: /etc/init.d/deluged
+      - file: /etc/default/deluged
+      - file: deluged-set-downloading
+      - file: deluged-set-completed
+      - file: deluged-set-torrents
+      - file: deluged-set-move-completed
+      - file: deluged-set-autoadd
+    - watch:
       - file: deluged-set-downloading
       - file: deluged-set-completed
       - file: deluged-set-torrents
@@ -40,21 +47,11 @@ deluged:
     - name: /etc/init.d/deluged start && sleep .5 && /etc/init.d/deluged stop
     - unless: test -f /home/deluge/.config/deluge/core.conf
     - require:
+      - file: /var/log/deluge
       - file: /etc/init.d/deluged
       - file: /etc/default/deluged
       - pkg: deluged
       - user: deluge
-
-deluged-stop:
-  service:
-    - name: deluged
-    - dead
-    - require_in:
-      - file: deluged-set-downloading
-      - file: deluged-set-completed
-      - file: deluged-set-torrents
-      - file: deluged-set-move-completed
-      - file: deluged-set-autoadd
 
 deluged-set-downloading:
   file.replace:
