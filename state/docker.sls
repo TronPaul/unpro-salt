@@ -1,3 +1,6 @@
+include:
+  - dev.python
+
 docker-ppa:
   pkgrepo.managed:
     - humanname: Docker PPA
@@ -15,6 +18,7 @@ docker-py:
   pip.installed:
     - require:
       - pkg: python-pip
+    - reload_modules: true
 
 docker:
   group.present

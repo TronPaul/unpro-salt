@@ -33,6 +33,9 @@ base:
   'roles:dockman':
     - match: grain
     - dockman
+  'roles:irc_bounce':
+    - match: grain
+    - znc
   'teamunpro.com*':
     - users
     - blog_teamunpro_com
