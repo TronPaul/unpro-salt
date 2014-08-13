@@ -7,5 +7,5 @@ rm -rf /srv/salt
 rm -rf /srv/pillar
 cp -r unpro-salt-master/state /srv/salt
 cp -r unpro-salt-master/pillar /srv/pillar
-rm -rf $DIR
 salt-call state.highstate
+rm -rf $DIR
