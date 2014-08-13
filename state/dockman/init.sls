@@ -23,6 +23,8 @@ dockman:
       - virtualenv: /usr/share/virtualenvs/dockman
     - require_in:
       - service: uwsgi
+    - watch_in:
+      - service: uwsgi
 
 /usr/share/dockman/config.json:
   file.managed:
