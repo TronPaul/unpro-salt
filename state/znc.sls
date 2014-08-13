@@ -5,7 +5,8 @@ base-images:
   docker.pulled:
     - names:
       - busybox
-      - jimeh/znc
+      - tronpaul/znc
+    - tag: latest
     - require:
       - pip: docker-py
 
@@ -20,7 +21,7 @@ znc-data-container:
 znc-container:
   docker.installed:
     - name: znc
-    - image: jimeh/znc
+    - image: tronpaul/znc
     - ports:
       - "6667/tcp"
     - require:
