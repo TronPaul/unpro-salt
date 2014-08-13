@@ -13,7 +13,10 @@ znc-data-container:
   docker.installed:
     - name: znc-data
     - image: busybox
+    - detach: true
     - command: echo Data-only container for znc
+    - volumes:
+      - /znc-data
     - require:
       - docker: base-images
 
@@ -29,8 +32,6 @@ znc-container:
 znc-data:
   docker.running:
     - container: znc-data
-    - volumes:
-      - /znc-data
     - require:
       - docker: znc-data-container
 
