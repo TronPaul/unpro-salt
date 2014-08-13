@@ -30,12 +30,6 @@ znc-container:
     - require:
       - docker: znc-data-container
 
-znc-data:
-  docker.running:
-    - container: znc-data
-    - require:
-      - docker: znc-data-container
-
 # salt is stupid about indenting for port_bindings
 znc:
   docker.running:
