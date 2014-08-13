@@ -6,6 +6,19 @@ mumble-server:
     - prereq:
       - file: /etc/init.d/mumble-server
 
+/var/lib/mumble-server:
+  file.directory:
+    - user: mumble-server
+    - group: mumble-server
+    - file_mode: 600
+    - mode: 700
+    - recurse:
+      - user
+      - group
+      - mode
+    - require:
+      - pkg: mumble-server
+
 /etc/mumble-server.ini:
   file.absent:
     - require:
