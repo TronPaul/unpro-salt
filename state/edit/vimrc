@@ -85,3 +85,4 @@ au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
 " Keep indentation level from previous line: ``set autoindent``
 
 " Folding based on indentation: ``set foldmethod=indent``
+set background=dark
