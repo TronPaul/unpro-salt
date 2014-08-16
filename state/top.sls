@@ -5,6 +5,7 @@ file_roots:
 base:
   '*':
     - edit.vim
+    - tmux
   '* and not G@virtual:VirtualBox':
     - match: compound
     - unpro-salt
@@ -42,9 +43,9 @@ base:
   'roles:dev':
     - match: grain
     - dev.python
+    - dev.java
     - git
     - docker
-    - tmux
   'G@roles:dev and G@roles:gui':
     - match: compound
     - virtualbox
