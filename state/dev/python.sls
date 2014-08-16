@@ -1,34 +1,24 @@
-{% set pyversions = ['2.7', '3.4'] %}
+include:
+  - python
+  - users
 
-deadsnakes-ppa:
-  pkg.installed:
-    - name: python-software-properties
-  pkgrepo.managed:
-    - ppa: fkrull/deadsnakes
+{% for name, user in salt['pillar.get']('users').items() -%}
+{%- if user == None -%}
+{%- set user = {} -%}
+{%- endif -%}
+{%- set home = user.get('home', "/home/%s" % name) -%}
+bashrc-{{ name }}:
+  file.append:
+    - name: {{ home }}/.bashrc
+    - text: PATH="$PATH:{{ home }}/.local/bin"
 
-packages:
-  pkg.installed:
-    - names:
-      {% for v in pyversions %}
-      - python{{ v }}
-      - python{{ v }}-dev
-      {% endfor %}
-      - python-pip
-    - require:
-      - pkgrepo: deadsnakes-ppa
-
-virtualenv:
+pew-{{ name }}:
   pip.installed:
+    - name: pew
+    - user: {{ name }}
+    - install_options:
+      - --user
     - require:
       - pkg: python-pip
-
-/usr/bin/inve:
-  file.managed:
-    - user: root
-    - group: root
-    - mode: 755
-    - source: salt://dev/inve
-
-/etc/bash.bashrc:
-  file.append:
-    - source: salt://dev/inve.bashrc
+      - user: {{ name }}
+{%- endfor -%}

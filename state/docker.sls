@@ -1,5 +1,5 @@
 include:
-  - dev.python
+  - python
 
 docker-ppa:
   pkgrepo.managed:

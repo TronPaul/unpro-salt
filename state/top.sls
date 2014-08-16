@@ -33,9 +33,17 @@ base:
   'roles:dockman':
     - match: grain
     - dockman
+  'roles:docker':
+    - match: grain
+    - docker
   'roles:irc_bounce':
     - match: grain
     - znc
+  'roles:dev':
+    - match: grain
+    - dev.python
+    - git
+    - docker
   'teamunpro.com*':
     - users
     - blog_teamunpro_com

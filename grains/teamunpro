@@ -1,7 +1,7 @@
 roles:
+  - dev
   - webserver
   - voiceserver
   - sshserver
-  - pythondev
   - dockman
   - irc_bounce

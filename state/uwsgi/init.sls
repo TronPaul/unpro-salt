@@ -1,5 +1,5 @@
 include:
-  - dev.python
+  - python
 
 uwsgi:
   service.running:

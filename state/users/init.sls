@@ -64,7 +64,7 @@ include:
 
 user_keydir_{{ name }}:
   file.directory:
-    - name: {{ user.get('home', '/home/{0}'.format(name)) }}/.ssh
+    - name: {{ home }}/.ssh
     - user: {{ name }}
     - group: {{ user_group }}
     - makedirs: True
