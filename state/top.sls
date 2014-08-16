@@ -44,6 +44,10 @@ base:
     - dev.python
     - git
     - docker
+    - tmux
+  'G@roles:dev and G@roles:gui':
+    - match: compound
+    - virtualbox
   'teamunpro.com*':
     - users
     - blog_teamunpro_com
