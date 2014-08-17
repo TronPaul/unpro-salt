@@ -46,6 +46,9 @@ base:
     - dev.java
     - git
     - docker
+  'roles:htpc':
+    - match: grain
+    - xbmc
   'G@roles:dev and G@roles:gui':
     - match: compound
     - virtualbox

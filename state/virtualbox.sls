@@ -10,6 +10,7 @@ virtualbox-key:
     - name: wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
     - watch:
       - cmd: virtualbox-repo
+    - reload_modules: True
 
 virtualbox-pkgs:
   pkg.installed:

@@ -11,3 +11,5 @@ base:
   'nasus':
     - nasus_samba
     - nasus_nfs
+  'fednet':
+    - fednet_nfs_client

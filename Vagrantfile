@@ -70,4 +70,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         salt.colorize = true
     end    
   end
+
+  config.vm.define :fednet do |box|
+    box.vm.box = "trusty64"
+    box.vm.hostname = "fednet"
+    config.vm.synced_folder "state", "/srv/salt/"
+    config.vm.synced_folder "pillar", "/srv/pillar/"
+    config.vm.synced_folder "grains", "/srv/grains/"
+    config.vm.provision "shell", path: "vagrant/grain-up"
+    config.vm.provision :salt do |salt|
+        salt.minion_config = "vagrant/minion"
+        salt.run_highstate = true
+        salt.verbose = true
+        salt.colorize = true
+    end    
+  end
 end
