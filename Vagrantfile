@@ -8,7 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :unpro do |box|
     box.vm.box = "trusty64"
   
-    #box.vm.box_url = "http://files.vagrantup.com/precise64.box"
+    box.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
 
     box.vm.hostname = "teamunpro.com"
   
@@ -32,7 +32,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :nasus do |box|
     box.vm.box = "trusty64"
 
-    #box.vm.box_url = "http://files.vagrantup.com/precise64.box"
+    box.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
 
     box.vm.hostname = "nasus"
 
@@ -58,6 +58,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define :'sjds-laptop' do |box|
     box.vm.box = "trusty64"
+    box.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
     box.vm.hostname = "sjds-laptop"
     config.vm.synced_folder "state", "/srv/salt/"
     config.vm.synced_folder "pillar", "/srv/pillar/"
@@ -73,6 +74,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define :fednet do |box|
     box.vm.box = "trusty64"
+    box.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
     box.vm.hostname = "fednet"
     config.vm.synced_folder "state", "/srv/salt/"
     config.vm.synced_folder "pillar", "/srv/pillar/"
