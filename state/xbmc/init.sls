@@ -21,7 +21,12 @@ xbmc:
   pkg.installed:
     - require:
       - pkgrepo: xbmc-ppa
+  user.present:
+    - shell: /bin/sh
+    - system: True
+    - createhome: False
   service.enabled:
     - require:
       - pkg: xbmc
       - pkg: xinit
+      - user: xbmc
