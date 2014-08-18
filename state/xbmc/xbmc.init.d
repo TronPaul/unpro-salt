@@ -16,7 +16,7 @@
 DAEMON=/usr/bin/xinit
 
 # startup args
-DAEMON_OPTS=" /usr/local/bin/xbmc --standalone -- :0"
+DAEMON_OPTS=" /usr/bin/xbmc --standalone -- :0"
 
 # script name
 NAME=xbmc
