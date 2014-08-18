@@ -49,6 +49,9 @@ base:
   'roles:htpc':
     - match: grain
     - xbmc
+  'roles:nas_client':
+    - match: grain
+    - nfs.client
   'G@roles:dev and G@roles:gui':
     - match: compound
     - virtualbox
