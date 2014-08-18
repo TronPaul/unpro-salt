@@ -24,7 +24,13 @@ xbmc:
   user.present:
     - shell: /bin/sh
     - system: True
-    - createhome: False
+    - home: /var/lib/xbmc
+    - groups:
+      - audio
+      - video
+      - fuse
+      - cdrom
+      - plugdev
   service.enabled:
     - require:
       - pkg: xbmc
