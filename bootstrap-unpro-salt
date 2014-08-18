@@ -1,10 +1,10 @@
 #!/bin/bash
-if [ ! $(hash unzip 2>/dev/null) ]; then
+if hash unzip 2>/dev/null; then
   echo 'Error: unzip util not installed'
   exit 1
 fi
 
-if [ ! $(hash salt-call 2>/dev/null) ]; then
+if hash salt-call 2>/dev/null; then
   wget -O install_salt.sh https://bootstrap.saltstack.com
   sh install_salt.sh
 fi
@@ -17,5 +17,5 @@ rm -rf /srv/salt
 rm -rf /srv/pillar
 cp -r unpro-salt-master/state /srv/salt
 cp -r unpro-salt-master/pillar /srv/pillar
-rm -rf $DIR
 salt-call state.highstate
+rm -rf $DIR
