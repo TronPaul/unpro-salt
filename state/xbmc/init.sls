@@ -13,6 +13,10 @@ xbmc-ppa:
     - group: root
     - mode: 744
 
+xinit:
+  pkg:
+    - installed
+
 xbmc:
   pkg.installed:
     - require:
@@ -20,3 +24,4 @@ xbmc:
   service.enabled:
     - require:
       - pkg: xbmc
+      - pkg: xinit
