@@ -49,6 +49,7 @@ base:
   'roles:htpc':
     - match: grain
     - xbmc
+    - pcsx2
   'roles:nas_client':
     - match: grain
     - nfs.client

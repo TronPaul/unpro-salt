@@ -17,5 +17,6 @@ virtualbox-pkgs:
     - names:
       - virtualbox-{{ virtualbox_version }}
       - dkms
+    - refresh: True
     - require:
       - cmd: virtualbox-repo
