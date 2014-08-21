@@ -1,0 +1,3 @@
+xinit:
+  pkg:
+    - installed

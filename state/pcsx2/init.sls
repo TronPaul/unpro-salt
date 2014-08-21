@@ -1,3 +1,6 @@
+include:
+  - xinit
+
 enable-i386:
   cmd.run:
     - name: dpkg --add-architecture i386
@@ -24,3 +27,10 @@ pcsx2:
     - refresh: True
     - require:
       - pkgrepo: pcsx2-ppa
+
+/usr/local/bin/pcsx2-standalone:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: 755
+    - source: salt://pcsx2/pcsx2-standalone

@@ -1,3 +1,6 @@
+include:
+  - xinit
+
 xbmc-ppa:
   pkgrepo.managed:
     - humanname: XBMC PPA
@@ -12,10 +15,6 @@ xbmc-ppa:
     - user: root
     - group: root
     - mode: 744
-
-xinit:
-  pkg:
-    - installed
 
 xbmc:
   pkg.installed:

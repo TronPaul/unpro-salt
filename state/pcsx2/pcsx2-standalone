@@ -1,0 +1,5 @@
+#! /bin/sh
+
+PCSX2_OPTS="--nogui"
+
+/usr/bin/xinit /usr/games/pcsx2 $PCSX2_OPTS $@ -- :0
