@@ -50,6 +50,7 @@ base:
     - match: grain
     - xbmc
     - pcsx2
+    - desmume
   'roles:nas_client':
     - match: grain
     - nfs.client
