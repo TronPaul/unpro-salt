@@ -1,0 +1,3 @@
+#! /bin/sh
+
+/usr/bin/xinit /usr/games/dolphin-emu $@ -- :0

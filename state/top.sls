@@ -51,6 +51,7 @@ base:
     - xbmc
     - pcsx2
     - desmume
+    - dolphin
   'roles:nas_client':
     - match: grain
     - nfs.client
