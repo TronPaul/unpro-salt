@@ -8,7 +8,7 @@ include:
     - group: root
     - template: jinja
 
-secrets_permissions:
+ipsec.secrets_permissions:
   file.managed:
     - name: /etc/ipsec.secrets
     - create: False
@@ -17,7 +17,7 @@ secrets_permissions:
     - group: root
     - mode: 0600
 
-secrets_exists:
+ipsec.secrets_exists:
   file.exists:
     - name: /etc/ipsec.secrets
 
@@ -25,5 +25,6 @@ ipsec:
   service.running:
     - enable: True
     - require:
-      - file: secrets_permissions
+      - file: ipsec.secrets_permissions
+      - file: ipsec.secrets_exists
       - file: /etc/ipsec.conf

@@ -15,3 +15,4 @@ base:
     - fednet_nfs_client
   'vpn':
     - vpn_libreswan
+    - vpn_xl2tpd

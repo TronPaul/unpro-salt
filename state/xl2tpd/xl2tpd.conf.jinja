@@ -1,0 +1,22 @@
+{% set ip_start = salt['pillar.get']('xl2tpd:ip_start') %}
+{% set ip_end = salt['pillar.get']('xl2tpd:ip_end') %}
+{% set local_ip = salt['pillar.get']('xl2tpd:local_ip') %}
+
+[global]
+port = 1701
+
+;debug avp = yes
+;debug network = yes
+;debug state = yes
+;debug tunnel = yes
+
+[lns default]
+ip range = {{ ip_start }}-{{ ip_end }}
+local ip = {{ local_ip }}
+require chap = yes
+refuse pap = yes
+require authentication = yes
+name = l2tpd
+;ppp debug = yes
+pppoptfile = /etc/ppp/options.xl2tpd
+length bit = yes

@@ -58,6 +58,7 @@ base:
   'roles:vpn':
     - match: grain
     - libreswan
+    - xl2tpd
   'G@roles:dev and G@roles:gui':
     - match: compound
     - virtualbox
