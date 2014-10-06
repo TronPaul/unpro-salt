@@ -13,3 +13,5 @@ base:
     - nasus_nfs
   'fednet':
     - fednet_nfs_client
+  'vpn':
+    - vpn_libreswan
