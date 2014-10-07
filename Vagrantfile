@@ -33,6 +33,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder "grains", "/srv/grains/"
     config.vm.provision "shell", path: "vagrant/grain-up"
     config.vm.provision :salt do |salt|
+        salt.install_type = "daily"
+        salt.bootstrap_options = "-X"
         salt.minion_config = "vagrant/minion"
         salt.run_highstate = true
         salt.verbose = true
