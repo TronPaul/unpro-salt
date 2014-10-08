@@ -1,5 +1,5 @@
-{% set name = salt['pillar.get']('libreswan:name') %}
-{% set left_id = salt['pillar.get']('libreswan:left_id') %}
+{% set name = salt['pillar.get']('libreswan:name', 'vpn') %}
+{% set left_id = salt['grains.get']('external_ip') %}
 
 version 2.0
 
@@ -16,7 +16,10 @@ conn {{ name }}
   connaddrfamily=ipv4
   auto=add
   left=%defaultroute
+  {#- jinja is dumb and doesn't let you `if var is not None` -#}
+  {%- if left_id %}
   leftid={{ left_id }}
+  {%- endif %}
   leftnexthop=%defaultroute
   leftprotoport=17/1701
   right=%any
