@@ -1,5 +1,6 @@
 .*.swp
 .vagrant/
+*.pyc
 
 # don't share docker password
 pillar/docker.sls
