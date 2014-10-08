@@ -55,3 +55,16 @@ install:
       - cmd: build
     - require_in:
       - service: ipsec
+
+init_cert:
+  file.managed:
+    - name: /tmp/init_cert.sh
+    - mode: 755
+    - source: salt://libreswan/init_cert.sh
+  cmd.run:
+    - name: /tmp/init_cert.sh
+    - creates: /etc/ipsec.d/cert8.db
+    - require:
+      - file: init_cert
+    - require_in:
+      - service: ipsec
