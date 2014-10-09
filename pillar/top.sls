@@ -11,6 +11,7 @@ base:
   'nasus':
     - nasus_samba
     - nasus_nfs
+    - nasus_libreswan
   'fednet':
     - fednet_nfs_client
   'vpn':
