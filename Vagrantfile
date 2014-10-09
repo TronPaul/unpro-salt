@@ -20,6 +20,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     box.vm.box = "ubuntu/trusty64"
     box.vm.hostname = "teamunpro.com"
 
+    config.vm.network "private_network", ip: "192.168.50.2", virtualbox__intnet: "internet"
+
     config.vm.synced_folder "state", "/srv/salt/"
     config.vm.synced_folder "pillar", "/srv/pillar/"
     config.vm.synced_folder "grains", "/srv/grains/"
@@ -33,6 +35,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     box.vm.box = "ubuntu/trusty64"
     box.vm.hostname = "vpn"
 
+    config.vm.network "private_network", ip: "192.168.50.3", virtualbox__intnet: "internet"
+
     config.vm.synced_folder "state", "/srv/salt/"
     config.vm.synced_folder "pillar", "/srv/pillar/"
     config.vm.synced_folder "grains", "/srv/grains/"
@@ -41,11 +45,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         config_salt(salt)
     end
   end
-# INTERNAL
 
+  # INTERNAL
   config.vm.define :nasus do |box|
     box.vm.box = "ubuntu/trusty64"
     box.vm.hostname = "nasus"
+
+    config.vm.network "private_network", ip: "192.168.50.4", virtualbox__intnet: "internet"
 
     config.vm.synced_folder "state", "/srv/salt/"
     config.vm.synced_folder "pillar", "/srv/pillar/"
