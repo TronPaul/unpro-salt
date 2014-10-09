@@ -1,6 +1,8 @@
+{%- set interfaces = salt['pillar.get']('libreswan:interfaces', '%defaultroute') -%}
 {%- set name = salt['pillar.get']('libreswan:name', 'vpn') -%}
 {%- set left = salt['pillar.get']('libreswan:left', '%defaultroute') -%}
 {%- set left_id = salt['pillar.get']('libreswan:left_id') -%}
+{%- set left_subnet = salt['pillar.get']('libreswan:left_subnet') -%}
 {%- set right = salt['pillar.get']('libreswan:right', '%any') -%}
 {%- set right_proto_port = salt['pillar.get']('libreswan:right_proto_port', '17/%any') -%}
 {%- set right_subnet_within = salt['pillar.get']('libreswan:right_subnet_within') -%}
@@ -16,7 +18,7 @@ config setup
   oe=off
   protostack=netkey
   nhelpers=0
-  interfaces=%defaultroute
+  interfaces={{ interfaces }}
 
 conn {{ name }}
   connaddrfamily=ipv4
@@ -25,6 +27,9 @@ conn {{ name }}
   {#- jinja is dumb and doesn't let you `if var is not None` -#}
   {%- if left_id %}
   leftid={{ left_id }}
+  {%- endif %}
+  {%- if left_subnet %}
+  leftsubnet={{ left_subnet }}
   {%- endif %}
   leftnexthop=%defaultroute
   leftprotoport=17/1701

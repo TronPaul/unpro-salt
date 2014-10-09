@@ -1,6 +1,6 @@
 {%- if salt['grains.get']('virtual') == 'VirtualBox' -%}
 {%- set left = '192.168.50.4' -%}
-{%- set right = '192.168.50.2' -%}
+{%- set right = '192.168.50.3' -%}
 {%- else -%}
 {%- set right = 'vpn.teamunpro.com' -%}
 {%- set left = '192.168.1.10' -%}

@@ -54,4 +54,3 @@ net.ipv6.conf.default.accept_redirects:
     - value: 0
     - require_in:
       - service: ipsec
-
