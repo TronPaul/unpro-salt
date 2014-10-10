@@ -58,10 +58,11 @@ base:
   'roles:vpn_server':
     - match: grain
     - libreswan.server
-    - xl2tpd
+    - xl2tpd.server
   'roles:vpn_client':
     - match: grain
     - libreswan.common
+    - xl2tpd.client
   'G@roles:dev and G@roles:gui':
     - match: compound
     - virtualbox
