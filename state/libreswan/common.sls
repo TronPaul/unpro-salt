@@ -8,25 +8,38 @@ include:
     - group: root
     - template: jinja
 
-ipsec.secrets_permissions:
+/etc/ipsec.secrets:
   file.managed:
     - name: /etc/ipsec.secrets
-    - create: False
+    - source: salt://libreswan/ipsec.secrets.jinja
+    - template: jinja
     - replace: False
     - user: root
     - group: root
     - mode: 0600
 
-ipsec.secrets_exists:
-  file.exists:
-    - name: /etc/ipsec.secrets
+/etc/init/ipsec.conf:
+  file.managed:
+    - source: salt://libreswan/ipsec.init.conf
+    - user: root
+    - group: root
+    - mode: 755
+
+/etc/default/ipsec:
+  file.managed:
+    - source: salt://libreswan/ipsec
+    - replace: False
+    - user: root
+    - group: root
+    - mode: 644
 
 ipsec:
   service.running:
     - enable: True
     - require:
-      - file: ipsec.secrets_permissions
-      - file: ipsec.secrets_exists
+      - file: /etc/ipsec.secrets
+      - file: /etc/init/ipsec.conf
+      - file: /etc/default/ipsec
       - file: /etc/ipsec.conf
       - cmd: init_cert
     - watch:

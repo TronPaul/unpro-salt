@@ -18,3 +18,5 @@ libreswan:
   left_id: {{ left_id }}
   {%- endif %}
   right_subnet_within: 0.0.0.0/0
+  secrets:
+    - left: {{ left }}

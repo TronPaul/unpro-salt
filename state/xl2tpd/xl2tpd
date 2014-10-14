@@ -27,12 +27,20 @@ if [ -f /etc/default/xl2tpd ] ; then
 	. /etc/default/xl2tpd
 fi
 
+if [ -f /etc/default/xl2tpd-salt ] ; then
+	. /etc/default/xl2tpd-salt
+fi
+
 PIDFILE=/var/run/$NAME.pid
 
 set -e
 
 case "$1" in
   start)
+        if [ ${START_ENABLED:-1} -ne 0 ] ; then
+                log_warning_msg "Not starting $DESC $NAME, disabled via /etc/default/$NAME-salt"
+                exit 1
+        fi
 	echo -n "Starting $DESC: "
 	test -d ${XL2TPD_RUN_DIR:-/var/run/xl2tpd} || mkdir -p ${XL2TPD_RUN_DIR:-/var/run/xl2tpd}
 	start-stop-daemon --start --quiet --pidfile $PIDFILE \
@@ -64,9 +72,8 @@ case "$1" in
 	echo "$NAME."
 	;;
   status)
-        start-stop-daemon --status --quiet --pidfile $PIDFILE \
-                --exec $DAEMON
-  ;;
+        status_of_proc -p $PIDFILE "$DAEMON" $NAME && exit 0 || exit $?
+        ;;
   *)
 	N=/etc/init.d/$NAME
 	echo "Usage: $N {start|stop|restart|force-reload|status}" >&2

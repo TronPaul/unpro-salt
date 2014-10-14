@@ -12,3 +12,5 @@ libreswan:
   right: {{ right }}
   right_proto_port: 17/1701
   rekey: 'yes'
+  secrets:
+    - {right: {{ right }}, left: {{ left }}}

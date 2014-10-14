@@ -10,23 +10,17 @@ include:
       - pkg: xl2tpd
     - require_in:
       - service: xl2tpd
+    - watch_in:
+      - service: xl2tpd
 
-chap_secrets_permissions:
+/etc/ppp/chap-secrets:
   file.managed:
-    - name: /etc/ppp/chap-secrets
-    - create: False
+    - source: salt://xl2tpd/chap-secrets
+    - template: jinja
     - replace: False
     - user: root
     - group: root
     - mode: '0600'
-    - require:
-      - pkg: xl2tpd
-    - require_in:
-      - service: xl2tpd
-
-chap_secrets:
-  file.exists:
-    - name: /etc/ppp/chap-secrets
     - require:
       - pkg: xl2tpd
     - require_in:

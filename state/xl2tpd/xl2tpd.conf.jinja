@@ -6,21 +6,23 @@ port = 1701
 ;debug state = yes
 ;debug tunnel = yes
 
-{% for lns_name, lns in salt['pillar.get']('xl2tpd:lns', {}).items() -%}
+{% set lns = salt['pillar.get']('xl2tpd:lns', None) -%}
+{%- if lns -%}
+{%- set lns_name = lns.get('name', 'l2tp') -%}
 {%- set ip_start = lns.get('ip_start') -%}
 {%- set ip_end = lns.get('ip_end') -%}
 {%- set local_ip = lns.get('local_ip') -%}
-[lns {{ lns_name }}]
+[lns default]
 ip range = {{ ip_start }}-{{ ip_end }}
 local ip = {{ local_ip }}
 require chap = yes
 refuse pap = yes
 require authentication = yes
-name = l2tpd
+name = {{ lns_name }}
 ;ppp debug = yes
 pppoptfile = /etc/ppp/options.xl2tpd
 length bit = yes
-{%- endfor %}
+{%- endif %}
 {% for lac_name, lac in salt['pillar.get']('xl2tpd:lac', {}).items() -%}
 {%- set lns = lac.get('lns') -%}
 [lac {{ lac_name }}]

@@ -1,3 +1,4 @@
+{%- set username = salt['pillar.get']('xl2tpd:username') -%}
 ipcp-accept-local
 ipcp-accept-remote
 refuse-eap
@@ -7,9 +8,13 @@ noauth
 idle 1800
 mtu 1410
 mru 1410
+{%- if salt['pillar.get']('xl2tpd:default_route', False) -%}
 defaultroute
 replacedefaultroute
 usepeerdns
+{%- endif -%}
 debug
 lock
 connect-delay 5000
+name {{ username }}
+password password
