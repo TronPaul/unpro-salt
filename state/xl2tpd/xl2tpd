@@ -67,6 +67,10 @@ case "$1" in
 	start-stop-daemon --oknodo --stop --quiet --pidfile \
 		$PIDFILE --exec $DAEMON
 	sleep 1
+        if [ ${START_ENABLED:-1} -ne 0 ] ; then
+                log_warning_msg "Not restarting $DESC $NAME, disabled via /etc/default/$NAME-salt"
+                exit 1
+        fi
 	start-stop-daemon --start --quiet --pidfile \
 		$PIDFILE --exec $DAEMON -- $DAEMON_OPTS
 	echo "$NAME."

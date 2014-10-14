@@ -1,3 +1,4 @@
+{% set lns = salt['pillar.get']('xl2tpd:lns', None) -%}
 [global]
 port = 1701
 
@@ -6,12 +7,11 @@ port = 1701
 ;debug state = yes
 ;debug tunnel = yes
 
-{% set lns = salt['pillar.get']('xl2tpd:lns', None) -%}
 {%- if lns -%}
-{%- set lns_name = lns.get('name', 'l2tp') -%}
-{%- set ip_start = lns.get('ip_start') -%}
-{%- set ip_end = lns.get('ip_end') -%}
-{%- set local_ip = lns.get('local_ip') -%}
+{%- set lns_name = lns['name'] -%}
+{%- set ip_start = lns['ip_start'] -%}
+{%- set ip_end = lns['ip_end'] -%}
+{%- set local_ip = lns['local_ip'] -%}
 [lns default]
 ip range = {{ ip_start }}-{{ ip_end }}
 local ip = {{ local_ip }}
@@ -24,10 +24,10 @@ pppoptfile = /etc/ppp/options.xl2tpd
 length bit = yes
 {%- endif %}
 {% for lac_name, lac in salt['pillar.get']('xl2tpd:lac', {}).items() -%}
-{%- set lns = lac.get('lns') -%}
+{%- set lns = lac['lns'] -%}
 [lac {{ lac_name }}]
 lns = {{ lns }}
 ppp debug = no
-pppoptfile = /etc/ppp/options.xl2tpd.client
+pppoptfile = /etc/ppp/options.xl2tpd.client.{{ lac_name }}
 length bit = yes
 {%- endfor -%}

@@ -1,4 +1,4 @@
-{%- set username = salt['pillar.get']('xl2tpd:username') -%}
+{%- set username = lac_data.get('username', 'guest') -%}
 ipcp-accept-local
 ipcp-accept-remote
 refuse-eap

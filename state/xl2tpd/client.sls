@@ -14,17 +14,21 @@ include:
     - watch_in:
       - service: xl2tpd
 
-/etc/ppp/options.xl2tpd.client:
+{% for lac_name, lac_data in salt['pillar.get']('xl2tpd:lac', {}).items() -%}
+/etc/ppp/options.xl2tpd.client.{{ lac_name }}:
   file.managed:
-    - source: salt://xl2tpd/options.xl2tpd.client
+    - source: salt://xl2tpd/options.xl2tpd.client.jinja
     - template: jinja
     - user: root
     - group: root
     - mode: 600
     - replace: False
+    - context:
+      lac_data: {{ lac_data }}
     - require:
       - pkg: xl2tpd
     - require_in:
       - service: xl2tpd
     - watch_in:
       - service: xl2tpd
+{%- endfor -%}
