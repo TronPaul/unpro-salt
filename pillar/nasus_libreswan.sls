@@ -2,7 +2,7 @@
 {%- set left = '192.168.50.4' -%}
 {%- set right = '192.168.50.3' -%}
 {%- else -%}
-{%- set right = 'vpn.teamunpro.com' -%}
+{%- set right = '54.172.122.148' -%}
 {%- set left = '192.168.1.10' -%}
 {%- endif -%}
 
