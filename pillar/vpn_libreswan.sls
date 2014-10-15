@@ -2,7 +2,9 @@
 {%- set left = salt['grains.get']('ip_interfaces:eth1')[0] -%}
 {%- set interfaces = 'eth1' -%}
 {%- else -%}
-{%- set left_id = salt['grains.get']('external_ip') -%}
+{%- set left = salt['grains.get']('ec2_local-ipv4') -%}
+{%- set left_id = salt['grains.get']('ec2_public-ipv4') -%}
+{%- set interfaces = 'eth0' -%}
 {%- endif -%}
 libreswan:
   version: '3.10'
@@ -14,7 +16,7 @@ libreswan:
   {%- if left %}
   left: {{ left }}
   {%- endif %}
-  {%- if left_id is defined and left_id%}
+  {%- if left_id is defined and left_id %}
   left_id: {{ left_id }}
   {%- endif %}
   right_subnet_within: 0.0.0.0/0
