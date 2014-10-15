@@ -1,0 +1,54 @@
+{%- set interfaces = salt['pillar.get']('libreswan:interfaces', '%defaultroute') -%}
+{%- set name = salt['pillar.get']('libreswan:name', 'vpn') -%}
+{%- set left = salt['pillar.get']('libreswan:left', '%defaultroute') -%}
+{%- set left_id = salt['pillar.get']('libreswan:left_id') -%}
+{%- set right = salt['pillar.get']('libreswan:right', '%any') -%}
+{%- set right_proto_port = salt['pillar.get']('libreswan:right_proto_port', '17/%any') -%}
+{%- set right_subnet_within = salt['pillar.get']('libreswan:right_subnet_within') -%}
+{%- set rekey = salt['pillar.get']('libreswan:rekey', 'no') -%}
+{%- set ike_lifetime = salt['pillar.get']('libreswan:ike_lifetime') -%}
+{%- set key_life = salt['pillar.get']('libreswan:key_life') -%}
+version 2.0
+
+config setup
+  dumpdir=/var/run/pluto/
+  nat_traversal=yes
+  virtual_private=v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12,%v4:!192.168.42.0/24
+  oe=off
+  protostack=netkey
+  nhelpers=0
+  interfaces={{ interfaces }}
+
+conn {{ name }}
+  connaddrfamily=ipv4
+  auto=add
+  left={{ left }}
+  {#- jinja is dumb and doesn't let you `if var is not None` -#}
+  {%- if left_id %}
+  leftid={{ left_id }}
+  {%- endif %}
+  leftnexthop=%defaultroute
+  leftprotoport=17/1701
+  right={{ right }}
+  rightprotoport={{ right_proto_port }}
+  {%- if right_subnet_within %}
+  rightsubnetwithin={{ right_subnet_within }}
+  {%- endif %}
+  forceencaps=yes
+  authby=secret
+  pfs=no
+  type=transport
+  auth=esp
+  ike=3des-sha1,aes-sha1
+  phase2alg=3des-sha1,aes-sha1
+  rekey={{ rekey }}
+  keyingtries=5
+  dpddelay=30
+  dpdtimeout=120
+  dpdaction=clear
+  {%- if ike_lifetime -%}
+  ikelifetime={{ ike_lifetime }}
+  {%- endif -%}
+  {%- if key_life -%}
+  keylife={{ key_life }}
+  {%- endif -%}
