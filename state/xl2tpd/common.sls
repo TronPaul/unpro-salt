@@ -21,12 +21,6 @@
     - group: root
     - mode: 755
 
-kill_default_chap_secrets:
-  file.absent:
-    - name: /etc/ppp/chap-secrets
-    - watch:
-      - pkg: xl2tpd
-
 xl2tpd:
   pkg:
     - installed
