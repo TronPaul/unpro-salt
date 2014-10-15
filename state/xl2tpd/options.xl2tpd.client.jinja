@@ -1,4 +1,5 @@
 {%- set username = lac_data.get('username', 'guest') -%}
+{%- set idle = lac_data.get('idle') -%}
 ipcp-accept-local
 ipcp-accept-remote
 noipdefault
@@ -6,7 +7,9 @@ refuse-eap
 require-mschap-v2
 noccp
 noauth
-idle 1800
+{% if idle -%}
+idle {{ idle }}
+{% endif -%}
 mtu 1410
 mru 1410
 {%- if salt['pillar.get']('xl2tpd:default_route', False) -%}
