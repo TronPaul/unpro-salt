@@ -4,11 +4,10 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-def config_salt(salt)
-  salt.bootstrap_options = "-X"
-  salt.install_type = "git"
-  salt.install_args = "v2014.1.10"
-  salt.minion_config = "vagrant/minion"
+def config_salt(salt, hostname)
+  salt.minion_pub = "salt/key/#{hostname}.pub"
+  salt.minion_key = "salt/key/#{hostname}.pem"
+  salt.minion_config = "salt/minion"
   salt.run_highstate = true
   salt.verbose = true
   salt.colorize = true
@@ -25,9 +24,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder "state", "/srv/salt/"
     config.vm.synced_folder "pillar", "/srv/pillar/"
     config.vm.synced_folder "grains", "/srv/grains/"
-    config.vm.provision "shell", path: "vagrant/grain-up"
+    config.vm.provision "shell", path: "vagrant/add-hosts.sh"
     config.vm.provision :salt do |salt|
-        config_salt(salt)
+        config_salt(salt, box.vm.hostname)
     end
   end
 
@@ -42,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder "grains", "/srv/grains/"
     config.vm.provision "shell", path: "vagrant/grain-up"
     config.vm.provision :salt do |salt|
-        config_salt(salt)
+        config_salt(salt, box.vm.hostname)
     end
   end
 
@@ -55,10 +54,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.vm.synced_folder "state", "/srv/salt/"
     config.vm.synced_folder "pillar", "/srv/pillar/"
-    config.vm.synced_folder "grains", "/srv/grains/"
-    config.vm.provision "shell", path: "vagrant/grain-up"
     config.vm.provision :salt do |salt|
-        config_salt(salt)
+        salt.install_master = true
+        salt.seed_master = { "nasus" => "salt/key/nasus.pub", "teamunpro.com" => "salt/key/teamunpro.com.pub"}
+        config_salt(salt, box.vm.hostname)
     end    
   end
 
@@ -71,7 +70,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder "grains", "/srv/grains/"
     config.vm.provision "shell", path: "vagrant/grain-up"
     config.vm.provision :salt do |salt|
-        config_salt(salt)
+        config_salt(salt, box.vm.hostname)
     end    
   end
 
@@ -84,7 +83,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder "grains", "/srv/grains/"
     config.vm.provision "shell", path: "vagrant/grain-up"
     config.vm.provision :salt do |salt|
-        config_salt(salt)
+        config_salt(salt, box.vm.hostname)
     end    
   end
 end
