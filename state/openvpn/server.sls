@@ -1,5 +1,8 @@
 {% set fqdn = grains['fqdn'] %}
 
+include:
+  - .common
+
 key-files:
   file.exists:
     - names:
@@ -7,16 +10,8 @@ key-files:
       - /etc/openvpn/{{fqdn}}.crt
       - /etc/openvpn/ca.crt
       - /etc/openvpn/dh2048.pem
-
-openvpn:
-  pkg:
-    - installed
-  service:
-    - running
-    - watch:
-      - file: /etc/openvpn/server.conf
-    - require:
-      - file: key-files
+    - require_in:
+      - service: openvpn
 
 /etc/openvpn/server.conf:
   file.managed:
@@ -24,3 +19,5 @@ openvpn:
     - template: jinja
     - require:
       - pkg: openvpn
+    - watch_in:
+      - service: openvpn

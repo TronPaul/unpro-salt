@@ -5,6 +5,9 @@ pillar_roots:
 base:
   '*':
     - users
+  'roles:vpn_client':
+    - match: grain
+    - openvpn_client
   'teamunpro.com*':
     - mumble-servers
     - openssh

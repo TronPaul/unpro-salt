@@ -58,6 +58,9 @@ base:
   'roles:vpnserver':
     - match: grain
     - openvpn.server
+  'roles:vpnclient':
+    - match: grain
+    - openvpn.client
   'G@roles:dev and G@roles:gui':
     - match: compound
     - virtualbox
