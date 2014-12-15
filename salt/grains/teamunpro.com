@@ -5,3 +5,4 @@ roles:
   - sshserver
   - dockman
   - irc_bounce
+  - vpnserver

@@ -55,13 +55,9 @@ base:
   'roles:nas_client':
     - match: grain
     - nfs.client
-  'roles:vpn_server':
+  'roles:vpnserver':
     - match: grain
-    - libreswan.server
-    - xl2tpd.server
-  'roles:vpn_client':
-    - match: grain
-    - vpn_client
+    - openvpn.server
   'G@roles:dev and G@roles:gui':
     - match: compound
     - virtualbox
