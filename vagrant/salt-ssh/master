@@ -55,7 +55,7 @@ user: tron
 #ret_port: 4506
 
 # Specify the location of the daemon process ID file:
-pidfile: /.unpro-salt/var/run/salt-master.pid
+#pidfile: /var/run/salt-master.pid
 
 # The root directory prepended to these options: pki_dir, cachedir,
 # sock_dir, log_file, autosign_file, autoreject_file, extension_modules,
