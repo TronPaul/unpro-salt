@@ -21,3 +21,9 @@ key-files:
       - pkg: openvpn
     - watch_in:
       - service: openvpn
+
+net.ipv4.ip_forward:
+  sysctl.present:
+    - value: 1
+    - require_in:
+      - service: openvpn

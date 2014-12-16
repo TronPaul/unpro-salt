@@ -116,8 +116,13 @@ ns-cert-type server
 # enabled in the server config file.
 comp-lzo
 
+# This updates the resolvconf with dns settings
+script-security 2
+up /etc/openvpn/update-resolv-conf.sh
+down /etc/openvpn/update-resolv-conf.sh
+
 # Set log file verbosity.
-verb 3
+verb 4
 
 # Silence repeating messages
 ;mute 20

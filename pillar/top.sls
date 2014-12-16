@@ -8,9 +8,9 @@ base:
   'roles:vpn_client':
     - match: grain
     - openvpn_client
-  'teamunpro.com*':
-    - mumble-servers
-    - openssh
+  'roles:vpn_server':
+    - match: grain
+    - openvpn_server
   'nasus':
     - nasus_samba
     - nasus_nfs

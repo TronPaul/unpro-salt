@@ -1,3 +1,4 @@
+{% set routes = salt['pillar.get']('openvpn:server:routes', []) %}
 #################################################
 # Sample OpenVPN 2.0 config file for            #
 # multi-client server.                          #
@@ -94,7 +95,7 @@ dh dh2048.pem
 # Each client will be able to reach the server
 # on 10.8.0.1. Comment this line out if you are
 # ethernet bridging. See the man page for more info.
-server {{salt['pillar.get']('openvpn_server:network', '192.168.15.0')}} {{salt['pillar.get']('openvpn_server:netmask', '255.255.255.0')}}
+server {{salt['pillar.get']('openvpn:server:network', '192.168.15.0')}} {{salt['pillar.get']('openvpn:server:netmask', '255.255.255.0')}}
 
 # Maintain a record of client <-> virtual IP address
 # associations in this file.  If OpenVPN goes down or
@@ -136,6 +137,9 @@ ifconfig-pool-persist ipp.txt
 # back to the OpenVPN server.
 ;push "route 192.168.10.0 255.255.255.0"
 ;push "route 192.168.20.0 255.255.255.0"
+{% for route in routes %}
+push route {{route['network']}} {{route['netmask']}}
+{% endfor %}
 
 # To assign specific IP addresses to specific
 # clients or if a connecting client has a private
@@ -186,6 +190,7 @@ ifconfig-pool-persist ipp.txt
 # or bridge the TUN/TAP interface to the internet
 # in order for this to work properly).
 ;push "redirect-gateway def1 bypass-dhcp"
+;push "redirect-gateway def1"
 
 # Certain Windows-specific network settings
 # can be pushed to clients, such as DNS
@@ -195,6 +200,7 @@ ifconfig-pool-persist ipp.txt
 # DNS servers provided by opendns.com.
 ;push "dhcp-option DNS 208.67.222.222"
 ;push "dhcp-option DNS 208.67.220.220"
+push "dhcp-option DNS 192.168.15.1"
 
 # Uncomment this directive to allow different
 # clients to be able to "see" each other.

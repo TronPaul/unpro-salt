@@ -29,7 +29,6 @@ mumble-server:
     - require:
       - pkg: mumble-server
   
-
 /etc/default/mumble-server:
   file.absent:
     - require:

@@ -1,12 +1,12 @@
 include:
-  - mumble-servers.package
+  - .package
 
 {% for name, mumble_server in pillar.get('mumble-servers', {}).items() %}
 {%- if mumble_server == None -%}
 {%- set mumble_server = {} -%}
 {%- endif -%}
 
-mumble-server_{{ name }}:
+mumble_server_{{ name }}:
   service:
     - running
     - watch:

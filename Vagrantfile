@@ -5,20 +5,20 @@
 require 'yaml'
 VAGRANTFILE_API_VERSION = "2"
 
-def config_vm(config)
-    config.vm.provider :virtualbox do |v|
-      v.memory = 1024
-    end
+def seed_hash(hosts)
+  Hash[hosts.map {|host| [host, "vagrant/key/#{host}.pub"]}]
+end
 
+def config_vm(config)
     config.vm.synced_folder "state", "/srv/salt/"
     config.vm.synced_folder "pillar", "/srv/pillar/"
     config.vm.provision "shell", path: "vagrant/add-hosts.sh"
 end
 
 def config_salt(salt, hostname)
-  salt.minion_pub = "salt/key/#{hostname}.pub"
-  salt.minion_key = "salt/key/#{hostname}.pem"
-  grain_file_path = "salt/grains/#{hostname}"
+  salt.minion_pub = "vagrant/key/#{hostname}.pub"
+  salt.minion_key = "vagrant/key/#{hostname}.pem"
+  grain_file_path = "vagrant/grains/#{hostname}"
   if Vagrant.has_plugin?("salty-vagrant-grains") && File.file?(grain_file_path)
     salt.grains(YAML.load_file grain_file_path)
   end
@@ -30,16 +30,53 @@ end
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 # EXTERNAL
-  config.vm.define :teamunpro do |box|
+  config.vm.define :salt do |box|
     box.vm.box = "ubuntu/trusty64"
-    box.vm.hostname = "teamunpro.com"
+    box.vm.hostname = "salt"
 
-    config.vm.network :private_network, ip: "192.168.50.2"
+    config.vm.network :private_network, ip: "192.168.50.2", virtualbox__intnet: "amazon"
 
     config_vm(config)
     config.vm.provision :salt do |salt|
         salt.install_master = true
-        salt.seed_master = { "nasus" => "salt/key/nasus.pub", "teamunpro.com" => "salt/key/teamunpro.com.pub"}
+        salt.seed_master = seed_hash(["salt", "mumble", "vpn", "www", "nasus"])
+        config_salt(salt, box.vm.hostname)
+    end
+  end
+
+  config.vm.define :mumble do |box|
+    box.vm.box = "ubuntu/trusty64"
+    box.vm.hostname = "mumble"
+
+    config.vm.network :private_network, ip: "192.168.50.3", virtualbox__intnet: "amazon"
+
+    config_vm(config)
+    config.vm.provision :salt do |salt|
+        config_salt(salt, box.vm.hostname)
+    end
+  end
+
+  config.vm.define :vpn do |box|
+    box.vm.box = "ubuntu/trusty64"
+    box.vm.hostname = "vpn"
+
+    config.vm.network :private_network, ip: "192.168.50.4", virtualbox__intnet: "amazon"
+    config.vm.network :private_network, ip: "192.168.51.2", virtualbox__intnet: "internet"
+
+    config_vm(config)
+    config.vm.provision :salt do |salt|
+        config_salt(salt, box.vm.hostname)
+    end
+  end
+
+  config.vm.define :www do |box|
+    box.vm.box = "ubuntu/trusty64"
+    box.vm.hostname = "www"
+
+    config.vm.network :private_network, ip: "192.168.50.5", virtualbox__intnet: "amazon"
+
+    config_vm(config)
+    config.vm.provision :salt do |salt|
         config_salt(salt, box.vm.hostname)
     end
   end
@@ -49,7 +86,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     box.vm.box = "ubuntu/trusty64"
     box.vm.hostname = "nasus"
 
-    config.vm.network :private_network, ip: "192.168.50.4"
+    config.vm.network :private_network, ip: "192.168.51.3", virtualbox__intnet: "internet"
 
     config_vm(config)
     config.vm.provision :salt do |salt|

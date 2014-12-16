@@ -1,3 +1,3 @@
 openvpn:
   servers:
-    - teamunpro.com
+    - vpn.teamunpro.com

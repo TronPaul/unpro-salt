@@ -3,18 +3,16 @@ file_roots:
     - /srv/salt
 
 base:
-  '*':
-    - edit.vim
-    - tmux
-  '* and not G@virtual:VirtualBox':
-    - match: compound
-    - unpro-salt
-  'roles:webserver':
+  'roles:web_server':
     - match: grain
     - nginx
-  'roles:voiceserver':
+  'roles:vpn_server':
     - match: grain
-    - mumble-servers
+    - openvpn.server
+    - dnsmasq
+  'roles:voice_server':
+    - match: grain
+    - mumble_servers
   'roles:pythondev':
     - match: grain
     - dev.python
@@ -55,9 +53,6 @@ base:
   'roles:nas_client':
     - match: grain
     - nfs.client
-  'roles:vpnserver':
-    - match: grain
-    - openvpn.server
   'roles:vpnclient':
     - match: grain
     - openvpn.client

@@ -1,0 +1,6 @@
+nasus:
+  host: 127.0.0.1
+  port: 2201
+  user: vagrant
+  sudo: true
+  priv: /home/tron/dev/unpro-salt/.vagrant/machines/nasus/virtualbox/private_key
