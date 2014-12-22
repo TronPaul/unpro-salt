@@ -10,6 +10,9 @@ base:
     - match: grain
     - openvpn.server
     - dnsmasq
+  'roles:aws_nat':
+    - match: grain
+    - aws.nat
   'roles:voice_server':
     - match: grain
     - mumble_servers
@@ -53,7 +56,7 @@ base:
   'roles:nas_client':
     - match: grain
     - nfs.client
-  'roles:vpnclient':
+  'roles:vpn_client':
     - match: grain
     - openvpn.client
   'G@roles:dev and G@roles:gui':

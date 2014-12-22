@@ -3,4 +3,3 @@ roles:
   - torrentserver
   - nas  
   - docker
-  - vpn_client
