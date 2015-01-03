@@ -3,6 +3,9 @@ file_roots:
     - /srv/salt
 
 base:
+  '* and not G@virtual:VirtualBox':
+    - match: compound
+    - unpro_salt
   'roles:web_server':
     - match: grain
     - nginx
