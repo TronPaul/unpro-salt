@@ -31,11 +31,15 @@ fi
 
 if [ $_INSTALL_UNPRO_SALT -eq 0 ]; then
   DIR=`mktemp -d`
-  cd $DIR
   wget -q -O $DIR/unpro-salt.tar.gz https://github.com/TronPaul/unpro-salt/archive/master.tar.gz
-  tar -xzf unpro-salt.tar.gz -C $DIR
-  install -d unpro-salt-master/state /srv/salt
-  install -d unpro-salt-master/pillar /srv/pillar
+  tar -xzf $DIR/unpro-salt.tar.gz -C $DIR
+  _MINION_ID=$(salt-call --out txt grains.get id | cut -d ' ' -f 2)
+  _GRAIN_PATH="$DIR/unpro-salt-master/salt/grains/$_MINION_ID"
+  if [ -f $_GRAIN_PATH ]; then
+    install $_GRAIN_PATH /etc/salt/grains
+  fi
+  install -d $DIR/unpro-salt-master/state /srv/salt
+  install -d $DIR/unpro-salt-master/pillar /srv/pillar
   salt-call state.highstate
   rm -rf $DIR
 fi

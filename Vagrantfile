@@ -5,10 +5,6 @@
 require 'yaml'
 VAGRANTFILE_API_VERSION = "2"
 
-def seed_hash(hosts)
-  Hash[hosts.map {|host| [host, "vagrant/key/#{host}.pub"]}]
-end
-
 def config_vm(box, n)
   box.vm.synced_folder "state", "/srv/salt/"
   box.vm.synced_folder "pillar", "/srv/pillar/"
@@ -17,7 +13,7 @@ def config_vm(box, n)
 end
 
 def config_salt(salt, hostname)
-  grain_file_path = "vagrant/grains/#{hostname}"
+  grain_file_path = "salt/grains/#{hostname}"
   if Vagrant.has_plugin?("salty-vagrant-grains") && File.file?(grain_file_path)
     salt.grains(YAML.load_file grain_file_path)
   end
