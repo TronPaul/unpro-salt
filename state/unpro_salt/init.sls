@@ -1,6 +1,6 @@
 /usr/local/bin/salt-up:
   file.managed:
-    - source: salt://unpro-salt/salt-up
+    - source: salt://unpro_salt/salt-up
     - user: root
     - group: root
     - mode: 755
