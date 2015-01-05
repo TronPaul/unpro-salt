@@ -208,6 +208,17 @@
       }
     },
 
+    "NATNetworkInterface" : {
+      "Type" : "AWS::EC2::NetworkInterface",
+      "Properties" : {
+        "SubnetId" : { "Ref" : "PublicSubnet" },
+        "PrivateIpAddress" : "10.0.0.10",
+        "Description" : "NAT Interface",
+        "GroupSet" : [ { "Ref" : "NATSecurityGroup" } ],
+        "SourceDestCheck" : "false"
+      }
+    },
+
     "NATInstance" : {
       "Type" : "AWS::EC2::Instance",
       "DependsOn" : "GatewayToInternet",
@@ -217,10 +228,11 @@
       "Properties" : {
         "InstanceType" : { "Ref" : "NATNodeInstanceType" } ,
         "KeyName" : { "Ref" : "KeyName" },
-        "SubnetId" : { "Ref" : "PublicSubnet" },
-        "SourceDestCheck" : "false",
+        "NetworkInterfaces" : [ { 
+          "NetworkInterfaceId" : { "Ref" : "NATNetworkInterface" },
+          "DeviceIndex" : "0"
+        } ],
         "ImageId" : { "Fn::FindInMap" : [ "AWSNATAMI", { "Ref" : "AWS::Region" }, "AMI" ]},
-        "SecurityGroupIds" : [{ "Ref" : "NATSecurityGroup" }],
         "Tags" : [
           { "Key" : "Name", "Value" : "NAT" }
         ],
@@ -292,6 +304,16 @@
       }
     },
 
+    "MumbleNetworkInterface" : {
+      "Type" : "AWS::EC2::NetworkInterface",
+      "Properties" : {
+        "SubnetId" : { "Ref" : "PrivateSubnet" },
+        "PrivateIpAddress" : "10.0.1.10",
+        "Description" : "NAT Interface",
+        "GroupSet" : [ { "Ref" : "MumbleSecurityGroup" } ]
+      }
+    },
+
     "MumbleInstance" : {
       "Type" : "AWS::EC2::Instance",
       "Metadata" : {
@@ -300,10 +322,11 @@
       "Properties" : {
         "InstanceType" : { "Ref" : "MumbleNodeInstanceType" },
         "KeyName" : { "Ref" : "KeyName" },
-        "SubnetId" : { "Ref" : "PrivateSubnet" },
-        "SourceDestCheck" : "true",
+        "NetworkInterfaces" : [ { 
+          "NetworkInterfaceId" : { "Ref" : "MumbleNetworkInterface"},
+          "DeviceIndex" : "0"
+        } ],
         "ImageId" : { "Fn::FindInMap" : [ "UBUNTUAMI", { "Ref" : "AWS::Region" }, "AMI" ]},
-        "SecurityGroupIds" : [{ "Ref" : "MumbleSecurityGroup" }],
         "Tags" : [
           { "Key" : "Name", "Value" : "mumble" }
         ],
@@ -340,6 +363,16 @@
       }
     },
 
+    "VPNNetworkInterface" : {
+      "Type" : "AWS::EC2::NetworkInterface",
+      "Properties" : {
+        "SubnetId" : { "Ref" : "PrivateSubnet" },
+        "PrivateIpAddress" : "10.0.1.11",
+        "Description" : "NAT Interface",
+        "GroupSet" : [ { "Ref" : "VPNSecurityGroup" } ]
+      }
+    },
+
     "VPNInstance" : {
       "Type" : "AWS::EC2::Instance",
       "Metadata" : {
@@ -348,10 +381,11 @@
       "Properties" : {
         "InstanceType" : { "Ref" : "VPNNodeInstanceType" },
         "KeyName" : { "Ref" : "KeyName" },
-        "SubnetId" : { "Ref" : "PrivateSubnet" },
-        "SourceDestCheck" : "true",
+        "NetworkInterfaces" : [ { 
+          "NetworkInterfaceId" : { "Ref" : "VPNNetworkInterface"},
+          "DeviceIndex" : "0"
+        } ],
         "ImageId" : { "Fn::FindInMap" : [ "UBUNTUAMI", { "Ref" : "AWS::Region" }, "AMI" ]},
-        "SecurityGroupIds" : [{ "Ref" : "VPNSecurityGroup" }],
         "Tags" : [
           { "Key" : "Name", "Value" : "vpn" }
         ],
@@ -390,6 +424,16 @@
       }
     },
 
+    "WWWNetworkInterface" : {
+      "Type" : "AWS::EC2::NetworkInterface",
+      "Properties" : {
+        "SubnetId" : { "Ref" : "PrivateSubnet" },
+        "PrivateIpAddress" : "10.0.1.12",
+        "Description" : "NAT Interface",
+        "GroupSet" : [ { "Ref" : "WWWSecurityGroup" } ]
+      }
+    },
+
     "WWWInstance" : {
       "Type" : "AWS::EC2::Instance",
       "Metadata" : {
@@ -398,10 +442,11 @@
       "Properties" : {
         "InstanceType" : { "Ref" : "WWWNodeInstanceType" },
         "KeyName" : { "Ref" : "KeyName" },
-        "SubnetId" : { "Ref" : "PrivateSubnet" },
-        "SourceDestCheck" : "true",
+        "NetworkInterfaces" : [ { 
+          "NetworkInterfaceId" : { "Ref" : "WWWNetworkInterface"},
+          "DeviceIndex" : "0"
+        } ],
         "ImageId" : { "Fn::FindInMap" : [ "UBUNTUAMI", { "Ref" : "AWS::Region" }, "AMI" ]},
-        "SecurityGroupIds" : [{ "Ref" : "WWWSecurityGroup" }],
         "Tags" : [
           { "Key" : "Name", "Value" : "www" }
         ],
