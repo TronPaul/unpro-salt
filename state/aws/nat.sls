@@ -12,6 +12,17 @@ mumble:
     - table: nat
     - chain: PREROUTING
     - jump: DNAT
+    - proto: tcp
+    - dport: 64738
+    - to-destination: 10.0.1.10
+    - save: True
+
+mumble:
+  iptables.append:
+    - table: nat
+    - chain: PREROUTING
+    - jump: DNAT
+    - proto: udp
     - dport: 64738
     - to-destination: 10.0.1.10
     - save: True
