@@ -38,8 +38,10 @@ if [ $_INSTALL_UNPRO_SALT -eq 0 ]; then
   if [ -f $_GRAIN_PATH ]; then
     install $_GRAIN_PATH /etc/salt/grains
   fi
-  install -d $DIR/unpro-salt-master/state /srv/salt
-  install -d $DIR/unpro-salt-master/pillar /srv/pillar
+  rm -rf /srv/salt
+  rm -rf /srv/pillar
+  cp -r $DIR/unpro-salt-master/state /srv/salt
+  cp -r $DIR/unpro-salt-master/pillar /srv/pillar
   salt-call state.highstate
   rm -rf $DIR
 fi
