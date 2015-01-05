@@ -7,7 +7,7 @@ masquerade:
     - source: 10.0.0.0/16
     - save: True
 
-mumble:
+mumble-tcp:
   iptables.append:
     - table: nat
     - chain: PREROUTING
@@ -17,7 +17,7 @@ mumble:
     - to-destination: 10.0.1.10
     - save: True
 
-mumble:
+mumble-udp:
   iptables.append:
     - table: nat
     - chain: PREROUTING
