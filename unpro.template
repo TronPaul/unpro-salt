@@ -250,8 +250,8 @@
 	  "net.ipv4.ip_forward = 1\n",
 	  "net.ipv4.conf.eth0.send_redirects = 0\n",
 	  "EOF\n",
-          "wget -O bootstrap-salt.sh http://bootstrap.saltstack.org\n",
-          "sh ./bootstrap-salt.sh -i nat\n"
+          "wget -O bootstrap-unpro.sh https://raw.githubusercontent.com/TronPaul/unpro-salt/master/bootstrap-unpro-salt\n",
+          "sh ./bootstrap-unpro.sh -i nat\n"
         ]]}}
       }
     },
@@ -332,8 +332,8 @@
         ],
         "UserData" : { "Fn::Base64" : { "Fn::Join" : ["", [
           "#!/bin/bash -v\n",
-          "wget -O bootstrap-salt.sh http://bootstrap.saltstack.org\n",
-          "sh ./bootstrap-salt.sh -i mumble\n"
+          "wget -O bootstrap-unpro.sh https://raw.githubusercontent.com/TronPaul/unpro-salt/master/bootstrap-unpro-salt\n",
+          "sh ./bootstrap-unpro.sh -i mumble\n"
         ]]}}
       }
     },
@@ -391,8 +391,8 @@
         ],
         "UserData" : { "Fn::Base64" : { "Fn::Join" : ["", [
           "#!/bin/bash -v\n",
-          "wget -O bootstrap-salt.sh http://bootstrap.saltstack.org\n",
-          "sh ./bootstrap-salt.sh -i vpn\n"
+          "wget -O bootstrap-unpro.sh https://raw.githubusercontent.com/TronPaul/unpro-salt/master/bootstrap-unpro-salt\n",
+          "sh ./bootstrap-unpro.sh -i vpn\n"
         ]]}}
       }
     },
@@ -452,8 +452,8 @@
         ],
         "UserData" : { "Fn::Base64" : { "Fn::Join" : ["", [
           "#!/bin/bash -v\n",
-          "wget -O bootstrap-salt.sh http://bootstrap.saltstack.org\n",
-          "sh ./bootstrap-salt.sh -i www\n"
+          "wget -O bootstrap-unpro.sh https://raw.githubusercontent.com/TronPaul/unpro-salt/master/bootstrap-unpro-salt\n",
+          "sh ./bootstrap-unpro.sh -i www\n"
         ]]}}
       }
     },
