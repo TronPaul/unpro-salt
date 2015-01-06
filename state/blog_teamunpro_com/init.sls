@@ -33,12 +33,10 @@ pelican:
     - require:
       - pkg: nginx
 
-tron_linode:
-  ssh_auth.present:
-    - source: salt://ssh_keys/tron_linode.id_rsa.pub
-    - user: pelican
-
-tron_laptop:
-  ssh_auth.present:
-    - source: salt://ssh_keys/tron_laptop.id_rsa.pub
-    - user: pelican
+# Add key for pelican
+#pelican_key:
+#  ssh_auth.present:
+#    - source: salt://blog_teamunpro_com/pelican.pub
+#    - user: pelican
+#    - require:
+#       - user: pelican
