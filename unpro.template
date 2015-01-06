@@ -493,10 +493,6 @@
   },
 
   "Outputs" : {
-    "NAT" : {
-      "Description" : "NAT EIP.",
-      "Value" :  { "Fn::Join" : [ "", [ { "Ref" : "NATInstance" }, " (", { "Ref" : "NATEIP" }, ")" ]] }
-    },
     "VPCID" : {
       "Description" : "VPC Info.",
       "Value" : { "Fn::Join" : [ "", [ { "Ref" : "VPC" }, " (", { "Ref" : "VpcCidr" }, ")" ]] }
