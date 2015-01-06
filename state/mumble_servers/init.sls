@@ -25,7 +25,7 @@ mumble_server_{{ name }}:
     - user: root
     - group: root
     - mode: 644
-    - source: salt://mumble-servers/mumble-server.logrotate.jinja
+    - source: salt://mumble_servers/mumble-server.logrotate.jinja
     - context:
       server_name: '{{ name }}'
 
@@ -35,7 +35,7 @@ mumble_server_{{ name }}:
     - user: mumble-server
     - group: root
     - mode: 640
-    - source: salt://mumble-servers/mumble-server.ini.jinja
+    - source: salt://mumble_servers/mumble-server.ini.jinja
     - context:
       server_name: '{{ name }}'
       mumble_server:
@@ -49,7 +49,7 @@ mumble_server_{{ name }}:
     - user: root
     - group: root
     - mode: 755
-    - source: salt://mumble-servers/mumble-server.init.d.jinja
+    - source: salt://mumble_servers/mumble-server.init.d.jinja
     - context:
       server_name: '{{ name }}'
 
@@ -58,5 +58,5 @@ mumble_server_{{ name }}:
     - user: root
     - group: root
     - mode: 644
-    - source: salt://mumble-servers/mumble-server.default
+    - source: salt://mumble_servers/mumble-server.default
 {% endfor %}
