@@ -13,6 +13,10 @@
       "AllowedPattern" : "[-_ a-zA-Z0-9]*",
       "ConstraintDescription" : "can contain only alphanumeric characters, spaces, dashes and underscores."
     },
+    "NATEIPAllocationId" : {
+      "Description" : "EIPAllocationId to use for the NAT",
+      "Type" : "String"
+    },
     "VpcCidr" : {
       "Description" : "CIDR address for the VPC to be created.",
       "Type" : "String",
@@ -199,12 +203,12 @@
       }
     },
 
-    "NATEIP" : {
-      "Type" : "AWS::EC2::EIP",
+    "NATEIPAssociation" : {
+      "Type" : "AWS::EC2::EIPAssociation",
       "DependsOn" : "GatewayToInternet",
       "Properties" : {
-        "Domain" : "vpc",
-        "InstanceId" : { "Ref" : "NATInstance" }
+        "AllocationId" : { "Ref" : "NATEIPAllocationId" },
+        "NetworkInterfaceId" : { "Ref" : "NATNetworkInterface" }
       }
     },
 
