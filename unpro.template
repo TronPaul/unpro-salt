@@ -301,7 +301,7 @@
 
     "NATPublicDNSRecord" : {
       "Type" : "AWS::Route53::RecordSet",
-      "DependsOn" : "NATEIP",
+      "DependsOn" : "NATEIPAssociation",
       "Properties" : {
         "HostedZoneName" : "teamunpro.com.",
         "Name" : "teamunpro.com",
