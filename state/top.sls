@@ -9,6 +9,7 @@ base:
   'roles:web_server':
     - match: grain
     - nginx
+    - blog_teamunpro_com
   'roles:vpn_server':
     - match: grain
     - openvpn.server
@@ -65,6 +66,3 @@ base:
   'G@roles:dev and G@roles:gui':
     - match: compound
     - virtualbox
-  'teamunpro.com*':
-    - users
-    - blog_teamunpro_com
