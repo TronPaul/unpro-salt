@@ -6,7 +6,7 @@ include:
 {%- set mumble_server = {} -%}
 {%- endif -%}
 
-mumble_server_{{ name }}:
+mumble-server_{{ name }}:
   service:
     - running
     - watch:
