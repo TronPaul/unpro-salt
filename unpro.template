@@ -411,8 +411,6 @@
         "VpcId" : { "Ref" : "VPC" },
         "SecurityGroupIngress" : [
            { "IpProtocol" : "tcp", "FromPort" : "22",  "ToPort" : "22",  "CidrIp" : { "Ref" : "VpcCidr" }},
-           { "IpProtocol" : "tcp", "FromPort" : "443",  "ToPort" : "443",  "CidrIp" : { "Ref" : "VpcCidr" }}, 
-           { "IpProtocol" : "tcp", "FromPort" : "943",  "ToPort" : "943",  "CidrIp" : { "Ref" : "VpcCidr" }},
            { "IpProtocol" : "udp", "FromPort" : "1194",  "ToPort" : "1194",  "CidrIp" : { "Ref" : "VpcCidr" }}],
         "SecurityGroupEgress" : [
            { "IpProtocol" : "-1", "FromPort" : "0", "ToPort" : "65535", "CidrIp" : "0.0.0.0/0" } ]

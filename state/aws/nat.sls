@@ -27,6 +27,36 @@ mumble-udp:
     - to-destination: 10.0.1.10
     - save: True
 
+openvpn-udp:
+  iptables.append:
+    - table: nat
+    - chain: PREROUTING
+    - jump: DNAT
+    - proto: udp
+    - dport: 1194
+    - to-destination: 10.0.1.11
+    - save: True
+
+https-tcp:
+  iptables.append:
+    - table: nat
+    - chain: PREROUTING
+    - jump: DNAT
+    - proto: tcp
+    - dport: 443
+    - to-destination: 10.0.1.12
+    - save: True
+
+http-tcp:
+  iptables.append:
+    - table: nat
+    - chain: PREROUTING
+    - jump: DNAT
+    - proto: tcp
+    - dport: 80
+    - to-destination: 10.0.1.12
+    - save: True
+
 net.ipv4.ip_forward:
   sysctl.present:
     - value: 1
