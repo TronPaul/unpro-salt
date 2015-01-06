@@ -14,5 +14,8 @@ base:
   'nasus':
     - nasus_samba
     - nasus_nfs
+  'roles:voice_server':
+    - match: grain
+    - mumble_servers
   'fednet':
     - fednet_nfs_client
