@@ -35,7 +35,7 @@ pelican:
 
 pelican_key:
   ssh_auth.present:
-    - source: salt://blog_teamunpro_com/tron_laptop.id_rsa.pub
+    - source: salt://ssh_keys/tron_laptop.id_rsa.pub
     - user: pelican
     - require:
       - user: pelican
