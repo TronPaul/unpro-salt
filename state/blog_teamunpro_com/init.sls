@@ -33,10 +33,9 @@ pelican:
     - require:
       - pkg: nginx
 
-# Add key for pelican
-#pelican_key:
-#  ssh_auth.present:
-#    - source: salt://blog_teamunpro_com/pelican.pub
-#    - user: pelican
-#    - require:
-#       - user: pelican
+pelican_key:
+  ssh_auth.present:
+    - source: salt://blog_teamunpro_com/tron_laptop.id_rsa.pub
+    - user: pelican
+    - require:
+      - user: pelican
