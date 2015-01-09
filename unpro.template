@@ -19,7 +19,8 @@
     },
     "S3BackupRole" : {
       "Description" : "Existing IAM Role for S3 backup",
-      "Type" : "String"
+      "Type" : "String",
+      "Default" : "S3Backup"
     },
     "VpcCidr" : {
       "Description" : "CIDR address for the VPC to be created.",
