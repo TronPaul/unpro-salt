@@ -17,6 +17,10 @@
       "Description" : "EIPAllocationId to use for the NAT",
       "Type" : "String"
     },
+    "S3BackupRole" : {
+      "Description" : "Existing IAM Role for S3 backup",
+      "Type" : "String"
+    },
     "VpcCidr" : {
       "Description" : "CIDR address for the VPC to be created.",
       "Type" : "String",
@@ -220,6 +224,14 @@
         "Description" : "NAT Interface",
         "GroupSet" : [ { "Ref" : "NATSecurityGroup" } ],
         "SourceDestCheck" : "false"
+      }
+    },
+
+    "S3BackupInstanceProfile" : {
+      "Type" : "AWS::IAM::InstanceProfile",
+      "Properties" : {
+        "Path" : "/",
+        "Roles" : [{ "Ref" : "S3BackupRole" }]
       }
     },
 
