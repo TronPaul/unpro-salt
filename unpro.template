@@ -228,14 +228,6 @@
       }
     },
 
-    "S3BackupInstanceProfile" : {
-      "Type" : "AWS::IAM::InstanceProfile",
-      "Properties" : {
-        "Path" : "/",
-        "Roles" : [{ "Ref" : "S3BackupRole" }]
-      }
-    },
-
     "NATInstance" : {
       "Type" : "AWS::EC2::Instance",
       "DependsOn" : "GatewayToInternet",
@@ -334,6 +326,14 @@
       }
     },
 
+    "MumbleInstanceProfile" : {
+      "Type" : "AWS::IAM::InstanceProfile",
+      "Properties" : {
+        "Path" : "/",
+        "Roles" : [{ "Ref" : "S3BackupRole" }]
+      }
+    },
+
     "MumbleInstance" : {
       "Type" : "AWS::EC2::Instance",
       "Metadata" : {
@@ -342,6 +342,7 @@
       "Properties" : {
         "InstanceType" : { "Ref" : "MumbleNodeInstanceType" },
         "KeyName" : { "Ref" : "KeyName" },
+        "IamInstanceProfile" : { "Ref" : "MumbleInstanceProfile" },
         "NetworkInterfaces" : [ { 
           "NetworkInterfaceId" : { "Ref" : "MumbleNetworkInterface"},
           "DeviceIndex" : "0"
