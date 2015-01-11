@@ -1,0 +1,37 @@
+unpro:
+  region: us-east-1
+  highlight-output: true
+  stacks:
+    vpc:
+      cf_template: vpc_layer.json
+      depends: 
+      params: 
+        KeyName: 
+          value: teamunpro
+        NATEIPAllocationId:
+          value: eipalloc-a4f14fc1
+    instances:
+      cf_template: instance_layer.json
+      depends: 
+        - vpc
+      params: 
+        KeyName:
+          source: vpc
+          type: parameter
+          variable: KeyName
+        VPC:
+          source: vpc
+          type: resource
+          variable: VPC
+        VpcCidr:
+          source: vpc
+          type: parameter
+          variable: VpcCidr
+        PrivateSubnet:
+          source: vpc
+          type: resource
+          variable: PrivateSubnet
+        AvailabilityZone:
+          source: vpc
+          type: parameter
+          variable: AvailabilityZone
