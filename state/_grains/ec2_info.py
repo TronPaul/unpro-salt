@@ -69,7 +69,7 @@ def _snake_caseify_string(s):
 
 
 def _snake_caseify_dict(d):
-    return {_snake_caseify_string(k): v for k, v in data.items()}
+    return {_snake_caseify_string(k): v for k, v in d.items()}
 
 
 def _get_ec2_additional():
