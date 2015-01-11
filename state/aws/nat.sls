@@ -69,4 +69,4 @@ net.ipv4.ip_forward:
 
 net.ipv4.conf.eth0.send_redirects:
   sysctl.present:
-    - value 0
+    - value: 0
