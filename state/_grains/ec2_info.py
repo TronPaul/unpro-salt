@@ -43,7 +43,7 @@ def _get_ec2_hostinfo(path=""):
         if line[-1] != "/":
             call_response = _call_aws("/latest/meta-data/%s" % (path + line))
             if call_response is not None:
-                line = _snake_caseify_string(line)
+                line = _dash_to_snake_case(line)
                 try:
                     data = json.loads(call_response)
                     if isinstance(data, dict):
@@ -54,7 +54,7 @@ def _get_ec2_hostinfo(path=""):
             else:
                 return line
         else:
-            d[_snake_caseify_string(line[:-1])] = _get_ec2_hostinfo(path + line)
+            d[_dash_to_snake_case(line[:-1])] = _get_ec2_hostinfo(path + line)
     return d
 
 
@@ -66,12 +66,8 @@ def _dash_to_snake_case(s):
     return s.replace("-", "_")
 
 
-def _snake_caseify_string(s):
-    return _dash_to_snake_case(_camel_to_snake_case(s))
-
-
 def _snake_caseify_dict(d):
-    return {_snake_caseify_string(k): v for k, v in d.items()}
+    return {_camel_to_snake_case(k): v for k, v in d.items()}
 
 
 def _get_ec2_additional():
