@@ -59,7 +59,7 @@ def _get_ec2_hostinfo(path=""):
 
 
 def _camel_to_snake_case(s):
-    return "".join((("_" + x.lower()) if x.isupper() else x) for x in s)
+    return s[0].lower() + "".join((("_" + x.lower()) if x.isupper() else x) for x in s[1:])
 
 
 def _dash_to_snake_case(s):
