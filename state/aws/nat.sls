@@ -12,7 +12,7 @@ mumble-tcp:
     - table: nat
     - chain: PREROUTING
     - jump: DNAT
-    - in-interface: eth0
+    - source: !10.0.0.0/16
     - proto: tcp
     - dport: 64738
     - to-destination: 10.0.1.10
@@ -23,7 +23,7 @@ mumble-udp:
     - table: nat
     - chain: PREROUTING
     - jump: DNAT
-    - in-interface: eth0
+    - source: !10.0.0.0/16
     - proto: udp
     - dport: 64738
     - to-destination: 10.0.1.10
@@ -34,7 +34,7 @@ openvpn-udp:
     - table: nat
     - chain: PREROUTING
     - jump: DNAT
-    - in-interface: eth0
+    - source: !10.0.0.0/16
     - proto: udp
     - dport: 1194
     - to-destination: 10.0.1.11
@@ -45,7 +45,7 @@ https-tcp:
     - table: nat
     - chain: PREROUTING
     - jump: DNAT
-    - in-interface: eth0
+    - source: !10.0.0.0/16
     - proto: tcp
     - dport: 443
     - to-destination: 10.0.1.12
@@ -56,7 +56,7 @@ http-tcp:
     - table: nat
     - chain: PREROUTING
     - jump: DNAT
-    - in-interface: eth0
+    - source: !10.0.0.0/16
     - proto: tcp
     - dport: 80
     - to-destination: 10.0.1.12

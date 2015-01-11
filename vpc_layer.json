@@ -151,7 +151,7 @@
       "Properties" : {
         "RouteTableId" : { "Ref" : "PrivateRouteTable" },
         "DestinationCidrBlock" : "0.0.0.0/0",
-        "NetworkInterfaceId" : { "Ref" : "NATInternalNetworkInterface" }
+        "NetworkInterfaceId" : { "Ref" : "NATNetworkInterface" }
       }
     },
 
@@ -176,28 +176,17 @@
       "DependsOn" : "GatewayToInternet",
       "Properties" : {
         "AllocationId" : { "Ref" : "NATEIPAllocationId" },
-        "NetworkInterfaceId" : { "Ref" : "NATExternalNetworkInterface" }
+        "NetworkInterfaceId" : { "Ref" : "NATNetworkInterface" }
       }
     },
 
-    "NATExternalNetworkInterface" : {
+    "NATNetworkInterface" : {
       "Type" : "AWS::EC2::NetworkInterface",
       "Properties" : {
         "SubnetId" : { "Ref" : "PublicSubnet" },
         "PrivateIpAddress" : "10.0.0.10",
-        "Description" : "NAT External Interface",
-        "GroupSet" : [ { "Ref" : "NATExternalSecurityGroup" } ],
-        "SourceDestCheck" : "false"
-      }
-    },
-
-    "NATInternalNetworkInterface" : {
-      "Type" : "AWS::EC2::NetworkInterface",
-      "Properties" : {
-        "SubnetId" : { "Ref" : "PrivateSubnet" },
-        "PrivateIpAddress" : "10.0.1.9",
-        "Description" : "NAT Internal Interface",
-        "GroupSet" : [ { "Ref" : "NATInternalSecurityGroup" } ],
+        "Description" : "NAT Interface",
+        "GroupSet" : [ { "Ref" : "NATSecurityGroup" } ],
         "SourceDestCheck" : "false"
       }
     },
@@ -213,12 +202,8 @@
         "KeyName" : { "Ref" : "KeyName" },
         "NetworkInterfaces" : [ 
           { 
-            "NetworkInterfaceId" : { "Ref" : "NATExternalNetworkInterface" },
+            "NetworkInterfaceId" : { "Ref" : "NATNetworkInterface" },
             "DeviceIndex" : "0"
-          },
-          {
-            "NetworkInterfaceId" : { "Ref" : "NATInternalNetworkInterface" },
-            "DeviceIndex" : "1"
           }
         ],
         "ImageId" : { "Fn::FindInMap" : [ "AWSNATAMI", { "Ref" : "AWS::Region" }, "AMI" ]},
@@ -245,7 +230,7 @@
       }
     },
 
-    "NATExternalSecurityGroup" : {
+    "NATSecurityGroup" : {
       "Type" : "AWS::EC2::SecurityGroup",
       "Properties" : {
         "GroupDescription" : "Rules for allowing access to Nodes",
@@ -254,32 +239,21 @@
            { "IpProtocol" : "tcp", "FromPort" : "22",  "ToPort" : "22",  "CidrIp" : "0.0.0.0/0" } ,
            { "IpProtocol" : "tcp", "FromPort" : "80",  "ToPort" : "80",  "CidrIp" : "0.0.0.0/0" } ,
            { "IpProtocol" : "tcp", "FromPort" : "64738",  "ToPort" : "64738",  "CidrIp" : "0.0.0.0/0" } ,
-           { "IpProtocol" : "udp", "FromPort" : "64738",  "ToPort" : "64738",  "CidrIp" : "0.0.0.0/0" } ],
-        "SecurityGroupEgress" : [
-           { "IpProtocol" : "-1", "FromPort" : "0", "ToPort" : "65535", "CidrIp" : "0.0.0.0/0" } ]
-      }
-    },
-
-    "NATInternalSecurityGroup" : {
-      "Type" : "AWS::EC2::SecurityGroup",
-      "Properties" : {
-        "GroupDescription" : "Rules for allowing access to HA Nodes",
-        "VpcId" : { "Ref" : "VPC" },
-        "SecurityGroupIngress" : [
+           { "IpProtocol" : "udp", "FromPort" : "64738",  "ToPort" : "64738",  "CidrIp" : "0.0.0.0/0" } ,
            { "IpProtocol" : "-1", "FromPort" : "0", "ToPort" : "65535", "CidrIp" : { "Ref" : "VpcCidr" } } ],
         "SecurityGroupEgress" : [
-           { "IpProtocol" : "-1", "FromPort" : "0", "ToPort" : "65535", "CidrIp" : { "Ref" : "VpcCidr" } } ]
+           { "IpProtocol" : "-1", "FromPort" : "0", "ToPort" : "65535", "CidrIp" : "0.0.0.0/0" } ]
       }
     },
 
     "NATAllowICMP" : {
       "Type" : "AWS::EC2::SecurityGroupIngress",
       "Properties" : {
-        "GroupId" : { "Ref" : "NATExternalSecurityGroup" },
+        "GroupId" : { "Ref" : "NATSecurityGroup" },
         "IpProtocol" : "icmp", 
 	"FromPort" : "-1",  
 	"ToPort" : "-1",  
-	"SourceSecurityGroupId" : { "Ref" : "NATExternalSecurityGroup" }
+	"SourceSecurityGroupId" : { "Ref" : "NATSecurityGroup" }
       }
     },
 
