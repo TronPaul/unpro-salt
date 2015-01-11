@@ -37,16 +37,25 @@ def _get_ec2_hostinfo(path=""):
     All EC2 variables are prefixed with "ec2_" so they are grouped as grains and to
     avoid collisions with other grain names.
     """
+    resp = _call_aws("/latest/meta-data/%s" % path)
+    try:
+        data = json.loads(resp)
+        if isinstance(data, dict):
+            return data
+    except ValueError:
+        pass
+
     d = {}
-    for line in _call_aws("/latest/meta-data/%s" % path).split("\n"):
+    for line in resp.split("\n"):
         if line[-1] != "/":
             call_response = _call_aws("/latest/meta-data/%s" % (path + line))
             if call_response is not None:
                 d[line] = call_response
             else:
-                return line
+                return json.loads(line)
         else:
             d[line] = _get_ec2_hostinfo(path + line)
+    return d
 
 
 def _camel_to_snake_case(s):
