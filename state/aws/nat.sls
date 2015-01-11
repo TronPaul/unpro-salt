@@ -15,7 +15,6 @@ mumble-tcp:
     - in-interface: eth0
     - proto: tcp
     - dport: 64738
-    - destination: 
     - to-destination: 10.0.1.10
     - save: True
 
