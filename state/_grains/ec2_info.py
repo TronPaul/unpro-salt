@@ -54,8 +54,8 @@ def _get_ec2_hostinfo(path=""):
     return d
 
 
-def _camel_to_snake_case(s):
-    return "".join((("_" + x.lower()) if x.isupper() else x) for x in s)
+def _camel_to_dash_case(s):
+    return "".join((("-" + x.lower()) if x.isupper() else x) for x in s)
 
 
 def _get_ec2_additional():
@@ -66,7 +66,7 @@ def _get_ec2_additional():
 
     """
     data = json.loads(_call_aws("/latest/dynamic/instance-identity/document"))
-    return {_camel_to_snake_case(k): v for k, v in data.items()}
+    return {_camel_to_dash_case(k): v for k, v in data.items()}
 
 
 def ec2_info():
