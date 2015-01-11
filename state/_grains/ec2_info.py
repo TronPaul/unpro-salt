@@ -46,7 +46,9 @@ def _get_ec2_hostinfo(path=""):
                 line = _snake_caseify_string(line)
                 try:
                     data = json.loads(call_response)
-                    d[line] = _snake_caseify_dict(data)
+                    if isinstance(data, dict):
+                        data = _snake_caseify_dict(data)
+                    d[line] = data
                 except ValueError:
                     d[line] = call_response
             else:
