@@ -3,7 +3,7 @@
 """
 Get some grains information that is only available in Amazon AWS
 
-Author: Erik Günther, J C Lawrence <claw@kanga.nu>
+Author: Erik Günther, J C Lawrence <claw@kanga.nu>, Mark McGuire
 
 """
 import logging
@@ -28,7 +28,7 @@ def _call_aws(url):
         return response.read()
 
 
-def _get_ec2_hostinfo(path="", data={}):
+def _get_ec2_hostinfo(path=""):
     """
     Recursive function that walks the EC2 metadata available to each minion.
     :param path: URI fragment to append to /latest/meta-data/
@@ -41,11 +41,15 @@ def _get_ec2_hostinfo(path="", data={}):
         if line[-1] != "/":
             call_response = _call_aws("/latest/meta-data/%s" % (path + line))
             if call_response is not None:
-                data["ec2_" + path.replace("/", "_") + line] = call_response
+                 return {line: call_response}
             else:
-                data["ec2_" + path.replace("/", "_")[:-1]] = line
+                return line
         else:
-            _get_ec2_hostinfo(path + line, data=data)
+            return {line: _get_ec2_hostinfo(path + line)}
+
+
+def _camel_to_snake_case(s):
+    return "".join((("_" + x.lower()) if x.isupper() else x) for x in s)
 
 
 def _get_ec2_additional():
@@ -55,13 +59,8 @@ def _get_ec2_additional():
     architecture.
 
     """
-    data = _call_aws("/latest/dynamic/instance-identity/document")
-    rc = dict()
-    for pair in json.loads(data).items ():
-        # De-camelcase the keys: availabilityZone -> availability-zone
-        key = "".join((("-" + x.lower()) if x.isupper() else x) for x in pair[0])
-        rc["ec2_" + key] = pair[1]
-    return rc
+    data = json.loads(_call_aws("/latest/dynamic/instance-identity/document"))
+    return {_camel_to_snake_case(k): v for k, v in data.items()}
 
 
 def ec2_info():
@@ -77,8 +76,8 @@ def ec2_info():
 
     try:
         grains = _get_ec2_additional()
-        _get_ec2_hostinfo(data=grains)
-        return grains
+        grains.update(_get_ec2_hostinfo())
+        return {'ec2' : grains}
     except socket.timeout, serr:
         LOG.info("Could not read EC2 data (timeout): %s" % (serr))
         return {}
