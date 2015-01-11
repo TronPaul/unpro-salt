@@ -43,19 +43,33 @@ def _get_ec2_hostinfo(path=""):
         if line[-1] != "/":
             call_response = _call_aws("/latest/meta-data/%s" % (path + line))
             if call_response is not None:
+                line = _snake_caseify_string(line)
                 try:
-                    d[line] = json.loads(call_response)
+                    data = json.loads(call_response)
+                    d[line] = _snake_casify_dict(data)
                 except ValueError:
                     d[line] = call_response
             else:
                 return line
         else:
-            d[line[:-1]] = _get_ec2_hostinfo(path + line)
+            d[_snake_caseify_string(line[:-1])] = _get_ec2_hostinfo(path + line)
     return d
 
 
-def _camel_to_dash_case(s):
-    return "".join((("-" + x.lower()) if x.isupper() else x) for x in s)
+def _camel_to_snake_case(s):
+    return "".join((("_" + x.lower()) if x.isupper() else x) for x in s)
+
+
+def _dash_to_snake_case(s):
+    return s.replace("-", "_")
+
+
+def _snake_caseify_string(s):
+    return _dash_to_snake_case(_camel_to_snake_case(s))
+
+
+def _snake_caseify_dict(d):
+    return {_snake_caseify_string(k): v for k, v in data.items()}
 
 
 def _get_ec2_additional():
@@ -66,7 +80,7 @@ def _get_ec2_additional():
 
     """
     data = json.loads(_call_aws("/latest/dynamic/instance-identity/document"))
-    return {_camel_to_dash_case(k): v for k, v in data.items()}
+    return _snake_caseify_dict(data)
 
 
 def ec2_info():
