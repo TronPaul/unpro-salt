@@ -13,6 +13,7 @@ nfs:
         - nohide
     deluge:
       source: /srv/deluge
+      options:
         - ro
         - no_subtree_check
         - nohide
