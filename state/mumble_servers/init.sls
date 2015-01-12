@@ -62,10 +62,10 @@ mumble-server_{{name}}:
 
 {% if 'ec2' in grains %}
 {% set db_name = name + ".sqlite" %}
-{% set db_path = "/var/lib/mumble-servers/" + db_name %}
+{% set db_path = "/var/lib/mumble-server/" + db_name %}
 {% set bucket = "teamunpro-backup" %}
 {% set backup_path = "mumble/" + db_name %}
-/var/lib/mumble-servers/{{name}}.sqlite:
+/var/lib/mumble-server/{{name}}.sqlite:
   file.managed:
     - user: mumble-server
     - group: mumble-server
