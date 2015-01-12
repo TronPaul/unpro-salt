@@ -11,3 +11,8 @@ nfs:
         - ro
         - no_subtree_check
         - nohide
+    deluge:
+      source: /srv/deluge
+        - ro
+        - no_subtree_check
+        - nohide
