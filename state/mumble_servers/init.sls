@@ -98,7 +98,7 @@ backup_mumble_database:
     - user: root
     - group: root
     - mode: 755
-    - source: salt://mumble_server/backup_mumble_database.sh.jinja
+    - source: salt://mumble_servers/backup_mumble_database.sh.jinja
     - context:
       bucket: {{bucket}}
       backup_path: {{backup_path}}
