@@ -16,8 +16,9 @@ nfs-kernel-server:
     - require_in:
       - file: add-fstab-binds
 
-{{ mount_conf['source'] }}:
+{{name}}_mount:
   file.directory:
+    - name: {{ mount_conf['source'] }}
     - require_in:
       - cmd: add-fstab-binds
 {% endfor %}
