@@ -72,6 +72,7 @@ mumble-server_{{name}}:
     - mode: 600
     - replace: False
     - source: s3://{{bucket}}/{{backup_path}}
+    - source_hash: s3://{{bucket}}/{{backup_path}}.sha256
     - watch_in:
       - service: mumble-server_{{name}}
     - require_in:
