@@ -8,6 +8,7 @@
     - user: root
     - minute: random
     - hour: 20
+    - identifier: unpro_salt_update
     - comment: 'Update salt data from git'
     - require:
       - file: /usr/local/bin/salt-up
