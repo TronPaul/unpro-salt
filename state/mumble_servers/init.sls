@@ -1,6 +1,10 @@
 include:
   - .package
 
+{% set db_path = "/var/lib/mumble-server" %}
+{% set bucket = "teamunpro-backup" %}
+{% set backup_path = "mumble" %}
+
 {% for name, mumble_server in pillar.get('mumble_servers', {}).items() %}
 {%- if mumble_server == None -%}
 {%- set mumble_server = {} -%}
@@ -61,29 +65,42 @@ mumble-server_{{name}}:
     - source: salt://mumble_servers/mumble-server.default
 
 {% if 'ec2' in grains %}
-{% set db_name = name + ".sqlite" %}
-{% set db_path = "/var/lib/mumble-server/" + db_name %}
-{% set bucket = "teamunpro-backup" %}
-{% set backup_path = "mumble/" + db_name %}
-/var/lib/mumble-server/{{name}}.sqlite:
+{% set db_file = name + ".sqlite" %}
+{{db_path}}/{{db_file}}:
   file.managed:
     - user: mumble-server
     - group: mumble-server
     - mode: 600
     - replace: False
-    - source: s3://{{bucket}}/{{backup_path}}
-    - source_hash: s3://{{bucket}}/{{backup_path}}.sha256
+    - source: s3://{{bucket}}/{{backup_path}}/{{db_file}}
+    - source_hash: s3://{{bucket}}/{{backup_path}}/{{db_file}}.sha256
     - watch_in:
       - service: mumble-server_{{name}}
     - require_in:
       - service: mumble-server_{{name}}
-
+      
 backup_mumble_database:
   cron.present:
-    - name: salt-call s3.put {{bucket}} {{backup_path}} local_file={{db_path}}
-    - identifier: backup_mumble_database
+    - name: /usr/local/bin/backup_mumble_database.sh {{name}}
+    - identifier: backup_{{name}}_mumble_database
     - user: root
     - minute: random
     - hour: 6
+    - requires:
+      - file: /usr/local/bin/backup_mumble_database.sh
 {% endif %}
 {% endfor %}
+
+{% if 'ec2' in grains %}
+/usr/local/bin/backup_mumble_database.sh:
+  file.managed:
+    - template: jinja
+    - user: root
+    - group: root
+    - mode: 755
+    - source: salt://mumble_server/backup_mumble_database.sh.jinja
+    - context:
+      bucket: {{bucket}}
+      backup_path: {{backup_path}}
+      db_path: {{db_path}}
+{% endif %}

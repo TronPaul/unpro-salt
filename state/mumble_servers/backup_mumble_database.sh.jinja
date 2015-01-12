@@ -1,0 +1,5 @@
+#!/bin/sh
+
+SERVER_NAME=$1
+
+salt-call s3.put {{bucket}} {{backup_path}}/"$SERVER_NAME".sqlite local_file={{db_path}}/"$SERVER_NAME".sqlite
