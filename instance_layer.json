@@ -144,6 +144,14 @@
       }
     },
 
+    "VPNInstanceProfile" : {
+      "Type" : "AWS::IAM::InstanceProfile",
+      "Properties" : {
+        "Path" : "/",
+        "Roles" : ["VPNCACert"]
+      }
+    },
+
     "VPNInstance" : {
       "Type" : "AWS::EC2::Instance",
       "Metadata" : {

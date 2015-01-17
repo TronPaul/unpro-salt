@@ -19,7 +19,7 @@ net.ipv4.ip_forward:
 
 {% if 'ec2' in grains %}
 {% set bucket = "teamunpro" %}
-{% set path = "/ca" %}
+{% set path = "/vpn_ca" %}
 {% set base_s3_url = "s3://" + bucket + path %}
 key_files:
   file.managed:
