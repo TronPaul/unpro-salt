@@ -1,14 +1,14 @@
-include:
-  - .package
-
 {% set db_path = "/var/lib/mumble-server" %}
-{% set bucket = "teamunpro-backup" %}
+{% set bucket = "teamunpro" %}
 {% set backup_path = "mumble" %}
 
 {% for name, mumble_server in pillar.get('mumble_servers', {}).items() %}
 {%- if mumble_server == None -%}
 {%- set mumble_server = {} -%}
 {%- endif -%}
+
+include:
+  - .package
 
 mumble-server_{{name}}:
   service:
