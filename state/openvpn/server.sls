@@ -33,6 +33,8 @@ vpn_fix:
   file.managed:
     - source: salt://openvpn/server.conf.jinja
     - template: jinja
+    - context:
+      fqdn: {{fqdn}}
     - require:
       - pkg: openvpn
     - watch_in:

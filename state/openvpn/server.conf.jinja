@@ -76,7 +76,6 @@ dev tun
 # Any X509 key management system can be used.
 # OpenVPN can also use a PKCS #12 formatted key file
 # (see "pkcs12" directive in man page).
-{% set fqdn = grains['fqdn'] %}
 ca ca.crt
 cert {{fqdn}}.crt
 key {{fqdn}}.key  # This file should be kept secret
