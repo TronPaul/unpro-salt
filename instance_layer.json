@@ -160,6 +160,7 @@
       "Properties" : {
         "InstanceType" : { "Ref" : "VPNNodeInstanceType" },
         "KeyName" : { "Ref" : "KeyName" },
+        "IamInstanceProfile" : { "Ref" : "VPNInstanceProfile" },
         "NetworkInterfaces" : [ { 
           "NetworkInterfaceId" : { "Ref" : "VPNNetworkInterface"},
           "DeviceIndex" : "0"
