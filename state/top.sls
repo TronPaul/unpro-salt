@@ -13,7 +13,6 @@ base:
   'roles:vpn_server':
     - match: grain
     - openvpn.server
-    - dnsmasq
   'roles:aws_nat':
     - match: grain
     - aws.nat
