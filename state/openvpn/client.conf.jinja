@@ -1,3 +1,4 @@
+{% set fqdn = grains['fqdn'] %}
 ##############################################
 # Sample client-side OpenVPN 2.0 config file #
 # for connecting to multi-client server.     #
@@ -84,7 +85,6 @@ persist-tun
 # a separate .crt/.key file pair
 # for each client.  A single ca
 # file can be used for all clients.
-{% set fqdn = grains['fqdn'] %}
 ca ca.crt
 cert {{fqdn}}.crt
 key {{fqdn}}.key

@@ -1,3 +1,4 @@
 roles:
   - dev
   - gui
+  - vpn_client
