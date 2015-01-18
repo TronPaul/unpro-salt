@@ -63,6 +63,8 @@ key_files:
       - /etc/openvpn/dh2048.pem:
         - source: s3://teamunpro/vpn_ca/dh2048.pem
         - source_hash: s3://teamunpro/vpn_ca/dh2048.pem.sha256
+    - source: 
+    - source_hash:
     - user: root
     - group: root
     - mode: 400
