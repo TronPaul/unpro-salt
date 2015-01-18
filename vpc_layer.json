@@ -240,6 +240,7 @@
            { "IpProtocol" : "tcp", "FromPort" : "80",  "ToPort" : "80",  "CidrIp" : "0.0.0.0/0" } ,
            { "IpProtocol" : "tcp", "FromPort" : "64738",  "ToPort" : "64738",  "CidrIp" : "0.0.0.0/0" } ,
            { "IpProtocol" : "udp", "FromPort" : "64738",  "ToPort" : "64738",  "CidrIp" : "0.0.0.0/0" } ,
+           { "IpProtocol" : "udp", "FromPort" : "1194",  "ToPort" : "1194",  "CidrIp" : "0.0.0.0/0" } ,
            { "IpProtocol" : "-1", "FromPort" : "0", "ToPort" : "65535", "CidrIp" : { "Ref" : "VpcCidr" } } ],
         "SecurityGroupEgress" : [
            { "IpProtocol" : "-1", "FromPort" : "0", "ToPort" : "65535", "CidrIp" : "0.0.0.0/0" } ]
