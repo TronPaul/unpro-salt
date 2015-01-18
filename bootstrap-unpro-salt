@@ -17,9 +17,9 @@ done
 if ! hash salt-call 2>/dev/null; then
   wget -q -O install_salt.sh https://bootstrap.saltstack.com
   if [ "$_MINION_ID" != "null" ]; then
-    sh install_salt.sh -X -i $_MINION_ID
+    sh install_salt.sh -X -i $_MINION_ID -g https://github.com/TronPaul/salt.git git v2014.7.2
   else
-    sh install_salt.sh -X
+    sh install_salt.sh -X -g https://github.com/TronPaul/salt.git git v2014.7.2
   fi
   _EXIT_CODE=$?
   if [ $_EXIT_CODE -eq 0 ]; then
