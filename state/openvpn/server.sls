@@ -45,26 +45,46 @@ net.ipv4.ip_forward:
       - service: openvpn
 
 {% if 'ec2' in grains %}
-{% set bucket = "teamunpro" %}
-{% set path = "/vpn_ca" %}
-{% set base_s3_url = "s3://" + bucket + path %}
-key_files:
+/etc/openvpn/{{fqdn}}.key:
   file.managed:
-    - names:
-      - /etc/openvpn/{{fqdn}}.key:
-        - source: s3://teamunpro/vpn_ca/{{fqdn}}.key
-        - source_hash: s3://teamunpro/vpn_ca/{{fqdn}}.key.sha256
-      - /etc/openvpn/{{fqdn}}.crt:
-        - source: s3://teamunpro/vpn_ca/{{fqdn}}.crt
-        - source_hash: s3://teamunpro/vpn_ca/{{fqdn}}.crt.sha256
-      - /etc/openvpn/ca.crt:
-        - source: s3://teamunpro/vpn_ca/ca.crt
-        - source_hash: s3://teamunpro/vpn_ca/ca.crt.sha256
-      - /etc/openvpn/dh2048.pem:
-        - source: s3://teamunpro/vpn_ca/dh2048.pem
-        - source_hash: s3://teamunpro/vpn_ca/dh2048.pem.sha256
-    - source: 
-    - source_hash:
+    - source: s3://teamunpro/vpn_ca/{{fqdn}}.key
+    - source_hash: s3://teamunpro/vpn_ca/{{fqdn}}.key.sha256
+    - user: root
+    - group: root
+    - mode: 400
+    - watch_in:
+      - service: openvpn
+    - require_in:
+      - service: openvpn
+    
+/etc/openvpn/{{fqdn}}.crt:
+  file.managed:
+    - source: s3://teamunpro/vpn_ca/{{fqdn}}.crt
+    - source_hash: s3://teamunpro/vpn_ca/{{fqdn}}.crt.sha256
+    - user: root
+    - group: root
+    - mode: 400
+    - watch_in:
+      - service: openvpn
+    - require_in:
+      - service: openvpn
+
+/etc/openvpn/ca.crt:
+  file.managed:
+    - source: s3://teamunpro/vpn_ca/ca.crt
+    - source_hash: s3://teamunpro/vpn_ca/ca.crt.sha256
+    - user: root
+    - group: root
+    - mode: 400
+    - watch_in:
+      - service: openvpn
+    - require_in:
+      - service: openvpn
+
+/etc/openvpn/dh2048.pem:
+  file.managed:
+    - source: s3://teamunpro/vpn_ca/dh2048.pem
+    - source_hash: s3://teamunpro/vpn_ca/dh2048.pem.sha256
     - user: root
     - group: root
     - mode: 400
