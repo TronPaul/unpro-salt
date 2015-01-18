@@ -52,17 +52,17 @@ key_files:
   file.managed:
     - names:
       - /etc/openvpn/{{fqdn}}.key:
-        - source: {{base_s3_url}}/{{fqdn}}.key
-        - source_hash: {{base_s3_url}}/{{fqdn}}.key.sha256
+        - source: s3://teamunpro/vpn_ca/{{fqdn}}.key
+        - source_hash: s3://teamunpro/vpn_ca/{{fqdn}}.key.sha256
       - /etc/openvpn/{{fqdn}}.crt:
-        - source: {{base_s3_url}}/{{fqdn}}.crt
-        - source_hash: {{base_s3_url}}/{{fqdn}}.crt.sha256
+        - source: s3://teamunpro/vpn_ca/{{fqdn}}.crt
+        - source_hash: s3://teamunpro/vpn_ca/{{fqdn}}.crt.sha256
       - /etc/openvpn/ca.crt:
-        - source: {{base_s3_url}}/ca.crt
-        - source_hash: {{base_s3_url}}/ca.crt.sha256
+        - source: s3://teamunpro/vpn_ca/ca.crt
+        - source_hash: s3://teamunpro/vpn_ca/ca.crt.sha256
       - /etc/openvpn/dh2048.pem:
-        - source: {{base_s3_url}}/dh2048.pem
-        - source_hash: {{base_s3_url}}/dh2048.pem.sha256
+        - source: s3://teamunpro/vpn_ca/dh2048.pem
+        - source_hash: s3://teamunpro/vpn_ca/dh2048.pem.sha256
     - user: root
     - group: root
     - mode: 400
