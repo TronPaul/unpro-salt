@@ -1,4 +1,4 @@
-{% set fqdn = grains['fqdn'] %}
+{% set fqdn = salt['pillar.get']('openvpn:server:fqdn', grains['fqdn']) %}
 include:
   - .common
 
