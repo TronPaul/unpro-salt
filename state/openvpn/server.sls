@@ -15,7 +15,7 @@ dnsmasq:
 /etc/dnsmasq.conf:
   file.managed:
     - template: jinja
-    - source: salt://openvpn/dnsmasq.conf
+    - source: salt://openvpn/dnsmasq.conf.jinja
     - user: root
     - group: root
     - mode: 644
