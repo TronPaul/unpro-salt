@@ -1,4 +1,7 @@
 {% set routes = salt['pillar.get']('openvpn:server:routes', []) %}
+{% set network = salt['pillar.get']('openvpn:server:network', '192.168.15.0') %}
+{% set netmask = salt['pillar.get']('openvpn:server:netmask', '255.255.255.0') %}
+{% set ip_addr = salt['pillar.get']('openvpn:server:ip_addr', '192.168.15.1') %}
 #################################################
 # Sample OpenVPN 2.0 config file for            #
 # multi-client server.                          #
@@ -94,7 +97,7 @@ dh dh2048.pem
 # Each client will be able to reach the server
 # on 10.8.0.1. Comment this line out if you are
 # ethernet bridging. See the man page for more info.
-server {{salt['pillar.get']('openvpn:server:network', '192.168.15.0')}} {{salt['pillar.get']('openvpn:server:netmask', '255.255.255.0')}}
+server {{network}} {{netmask}}
 
 # Maintain a record of client <-> virtual IP address
 # associations in this file.  If OpenVPN goes down or
@@ -137,7 +140,7 @@ ifconfig-pool-persist ipp.txt
 ;push "route 192.168.10.0 255.255.255.0"
 ;push "route 192.168.20.0 255.255.255.0"
 {% for route in routes %}
-push route {{route['network']}} {{route['netmask']}}
+push "route {{route['network']}} {{route['netmask']}}"
 {% endfor %}
 
 # To assign specific IP addresses to specific
@@ -199,7 +202,7 @@ push route {{route['network']}} {{route['netmask']}}
 # DNS servers provided by opendns.com.
 ;push "dhcp-option DNS 208.67.222.222"
 ;push "dhcp-option DNS 208.67.220.220"
-push "dhcp-option DNS 192.168.15.1"
+push "dhcp-option DNS {{ip_addr}}"
 
 # Uncomment this directive to allow different
 # clients to be able to "see" each other.
