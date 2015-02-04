@@ -28,12 +28,12 @@ nfs:
     deluge:
       source: /srv/deluge
       subnets:
-        - 192.168.1.0/24:
+        192.168.1.0/24:
           options:
             - ro
             - no_subtree_check
             - nohide
-        - 10.0.254.0/24:
+        10.0.254.0/24:
           options:
             - ro
             - no_subtree_check
