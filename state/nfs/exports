@@ -1,4 +1,4 @@
-/export {{ salt['pillar.get']('nfs:subnet', '192.168.1.0/24') }}({{ ','.join(salt['pillar.get']('nfs:root_options', [])) }})
+/export {{ ' '.join(["{subnet}({options})".format(subnet=subnet, options=options) for subnet, options in mount_conf.get('nfs:root:subnets', {}).items()]) }}
 {% for name, mount_conf in salt['pillar.get']('nfs:mounts', {}).items() %}
-/export/{{ name }} {{ mount_conf.get('subnet', salt['pillar.get']('nfs:subnet', '192.168.1.0/24')) }}({{ ','.join(mount_conf.get('options', [])) }})
+/export/{{ name }} {{ ' '.join(["{subnet}({options})".format(subnet=subnet, options=options) for subnet, options in mount_conf.get('subnets', {}).items()]) }}
 {% endfor %}
