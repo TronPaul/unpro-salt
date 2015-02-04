@@ -1,4 +1,14 @@
-/export {{' '.join(["{subnet}({options})".format(subnet=s_o[0], options=','.join(s_o[1])) for s_o in mount_conf.get('nfs:root:subnets', {}).items()])}}
+{%- subnet_options_list = []
+    for subnet, options in salt['pillar.get']('nfs:root:subnets', {}).items():
+        subnet_options_list.append("{subnet}({options})".format(subnet=subnet, options=','.join(options)))
+    set subnet_options_line = ' '.join(subnet_options_list)
+  -%}
+/export {{ subnet_options_line }}
 {% for name, mount_conf in salt['pillar.get']('nfs:mounts', {}).items() %}
-/export/{{ name }} {{ ' '.join(["{subnet}({options})".format(subnet=subnet, options=options) for subnet, options in mount_conf.get('subnets', {}).items()]) }}
+{%- subnet_options_list = []
+    for subnet, options in salt['pillar.get']('nfs:root:subnets', {}).items():
+        subnet_options_list.append("{subnet}({options})".format(subnet=subnet, options=','.join(options)))
+    set subnet_options_line = ' '.join(subnet_options_list)
+  -%}
+/export/{{ name }} {{ subnet_options_line }}
 {% endfor %}
