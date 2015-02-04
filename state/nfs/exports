@@ -1,14 +1,14 @@
-{%- subnet_options_list = []
-    for subnet, options in salt['pillar.get']('nfs:root:subnets', {}).items():
-        subnet_options_list.append("{subnet}({options})".format(subnet=subnet, options=','.join(options)))
-    set subnet_options_line = ' '.join(subnet_options_list)
-  -%}
+{%- set subnet_options_list = [] -%}
+{%- for subnet, options in salt['pillar.get']('nfs:root:subnets', {}).items() -%}
+{%- subnet_options_list.append("{subnet}({options})".format(subnet=subnet, options=','.join(options))) -%}
+{%- endfor -%}
+{%- set subnet_options_line = ' '.join(subnet_options_list) -%}
 /export {{ subnet_options_line }}
 {% for name, mount_conf in salt['pillar.get']('nfs:mounts', {}).items() %}
-{%- subnet_options_list = []
-    for subnet, options in salt['pillar.get']('nfs:root:subnets', {}).items():
-        subnet_options_list.append("{subnet}({options})".format(subnet=subnet, options=','.join(options)))
-    set subnet_options_line = ' '.join(subnet_options_list)
-  -%}
+{%- set subnet_options_list = [] -%}
+{%- for subnet, options in mount_conf.get('subnets', {}).items() -%}
+{%- subnet_options_list.append("{subnet}({options})".format(subnet=subnet, options=','.join(options))) -%}
+{%- endfor -%}
+{%- set subnet_options_line = ' '.join(subnet_options_list) -%}
 /export/{{ name }} {{ subnet_options_line }}
 {% endfor %}
