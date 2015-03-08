@@ -23,6 +23,7 @@ def config_salt(salt, hostname)
 end
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.provider "virtualbox"
   config.vm.define :nat do |box|
     box.vm.box = "ubuntu/trusty64"
     box.vm.hostname = "nat"
