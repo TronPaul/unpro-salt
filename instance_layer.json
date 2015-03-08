@@ -20,12 +20,20 @@
       "Description" : "VpcId of the VPC to use",
       "Type" : "String"
     },
+    "PublicRouteTable" : {
+      "Description" : "RouteTableId of the PublicRouteTable to modify",
+      "Type" : "String"
+    },
     "PrivateRouteTable" : {
-      "Description" : "RouteTableId of the RouteTable to modify",
+      "Description" : "RouteTableId of the PrivateRouteTable to modify",
       "Type" : "String"
     },
     "VpcCidr" : {
       "Description" : "Cidr of the Vpc",
+      "Type" : "String"
+    },
+    "PublicSubnet" : {
+      "Description" : "PrivateSubnetId to use",
       "Type" : "String"
     },
     "PrivateSubnet" : {
@@ -150,6 +158,23 @@
         "PrivateIpAddress" : "10.0.1.11",
         "Description" : "NAT Interface",
         "GroupSet" : [ { "Ref" : "VPNSecurityGroup" } ]
+      }
+    },
+
+    "VPNPublicRoute" : {
+      "Type" : "AWS::EC2::Route",
+      "Properties" : {
+        "RouteTableId" : { "Ref" : "PublicRouteTable" },
+        "DestinationCidrBlock" : "10.1.0.0/24",
+        "NetworkInterfaceId" : { "Ref" : "VPNNetworkInterface" }
+      }
+    },
+
+    "VPNPublicSubnetRTAssoc" : {
+      "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties" : {
+        "SubnetId" : { "Ref" : "PublicSubnet" },
+        "RouteTableId" : { "Ref" : "PublicRouteTable" }
       }
     },
 

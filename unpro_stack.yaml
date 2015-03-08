@@ -29,10 +29,18 @@ unpro:
           source: vpc
           type: parameter
           variable: VpcCidr
+        PublicSubnet:
+          source: vpc
+          type: resource
+          variable: PublicSubnet
         PrivateSubnet:
           source: vpc
           type: resource
           variable: PrivateSubnet
+        PublicRouteTable:
+          source: vpc
+          type: resource
+          variable: PublicRouteTable
         PrivateRouteTable:
           source: vpc
           type: resource
