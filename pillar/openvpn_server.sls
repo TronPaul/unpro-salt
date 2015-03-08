@@ -1,9 +1,9 @@
 openvpn:
   server:
     fqdn: vpn.teamunpro.com
-    network: 10.0.254.0
+    network: 10.1.0.0
     netmask: 255.255.255.0
-    ip_addr: 10.0.254.1
+    ip_addr: 10.1.0.1
     routes:
       {%- if salt['grains.get']('virtual') == 'VirtualBox' %}
       - network: 192.168.50.0
