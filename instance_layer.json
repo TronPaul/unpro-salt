@@ -165,6 +165,7 @@
           "NetworkInterfaceId" : { "Ref" : "VPNNetworkInterface"},
           "DeviceIndex" : "0"
         } ],
+        "SourceDestCheck": false,
         "ImageId" : { "Fn::FindInMap" : [ "UBUNTUAMI", { "Ref" : "AWS::Region" }, "AMI" ]},
         "Tags" : [
           { "Key" : "Name", "Value" : "vpn" }
