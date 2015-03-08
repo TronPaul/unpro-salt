@@ -15,7 +15,7 @@
     "VPNCidr" : {
       "Description" : "Cidr of the VPN",
       "Type" : "String"
-    }
+    },
     "VPC" : {
       "Description" : "VpcId of the VPC to use",
       "Type" : "String"
