@@ -12,8 +12,16 @@
       "AllowedPattern" : "[-_ a-zA-Z0-9]*",
       "ConstraintDescription" : "can contain only alphanumeric characters, spaces, dashes and underscores."
     },
+    "VPNCidr" : {
+      "Description" : "Cidr of the VPN",
+      "Type" : "String"
+    }
     "VPC" : {
       "Description" : "VpcId of the VPC to use",
+      "Type" : "String"
+    },
+    "PrivateRouteTable" : {
+      "Description" : "RouteTableId of the RouteTable to modify",
       "Type" : "String"
     },
     "VpcCidr" : {
@@ -116,7 +124,8 @@
         "VpcId" : { "Ref" : "VPC" },
         "SecurityGroupIngress" : [
            { "IpProtocol" : "tcp", "FromPort" : "22",  "ToPort" : "22",  "CidrIp" : { "Ref" : "VpcCidr" }} ,
-           { "IpProtocol" : "-1", "FromPort" : "64738",  "ToPort" : "64738",  "CidrIp" : { "Ref" : "VpcCidr" }} ],
+           { "IpProtocol" : "-1", "FromPort" : "64738",  "ToPort" : "64738",  "CidrIp" : { "Ref" : "VpcCidr" }}
+           { "IpProtocol" : "-1", "FromPort" : "64738",  "ToPort" : "64738",  "CidrIp" : { "Ref" : "VPNCidr" }}],
         "SecurityGroupEgress" : [
            { "IpProtocol" : "-1", "FromPort" : "0", "ToPort" : "65535", "CidrIp" : "0.0.0.0/0" } ]
       }
@@ -141,6 +150,23 @@
         "PrivateIpAddress" : "10.0.1.11",
         "Description" : "NAT Interface",
         "GroupSet" : [ { "Ref" : "VPNSecurityGroup" } ]
+      }
+    },
+
+    "VPNPrivateRoute" : {
+      "Type" : "AWS::EC2::Route",
+      "Properties" : {
+        "RouteTableId" : { "Ref" : "PrivateRouteTable" },
+        "DestinationCidrBlock" : "10.1.0.0/24",
+        "NetworkInterfaceId" : { "Ref" : "VPNNetworkInterface" }
+      }
+    },
+
+    "VPNPrivateSubnetRTAssoc" : {
+      "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties" : {
+        "SubnetId" : { "Ref" : "PrivateSubnet" },
+        "RouteTableId" : { "Ref" : "PrivateRouteTable" }
       }
     },
 
@@ -245,7 +271,8 @@
         "SecurityGroupIngress" : [
            { "IpProtocol" : "tcp", "FromPort" : "22",  "ToPort" : "22",  "CidrIp" : { "Ref" : "VpcCidr" }},
            { "IpProtocol" : "tcp", "FromPort" : "80",  "ToPort" : "80",  "CidrIp" : { "Ref" : "VpcCidr" }}, 
-           { "IpProtocol" : "tcp", "FromPort" : "443",  "ToPort" : "443",  "CidrIp" : { "Ref" : "VpcCidr" }}],
+           { "IpProtocol" : "tcp", "FromPort" : "443",  "ToPort" : "443",  "CidrIp" : { "Ref" : "VpcCidr" }}
+           { "IpProtocol" : "-1", "FromPort" : "64738",  "ToPort" : "64738",  "CidrIp" : { "Ref" : "VPNCidr" }}],
         "SecurityGroupEgress" : [
            { "IpProtocol" : "-1", "FromPort" : "0", "ToPort" : "65535", "CidrIp" : "0.0.0.0/0" } ]
       }

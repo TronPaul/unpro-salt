@@ -19,6 +19,8 @@ unpro:
           source: vpc
           type: parameter
           variable: KeyName
+        VPNCidr:
+          value: 10.1.0.0/24
         VPC:
           source: vpc
           type: resource
@@ -31,6 +33,10 @@ unpro:
           source: vpc
           type: resource
           variable: PrivateSubnet
+        PrivateRouteTable:
+          source: vpc
+          type: resource
+          variable: PrivateRouteTable
         AvailabilityZone:
           source: vpc
           type: parameter
