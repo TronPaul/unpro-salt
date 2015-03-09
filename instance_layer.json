@@ -69,15 +69,8 @@
   },
 
   "Mappings" : {
-    "UBUNTUAMI" : {
-      "us-east-1"      : { "AMI" : "ami-76e27e1e" },
-      "us-west-2"      : { "AMI" : "ami-838dd9b3" },
-      "us-west-1"      : { "AMI" : "ami-d5180890" },
-      "eu-west-1"      : { "AMI" : "ami-863686f1" },
-      "ap-southeast-1" : { "AMI" : "ami-f75875a5" },
-      "ap-southeast-2" : { "AMI" : "ami-950b62af" },
-      "ap-northeast-1" : { "AMI" : "ami-4ceaed4d" },
-      "sa-east-1"      : { "AMI" : "ami-cb70c1d6" }
+    "UNPROAMI" : {
+      "us-east-1"      : { "AMI" : "ami-6451750c" },
     }
   },
 
@@ -113,7 +106,7 @@
           "NetworkInterfaceId" : { "Ref" : "MumbleNetworkInterface"},
           "DeviceIndex" : "0"
         } ],
-        "ImageId" : { "Fn::FindInMap" : [ "UBUNTUAMI", { "Ref" : "AWS::Region" }, "AMI" ]},
+        "ImageId" : { "Fn::FindInMap" : [ "UNPROAMI", { "Ref" : "AWS::Region" }, "AMI" ]},
         "Tags" : [
           { "Key" : "Name", "Value" : "mumble" }
         ],
@@ -217,7 +210,7 @@
           "DeviceIndex" : "0"
         } ],
         "SourceDestCheck": false,
-        "ImageId" : { "Fn::FindInMap" : [ "UBUNTUAMI", { "Ref" : "AWS::Region" }, "AMI" ]},
+        "ImageId" : { "Fn::FindInMap" : [ "UNPROAMI", { "Ref" : "AWS::Region" }, "AMI" ]},
         "Tags" : [
           { "Key" : "Name", "Value" : "vpn" }
         ],
@@ -276,7 +269,7 @@
           "NetworkInterfaceId" : { "Ref" : "WWWNetworkInterface"},
           "DeviceIndex" : "0"
         } ],
-        "ImageId" : { "Fn::FindInMap" : [ "UBUNTUAMI", { "Ref" : "AWS::Region" }, "AMI" ]},
+        "ImageId" : { "Fn::FindInMap" : [ "UNPROAMI", { "Ref" : "AWS::Region" }, "AMI" ]},
         "Tags" : [
           { "Key" : "Name", "Value" : "www" }
         ],
