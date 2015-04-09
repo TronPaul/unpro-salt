@@ -30,6 +30,10 @@ if ! hash salt-call 2>/dev/null; then
     _EXIT_CODE=$?
   fi
   _INSTALL_UNPRO_SALT=$_EXIT_CODE
+else
+  if [ "$_MINION_ID" != "null" ]; then
+    echo $_MINION_ID > /etc/salt/minion_id
+  fi
 fi
 
 if [ $_INSTALL_UNPRO_SALT -eq 0 ]; then
