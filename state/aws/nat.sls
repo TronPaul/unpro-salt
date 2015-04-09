@@ -66,6 +66,6 @@ net.ipv4.ip_forward:
   sysctl.present:
     - value: 1
 
-net.ipv4.conf.eth0.send_redirects:
+net.ipv4.conf.wlp3s0.send_redirects:
   sysctl.present:
     - value: 0
