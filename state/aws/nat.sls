@@ -4,7 +4,6 @@ masquerade:
     - chain: POSTROUTING
     - jump: MASQUERADE
     - out-interface: eth0
-    - source: 10.0.0.0/16
     - save: True
 
 mumble-tcp:
