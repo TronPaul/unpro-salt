@@ -15,7 +15,7 @@ mumble-tcp:
     - source: '!10.0.0.0/16'
     - proto: tcp
     - dport: 64738
-    - to-destination: 10.0.1.10
+    - to-destination: 10.0.1.5
     - save: True
 
 mumble-udp:
@@ -26,7 +26,7 @@ mumble-udp:
     - source: '!10.0.0.0/16'
     - proto: udp
     - dport: 64738
-    - to-destination: 10.0.1.10
+    - to-destination: 10.0.1.5
     - save: True
 
 openvpn-udp:
@@ -37,7 +37,7 @@ openvpn-udp:
     - source: '!10.0.0.0/16'
     - proto: udp
     - dport: 1194
-    - to-destination: 10.0.1.11
+    - to-destination: 10.0.1.6
     - save: True
 
 https-tcp:
@@ -48,7 +48,7 @@ https-tcp:
     - source: '!10.0.0.0/16'
     - proto: tcp
     - dport: 443
-    - to-destination: 10.0.1.12
+    - to-destination: 10.0.1.7
     - save: True
 
 http-tcp:
@@ -59,7 +59,7 @@ http-tcp:
     - source: '!10.0.0.0/16'
     - proto: tcp
     - dport: 80
-    - to-destination: 10.0.1.12
+    - to-destination: 10.0.1.7
     - save: True
 
 net.ipv4.ip_forward:
