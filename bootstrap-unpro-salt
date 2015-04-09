@@ -2,6 +2,9 @@
 _MINON_ID="null"
 _INSTALL_UNPRO_SALT=0
 
+# Fix for AWS PATH
+PATH="/usr/local/bin:$PATH"
+
 while getopts ":i:" opt
 do
   case "${opt}" in
