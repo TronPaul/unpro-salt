@@ -5,6 +5,9 @@ base:
   'roles:irc_bot':
     - match: grain
     - lazybot
+  'roles:irc_bouncer':
+    - match: grain
+    - znc
   'roles:vpn_server':
     - match: grain
     - openvpn.server
