@@ -19,3 +19,5 @@ base:
     - nasus_nfs
   'fednet':
     - fednet_nfs_client
+  'ec2':
+    - match: grain
