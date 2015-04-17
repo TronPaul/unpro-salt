@@ -1,11 +1,10 @@
-file_roots:
-  base:
-    - /srv/salt
-
 base:
   '* and not G@virtual:VirtualBox':
     - match: compound
     - unpro_salt
+  'roles:irc_bot':
+    - match: grain
+    - lazybot
   'roles:vpn_server':
     - match: grain
     - openvpn.server
@@ -15,9 +14,6 @@ base:
   'roles:voice_server':
     - match: grain
     - mumble_servers
-  'roles:pythondev':
-    - match: grain
-    - dev.python
   'roles:sshserver':
     - match: grain
     - openssh
@@ -31,11 +27,6 @@ base:
     - match: grain
     - samba
     - nfs.server
-  'roles:dev':
-    - match: grain
-    - dev.python
-    - dev.java
-    - git
   'roles:htpc':
     - match: grain
     - xbmc
@@ -48,6 +39,3 @@ base:
   'roles:vpn_client':
     - match: grain
     - openvpn.client
-  'G@roles:dev and G@roles:gui':
-    - match: compound
-    - virtualbox
