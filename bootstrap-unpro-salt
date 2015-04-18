@@ -41,13 +41,13 @@ if [ $_INSTALL_UNPRO_SALT -eq 0 ]; then
   else
     salt-call git.clone /srv/unpro-salt https://github.com/TronPaul/unpro-salt.git opts='--depth 1 --recursive'
   fi
-  if ! salt-call file.is_link /srv/salt; then
+  if [ ! -L /srv/salt ]; then
     ln -s /srv/unpro-salt/state /srv/salt
   fi
-  if ! salt-call file.is_link /srv/formulas; then
+  if [ ! -L /srv/formulas ]; then
     ln -s /srv/unpro-salt/formulas /srv/formulas
   fi
-  if ! salt-call file.is_link /srv/pillar; then
+  if [ ! -L /srv/pillar ]; then
     ln -s /srv/unpro-salt/pillar /srv/pillar
   fi
   if [ -f /etc/keys/teamunpro_deploy_id_rsa ]; then
@@ -57,7 +57,7 @@ if [ $_INSTALL_UNPRO_SALT -eq 0 ]; then
       salt-call git.clone /srv/unpro-pillar-secrets git@github.com:TronPaul/unpro-pillar-secrets.git opts='--depth 1' identity=/etc/keys/teamunpro_deploy_id_rsa
     fi
   fi
-  if [ -d /srv/unpro-pillar-secrets ] && ! salt-call file.is_link /srv/pillar-secrets; then
+  if [ -d /srv/unpro-pillar-secrets ] && [ ! -L /srv/pillar-secrets ]; then
     ln -s /srv/unpro-pillar-secrets /srv/pillar-secrets
   fi
   # Copy grain if found
