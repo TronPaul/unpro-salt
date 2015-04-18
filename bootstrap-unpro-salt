@@ -24,12 +24,7 @@ if ! hash salt-call 2>/dev/null; then
   else
     sh install_salt.sh -X -g https://github.com/TronPaul/salt.git git v2014.7.2
   fi
-  _EXIT_CODE=$?
-  if [ $_EXIT_CODE -eq 0 ]; then
-    sed -i "s/^#file_client: remote$/file_client: local/g" /etc/salt/minion
-    _EXIT_CODE=$?
-  fi
-  _INSTALL_UNPRO_SALT=$_EXIT_CODE
+  _INSTALL_UNPRO_SALT=$?
 else
   if [ "$_MINION_ID" != "null" ]; then
     echo $_MINION_ID > /etc/salt/minion_id
@@ -43,7 +38,10 @@ if [ $_INSTALL_UNPRO_SALT -eq 0 ]; then
   _MINION_ID=$(salt-call --out txt grains.get id | cut -d ' ' -f 2)
   _GRAIN_PATH="$DIR/unpro-salt-master/salt/grains/$_MINION_ID"
   if [ -f $_GRAIN_PATH ]; then
-    install $_GRAIN_PATH /etc/salt/grains
+    cp $_GRAIN_PATH /etc/salt/grains
+  fi
+  if ! grep -q '######## unPRO salt minion config ########' /etc/salt/minion; then
+    cp $DIR/unpro-salt-master/salt/minion /etc/salt/minion
   fi
   rm -rf /srv/salt
   rm -rf /srv/pillar
