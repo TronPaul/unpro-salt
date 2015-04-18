@@ -7,17 +7,41 @@ if ! hash salt-call 2>/dev/null; then
   exit 1
 fi
 
-DIR=`mktemp -d`
-wget -q -O $DIR/unpro-salt.tar.gz https://github.com/TronPaul/unpro-salt/archive/master.tar.gz
-tar -xzf $DIR/unpro-salt.tar.gz -C $DIR
-_MINION_ID=$(salt-call --out txt grains.get id | cut -d ' ' -f 2)
-_GRAIN_PATH="$DIR/unpro-salt-master/salt/grains/$_MINION_ID"
-if [ -f $_GRAIN_PATH ]; then
-  install $_GRAIN_PATH /etc/salt/grains
+# Add github rsa key
+salt-call ssh.set_known_host hostname=github.com fingerprint='16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48' enc='ssh-rsa'
+# Get/Update unpro-salt
+if [ -d /srv/unpro-salt ]; then
+  salt-call git.pull /srv/unpro-salt
+else
+  salt-call git.clone /srv/unpro-salt https://github.com/TronPaul/unpro-salt.git opts='--depth 1 --recursive'
 fi
-rm -rf /srv/salt
-rm -rf /srv/pillar
-cp -r $DIR/unpro-salt-master/state /srv/salt
-cp -r $DIR/unpro-salt-master/pillar /srv/pillar
+if ! salt-call file.is_link /srv/salt; then
+  ln -s /srv/unpro-salt/state /srv/salt
+fi
+if ! salt-call file.is_link /srv/formulas; then
+  ln -s /srv/unpro-salt/formulas /srv/formulas
+fi
+if ! salt-call file.is_link /srv/pillar; then
+  ln -s /srv/unpro-salt/pillar /srv/pillar
+fi
+if [ -f /etc/keys/teamunpro_deploy_id_rsa ]; then
+  if [ -d /srv/unpro-pillar-secrets ]; then
+    salt-call git.pull /srv/unpro-pillar-secrets
+  else
+    salt.call git.clone /srv/unpro-pillar-secrets git@github.com:TronPaul/unpro-pillar-secrets.git opts='--depth 1'
+  fi
+fi
+if [ -d /srv/unpro-pillar-secrets] && ! salt-call file.is_link /srv/pillar-secrets; then
+  ln -s /srv/unpro-pillar-secrets /srv/pillar-secrets
+fi
+# Copy grain if found
+_MINION_ID=$(salt-call --out txt grains.get id | cut -d ' ' -f 2)
+_GRAIN_PATH="/srv/unpro-salt/salt/grains/$_MINION_ID"
+if [ -f $_GRAIN_PATH ]; then
+  cp $_GRAIN_PATH /etc/salt/grains
+fi
+# Copy custom minion config
+if ! grep -q '######## unPRO salt minion config ########' /etc/salt/minion; then
+  cp /srv/unpro-salt/salt/minion /etc/salt/minion
+fi
 salt-call state.highstate
-rm -rf $DIR
