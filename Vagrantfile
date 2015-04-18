@@ -17,6 +17,7 @@ def config_salt(salt, hostname)
   if Vagrant.has_plugin?("salty-vagrant-grains") && File.file?(grain_file_path)
     salt.grains(YAML.load_file grain_file_path)
   end
+  salt.install_args = "-X -g https://github.com/TronPaul/salt.git git v2014.7.2"
   salt.minion_config = "salt/minion"
   salt.verbose = true
   salt.colorize = true
