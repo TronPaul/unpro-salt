@@ -424,7 +424,7 @@ file_roots:
 pillar_roots:
   base:
     - /srv/pillar
-    - /srv/pillar_secrets
+    - /srv/pillar-secrets
 
 
 ######        Security settings       #####
