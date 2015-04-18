@@ -54,10 +54,10 @@ if [ $_INSTALL_UNPRO_SALT -eq 0 ]; then
     if [ -d /srv/unpro-pillar-secrets ]; then
       salt-call git.pull /srv/unpro-pillar-secrets
     else
-      salt.call git.clone /srv/unpro-pillar-secrets git@github.com:TronPaul/unpro-pillar-secrets.git opts='--depth 1'
+      salt-call git.clone /srv/unpro-pillar-secrets git@github.com:TronPaul/unpro-pillar-secrets.git opts='--depth 1'
     fi
   fi
-  if [ -d /srv/unpro-pillar-secrets] && ! salt-call file.is_link /srv/pillar-secrets; then
+  if [ -d /srv/unpro-pillar-secrets ] && ! salt-call file.is_link /srv/pillar-secrets; then
     ln -s /srv/unpro-pillar-secrets /srv/pillar-secrets
   fi
   # Copy grain if found
