@@ -1,7 +1,3 @@
-pillar_roots:
-  base:
-    - /srv/pillar
-
 base:
   '*':
     - users
