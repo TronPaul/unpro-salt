@@ -52,9 +52,9 @@ if [ $_INSTALL_UNPRO_SALT -eq 0 ]; then
   fi
   if [ -f /etc/keys/teamunpro_deploy_id_rsa ]; then
     if [ -d /srv/unpro-pillar-secrets ]; then
-      salt-call git.pull /srv/unpro-pillar-secrets
+      salt-call git.pull /srv/unpro-pillar-secrets identity=/etc/keys/teamunpro_deploy_id_rsa
     else
-      salt-call git.clone /srv/unpro-pillar-secrets git@github.com:TronPaul/unpro-pillar-secrets.git opts='--depth 1'
+      salt-call git.clone /srv/unpro-pillar-secrets git@github.com:TronPaul/unpro-pillar-secrets.git opts='--depth 1' identity=/etc/keys/teamunpro_deploy_id_rsa
     fi
   fi
   if [ -d /srv/unpro-pillar-secrets ] && ! salt-call file.is_link /srv/pillar-secrets; then
