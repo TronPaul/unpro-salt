@@ -1,6 +1,5 @@
 {% set db_path = "/var/lib/mumble-server" %}
-{% set bucket = "teamunpro" %}
-{% set backup_path = "mumble" %}
+{% set bucket = salt['pillar.get']('secrets:bucket') %}
 
 {% for name, mumble_server in pillar.get('mumble_servers', {}).items() %}
 {%- if mumble_server == None -%}
@@ -64,7 +63,7 @@ mumble-server_{{name}}:
     - mode: 644
     - source: salt://mumble_servers/mumble-server.default
 
-{% if 'ec2' in grains %}
+{% if bucket %}
 {% set db_file = name + ".sqlite" %}
 {{db_path}}/{{db_file}}:
   file.managed:
@@ -72,8 +71,8 @@ mumble-server_{{name}}:
     - group: mumble-server
     - mode: 600
     - replace: False
-    - source: s3://{{bucket}}/{{backup_path}}/{{db_file}}
-    - source_hash: s3://{{bucket}}/{{backup_path}}/{{db_file}}.sha256
+    - source: s3://{{bucket}}/mumble/{{db_file}}
+    - source_hash: s3://{{bucket}}/mumble/{{db_file}}.sha256
     - watch_in:
       - service: mumble-server_{{name}}
     - require_in:
@@ -91,7 +90,7 @@ backup_mumble_database:
 {% endif %}
 {% endfor %}
 
-{% if 'ec2' in grains %}
+{% if bucket %}
 /usr/local/bin/backup_mumble_database.sh:
   file.managed:
     - template: jinja
@@ -101,6 +100,5 @@ backup_mumble_database:
     - source: salt://mumble_servers/backup_mumble_database.sh.jinja
     - context:
       bucket: {{bucket}}
-      backup_path: {{backup_path}}
       db_path: {{db_path}}
 {% endif %}

@@ -5,6 +5,9 @@ pillar_roots:
 base:
   '*':
     - users
+  'ec2':
+    - match: grain
+    - ec2
   'roles:vpn_client':
     - match: grain
     - openvpn_client
@@ -19,5 +22,3 @@ base:
     - nasus_nfs
   'fednet':
     - fednet_nfs_client
-  'ec2':
-    - match: grain

@@ -1,3 +1,2 @@
 roles:
-  - irc_bot
   - irc_bouncer
