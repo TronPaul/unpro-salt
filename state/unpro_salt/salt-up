@@ -32,7 +32,7 @@ if [ -f /etc/keys/teamunpro_deploy_id_rsa ]; then
   fi
 fi
 if [ -d /srv/unpro-pillar-secrets ] && [ ! -L /srv/pillar-secrets ]; then
-  ln -s /srv/unpro-pillar-secrets /srv/pillar-secrets
+  ln -s /srv/unpro-pillar-secrets/pillar /srv/pillar-secrets
 fi
 # Copy grain if found
 _MINION_ID=$(salt-call --out txt grains.get id | cut -d ' ' -f 2)
