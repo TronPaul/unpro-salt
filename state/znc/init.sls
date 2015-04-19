@@ -59,7 +59,7 @@ znc-config:
 {% if bucket %}
 backup-znc-config:
   cron.present:
-    - name: /usrlocal/bin/backup-znc-config
+    - name: /usr/local/bin/backup-znc-config
     - identifier: backup-znc-config
     - user: root
     - minute: random
