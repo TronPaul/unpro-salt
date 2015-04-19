@@ -39,25 +39,14 @@ openvpn-udp:
     - to-destination: 10.0.1.6
     - save: True
 
-https-tcp:
+irc-tcp:
   iptables.append:
     - table: nat
     - chain: PREROUTING
     - jump: DNAT
     - source: '!10.0.0.0/16'
     - proto: tcp
-    - dport: 443
-    - to-destination: 10.0.1.7
-    - save: True
-
-http-tcp:
-  iptables.append:
-    - table: nat
-    - chain: PREROUTING
-    - jump: DNAT
-    - source: '!10.0.0.0/16'
-    - proto: tcp
-    - dport: 80
+    - dport: 6667
     - to-destination: 10.0.1.7
     - save: True
 
