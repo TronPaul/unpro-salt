@@ -74,6 +74,8 @@ backup-znc-config:
     - user: root
     - group: root
     - mode: 755
+    - context:
+      bucket: {{bucket}}
 {% endif %}
 
 adminlog-dir:
