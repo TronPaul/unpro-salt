@@ -13,9 +13,14 @@ def config_vm(box, n)
 end
 
 def config_salt(salt, hostname)
+  vagrant_grain_file_path = "salt/vagrant-grains/#{hostname}"
   grain_file_path = "salt/grains/#{hostname}"
-  if Vagrant.has_plugin?("salty-vagrant-grains") && File.file?(grain_file_path)
-    salt.grains(YAML.load_file grain_file_path)
+  if Vagrant.has_plugin?("salty-vagrant-grains")
+    if File.file?(grain_file_path)
+      salt.grains(YAML.load_file grain_file_path)
+    elsif File.file?(vagrant_grain_file_path)
+      salt.grains(YAML.load_file vagrant_grain_file_path)
+    end
   end
   salt.install_args = "-X -g https://github.com/TronPaul/salt.git git v2014.7.2"
   salt.minion_config = "salt/minion"
