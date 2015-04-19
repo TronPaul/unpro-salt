@@ -42,14 +42,39 @@ znc-subdirs:
 znc-config:
   file.managed:
     - name: /var/lib/znc/configs/znc.conf
+{% if bucket %}
+    - source: s3://znc/configs/znc.conf
+    - source_hash: s3://znc/configs/znc.conf.sha256
+{% else %}
     - template: jinja
     - source: salt://znc/znc.conf.jinja
+{% endif %}
     - replace: False
     - user: znc
     - group: znc
     - mode: 640
     - require:
       - file: znc-subdirs
+
+{% if bucket %}
+backup-znc-config:
+  cron.present:
+    - name: /usrlocal/bin/backup-znc-config
+    - identifier: backup-znc-config
+    - user: root
+    - minute: random
+    - hour: 6
+    - require:
+      - file: /usr/local/bin/backup-znc-config
+
+/usr/local/bin/backup-znc-config:
+  file.managed:
+    - template: jinja
+    - source: salt://znc/backup-znc-config.jinja
+    - user: root
+    - group: root
+    - mode: 755
+{% endif %}
 
 adminlog-dir:
   file.directory:
