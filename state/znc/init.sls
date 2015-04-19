@@ -75,7 +75,7 @@ znc-pem:
   file.managed:
     - name: /var/lib/znc/znc.pem
     - source: s3://{{bucket}}/znc/znc.pem
-    - source: s3://{{bucket}}/znc/znc.pem.sha256
+    - source_hash: s3://{{bucket}}/znc/znc.pem.sha256
     - replace: False
     - user: znc
     - group: znc
