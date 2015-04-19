@@ -78,26 +78,26 @@ mumble-server_{{name}}:
     - require_in:
       - service: mumble-server_{{name}}
       
-backup_mumble_database:
+backup-mumble-database:
   cron.present:
-    - name: /usr/local/bin/backup_mumble_database.sh {{name}}
-    - identifier: backup_{{name}}_mumble_database
+    - name: /usr/local/bin/backup-mumble-database {{name}}
+    - identifier: backup-{{name}}-mumble-database
     - user: root
     - minute: random
     - hour: 6
     - require:
-      - file: /usr/local/bin/backup_mumble_database.sh
+      - file: /usr/local/bin/backup-mumble-database
 {% endif %}
 {% endfor %}
 
 {% if bucket %}
-/usr/local/bin/backup_mumble_database.sh:
+/usr/local/bin/backup-mumble-database:
   file.managed:
     - template: jinja
     - user: root
     - group: root
     - mode: 755
-    - source: salt://mumble_servers/backup_mumble_database.sh.jinja
+    - source: salt://mumble_servers/backup-mumble-database.sh.jinja
     - context:
       bucket: {{bucket}}
       db_path: {{db_path}}
