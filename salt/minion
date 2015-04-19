@@ -402,6 +402,7 @@ file_roots:
     - /srv/salt
     - /srv/formulas/sun-java-formula
   production:
+    - /dev/null
 
 # By default, the Salt fileserver recurses fully into all defined environments
 # to attempt to find files. To limit this behavior so that the fileserver only
