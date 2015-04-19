@@ -70,5 +70,6 @@ if [ $_INSTALL_UNPRO_SALT -eq 0 ]; then
   if ! grep -q '######## unPRO salt minion config ########' /etc/salt/minion; then
     cp /srv/unpro-salt/salt/minion /etc/salt/minion
   fi
+  salt-call saltutil.sync_grains
   salt-call state.highstate
 fi
