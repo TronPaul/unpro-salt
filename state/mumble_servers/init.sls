@@ -85,7 +85,7 @@ backup_mumble_database:
     - user: root
     - minute: random
     - hour: 6
-    - requires:
+    - require:
       - file: /usr/local/bin/backup_mumble_database.sh
 {% endif %}
 {% endfor %}
