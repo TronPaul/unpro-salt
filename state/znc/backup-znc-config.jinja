@@ -2,7 +2,7 @@
 
 BUCKET="{{bucket}}"
 if [ -f /var/lib/znc/configs/znc.conf ]; then
-  DIR=`mktmp -d`
+  DIR=`mktemp -d`
   echo sha256=$(sha256sum /var/lib/znc/configs/znc.conf | cut -d ' ' -f1) > $DIR/znc.conf.sha256
   salt-call s3.put $BUCKET znc/configs/znc.conf.sha256 local_file=$DIR/znc.conf.sha256
   salt-call s3.put $BUCKET znc/configs/znc.conf local_file=/var/lib/znc/configs/znc.conf
