@@ -1,7 +1,7 @@
 base:
   '*':
     - users
-  'ec2':
+  'domain:ec2.internal':
     - match: grain
     - ec2
   'roles:vpn_client':
