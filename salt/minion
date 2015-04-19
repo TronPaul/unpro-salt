@@ -401,6 +401,7 @@ file_roots:
   base:
     - /srv/salt
     - /srv/formulas/sun-java-formula
+  production:
 
 # By default, the Salt fileserver recurses fully into all defined environments
 # to attempt to find files. To limit this behavior so that the fileserver only
@@ -424,6 +425,7 @@ file_roots:
 pillar_roots:
   base:
     - /srv/pillar
+  production:
     - /srv/pillar-secrets
 
 
