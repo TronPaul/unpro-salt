@@ -38,12 +38,14 @@ from distutils.version import StrictVersion
 import boto.ec2
 import boto.utils
 import salt.log
+import salt.utils.iam as iam
 
 log = logging.getLogger(__name__)
 
 AWS_CREDENTIALS = {
     'access_key': None,
     'secret_key': None,
+    'security_token': None,
 }
 
 
@@ -59,6 +61,14 @@ def _on_ec2():
 
 def _get_credentials():
     creds = AWS_CREDENTIALS.copy()
+
+    # iam
+    try:
+        aws = iam.get_iam_metadata()
+        if aws.get('access_key') and aws.get('secret_key') and aws.get('security_token'):
+            creds.update(dict(access_key=aws.get('access_key'), secret_key=aws.get('secret_key'), security_token=aws.get('security_token')))
+    except Exception:
+        pass
 
     # Minion config
     if '__opts__' in globals():
@@ -101,6 +111,7 @@ def ec2_tags():
             region,
             aws_access_key_id=credentials['access_key'],
             aws_secret_access_key=credentials['secret_key'],
+            security_token=credentials['security_token'],
         )
     except Exception, e:
         log.error("Could not get AWS connection: %s", e)
@@ -120,7 +131,7 @@ def ec2_tags():
 
     # Provide ec2_tags_roles functionality
     if 'Roles' in ec2_tags:
-        ret['roles'] = tags['Roles'].split(',')
+        ret['roles'] = ec2_tags['Roles'].split(',')
 
     return ret
 
