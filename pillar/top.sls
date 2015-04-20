@@ -13,6 +13,9 @@ base:
   'roles:voice_server':
     - match: grain
     - mumble_servers
+  'roles:rabbitmq':
+    - match: grain
+    - rabbitmq
   'nasus':
     - nasus_samba
     - nasus_nfs

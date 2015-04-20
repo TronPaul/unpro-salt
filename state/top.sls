@@ -2,6 +2,10 @@ base:
   '* and not G@virtual:VirtualBox':
     - match: compound
     - unpro_salt
+  'roles:rabbitmq':
+    - match: grain
+    - rabbitmq
+    - rabbitmq.config
   'roles:irc_bot':
     - match: grain
     - lazybot
