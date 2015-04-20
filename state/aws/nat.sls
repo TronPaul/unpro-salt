@@ -4,6 +4,8 @@ masquerade:
     - chain: POSTROUTING
     - jump: MASQUERADE
     - out-interface: eth0
+    - source: 10.0.1.0/24
+    - destination: '!10.0.1.0/24'
     - save: True
 
 net.ipv4.ip_forward:
