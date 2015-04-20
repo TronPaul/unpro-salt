@@ -403,6 +403,7 @@ file_roots:
     - /srv/formulas/sun-java-formula
     - /srv/formulas/sensu-formula
     - /srv/formulas/rabbitmq-formula
+    - /srv/formulas/redis-formula
   production:
     - /dev/null
 

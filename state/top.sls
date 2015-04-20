@@ -9,6 +9,9 @@ base:
     - match: grain
     - rabbitmq
     - rabbitmq.config
+  'G@roles:monitor_master and G@virtual:VirtualBox':
+    - match: compund
+    - redis.server
   'roles:monitor_master':
     - match: grain
     - sensu

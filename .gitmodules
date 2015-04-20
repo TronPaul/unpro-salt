@@ -7,3 +7,6 @@
 [submodule "formulas/rabbitmq-formula"]
 	path = formulas/rabbitmq-formula
 	url = git@github.com:TronPaul/rabbitmq-formula.git
+[submodule "formulas/redis-formula"]
+	path = formulas/redis-formula
+	url = git@github.com:TronPaul/redis-formula.git

@@ -7,7 +7,7 @@ sensu:
     user: sensu
     password: foobar
   redis:
-    host: redis-01
+    host: localhost
     port: 6379
   api:
     password: foobar
