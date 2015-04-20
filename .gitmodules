@@ -1,3 +1,9 @@
 [submodule "formulas/sun-java-formula"]
 	path = formulas/sun-java-formula
 	url = https://github.com/TronPaul/sun-java-formula.git
+[submodule "formulas/sensu-formula"]
+	path = formulas/sensu-formula
+	url = git@github.com:TronPaul/sensu-formula.git
+[submodule "formulas/rabbitmq-formula"]
+	path = formulas/rabbitmq-formula
+	url = git@github.com:TronPaul/rabbitmq-formula.git
