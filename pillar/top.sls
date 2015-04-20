@@ -1,15 +1,13 @@
 base:
   '*':
     - users
+    - sensu
   'domain:ec2.internal':
     - match: grain
     - ec2
   'roles:rabbitmq':
     - match: grain
     - rabbitmq
-  'roles:monitor_master':
-    - match: grain
-    - sensu
   'roles:voice_server':
     - match: grain
     - mumble_servers

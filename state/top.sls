@@ -1,4 +1,7 @@
 base:
+  '*':
+    - sensu
+    - sensu.client
   '* and not G@virtual:VirtualBox':
     - match: compound
     - unpro_salt
