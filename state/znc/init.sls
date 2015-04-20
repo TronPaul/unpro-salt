@@ -43,8 +43,8 @@ znc-config:
   file.managed:
     - name: /var/lib/znc/configs/znc.conf
 {% if bucket %}
-    - source: s3://znc/configs/znc.conf
-    - source_hash: s3://znc/configs/znc.conf.sha256
+    - source: s3://{{bucket}}/znc/configs/znc.conf
+    - source_hash: s3://{{bucket}}/znc/configs/znc.conf.sha256
 {% else %}
     - template: jinja
     - source: salt://znc/znc.conf.jinja
