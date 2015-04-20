@@ -4,6 +4,9 @@ base:
   'domain:ec2.internal':
     - match: grain
     - ec2
+  'roles:monitor_master':
+    - match: grain
+    - sensu
   'roles:vpn_client':
     - match: grain
     - openvpn_client

@@ -6,6 +6,10 @@ base:
     - match: grain
     - rabbitmq
     - rabbitmq.config
+  'roles:monitor_master':
+    - match: grain
+    - sensu
+    - sensu.server
   'roles:irc_bot':
     - match: grain
     - lazybot
