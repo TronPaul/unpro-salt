@@ -67,7 +67,7 @@ if [ $_INSTALL_UNPRO_SALT -eq 0 ]; then
     cp $_GRAIN_PATH /etc/salt/grains
   fi
   # Copy custom minion config
-  if [ -n $(diff -q /etc/salt/minion /srv/unpro-salt/salt/minion ) ]; then
+  if ! diff -q /etc/salt/minion /srv/unpro-salt/salt/minion; then
     cp /srv/unpro-salt/salt/minion /etc/salt/minion
   fi
   salt-call saltutil.sync_grains

@@ -40,7 +40,7 @@ _GRAIN_PATH="/srv/unpro-salt/salt/grains/$_MINION_ID"
 if [ -f $_GRAIN_PATH ]; then
   cp $_GRAIN_PATH /etc/salt/grains
 fi
-if [ -n $(diff -q /etc/salt/minion /srv/unpro-salt/salt/minion ) ]; then
+if ! diff -q /etc/salt/minion /srv/unpro-salt/salt/minion; then
   cp /srv/unpro-salt/salt/minion /etc/salt/minion
 fi
 salt-call saltutil.sync_grains
