@@ -38,6 +38,7 @@ if [ $_INSTALL_UNPRO_SALT -eq 0 ]; then
   # Get/Update unpro-salt
   if [ -d /srv/unpro-salt ]; then
     salt-call git.pull /srv/unpro-salt
+    salt-call git.submodule /srv/unpro-salt
   else
     salt-call git.clone /srv/unpro-salt https://github.com/TronPaul/unpro-salt.git opts='--depth 1 --recursive'
   fi
