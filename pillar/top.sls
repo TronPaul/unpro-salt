@@ -10,7 +10,7 @@ base:
     - rabbitmq
   'roles:voice_server':
     - match: grain
-    - mumble_servers
+    - mumble
   'roles:vpn_server':
     - match: grain
     - openvpn_server
