@@ -1,3 +1,4 @@
+{% set default_password = 'foobar' %}
 rabbitmq:
   plugin:
     rabbitmq_management:
@@ -10,9 +11,9 @@ rabbitmq:
       - read: .*
   user:
     sensu:
-      - password: foobar
+      - password: {{sensu_password if sensu_password is defined else default_password}}
       - runas: root
     admin:
-      - password: foobar
+      - password: {{admin_password if admin_password is defined else default_password}}
       - runas: root
       - tags: administrator
