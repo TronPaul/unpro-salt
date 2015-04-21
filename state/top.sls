@@ -1,7 +1,23 @@
 base:
+  '*':
+    - sensu
+    - sensu.client
   '* and not G@virtual:VirtualBox':
     - match: compound
     - unpro_salt
+  'roles:rabbitmq':
+    - match: grain
+    - rabbitmq
+    - rabbitmq.config
+  'G@roles:monitor_master and G@virtual:VirtualBox':
+    - match: compound
+    - redis.server
+  'roles:monitor_master':
+    - match: grain
+    - sensu
+    - sensu.server
+    - sensu.api
+    - sensu.uchiwa
   'roles:irc_bot':
     - match: grain
     - lazybot

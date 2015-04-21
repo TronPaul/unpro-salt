@@ -71,6 +71,26 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  config.vm.define :'rabbitmq-01' do |box|
+    box.vm.box = "ubuntu/trusty64"
+    box.vm.hostname = 'rabbitmq-01'
+
+    config_vm(box, 7)
+    box.vm.provision :salt do |salt|
+      config_salt(salt, box.vm.hostname)
+    end
+  end
+
+  config.vm.define :sensu do |box|
+    box.vm.box = "ubuntu/trusty64"
+    box.vm.hostname = 'sensu'
+
+    config_vm(box, 8)
+    box.vm.provision :salt do |salt|
+      config_salt(salt, box.vm.hostname)
+    end
+  end
+
   # INTERNAL
   config.vm.define :nasus do |box|
     box.vm.box = "ubuntu/trusty64"

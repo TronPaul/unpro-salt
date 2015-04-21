@@ -401,6 +401,9 @@ file_roots:
   base:
     - /srv/salt
     - /srv/formulas/sun-java-formula
+    - /srv/formulas/sensu-formula
+    - /srv/formulas/rabbitmq-formula
+    - /srv/formulas/redis-formula
   production:
     - /dev/null
 

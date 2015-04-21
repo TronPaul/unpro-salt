@@ -1,18 +1,22 @@
 base:
   '*':
     - users
+    - sensu
   'domain:ec2.internal':
     - match: grain
     - ec2
-  'roles:vpn_client':
+  'roles:rabbitmq':
     - match: grain
-    - openvpn_client
-  'roles:vpn_server':
-    - match: grain
-    - openvpn_server
+    - rabbitmq
   'roles:voice_server':
     - match: grain
     - mumble_servers
+  'roles:vpn_server':
+    - match: grain
+    - openvpn_server
+  'roles:vpn_client':
+    - match: grain
+    - openvpn_client
   'nasus':
     - nasus_samba
     - nasus_nfs
