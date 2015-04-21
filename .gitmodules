@@ -11,3 +11,6 @@
 	path = formulas/redis-formula
 	url = https://github.com/TronPaul/redis-formula.git
 	branch = ubuntu-14.04
+[submodule "formulas/nfs-formula"]
+	path = formulas/nfs-formula
+	url = https://github.com/TronPaul/nfs-formula.git
