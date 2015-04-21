@@ -19,6 +19,6 @@ base:
     - openvpn_client
   'nasus':
     - nasus_samba
-    - nasus_nfs
+    - nfs
   'fednet':
-    - fednet_nfs_client
+    - nfs

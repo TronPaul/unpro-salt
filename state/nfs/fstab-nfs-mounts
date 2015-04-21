@@ -1,5 +1,0 @@
-{% for name, mount_conf in salt['pillar.get']('nfs_client:mounts', {}).items() %}
-# {{ name }}
-{{ mount_conf['nfs_url'] }}	{{ mount_conf['mount_point'] }}	nfs	auto	0	0
-{% endfor %}
-
