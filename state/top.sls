@@ -26,7 +26,7 @@ base:
     - znc
   'roles:vpn_server':
     - match: grain
-    - openvpn.server
+    - unpro-openvpn
   'roles:aws_nat':
     - match: grain
     - aws.nat
@@ -57,4 +57,4 @@ base:
     - nfs.client
   'roles:vpn_client':
     - match: grain
-    - openvpn.client
+    - unpro-openvpn-client

@@ -13,10 +13,10 @@ base:
     - mumble
   'roles:vpn_server':
     - match: grain
-    - openvpn_server
+    - openvpn.server
   'roles:vpn_client':
     - match: grain
-    - openvpn_client
+    - openvpn-client
   'nasus':
     - nasus_samba
     - nasus_nfs
