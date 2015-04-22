@@ -11,3 +11,12 @@
 	path = formulas/redis-formula
 	url = https://github.com/TronPaul/redis-formula.git
 	branch = ubuntu-14.04
+[submodule "formulas/openvpn-formula"]
+	path = formulas/openvpn-formula
+	url = https://github.com/TronPaul/openvpn-formula.git
+[submodule "formulas/openvpn-client-formula"]
+	path = formulas/openvpn-client-formula
+	url = https://github.com/TronPaul/openvpn-client-formula.git
+[submodule "formulas/bind-formula"]
+	path = formulas/bind-formula
+	url = https://github.com/TronPaul/bind-formula.git
