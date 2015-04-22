@@ -13,7 +13,7 @@ base:
     - mumble
   'roles:vpn_server':
     - match: grain
-    - openvpn.server
+    - vpn-server
   'roles:vpn_client':
     - match: grain
     - openvpn-client

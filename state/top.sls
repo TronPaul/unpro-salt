@@ -27,6 +27,7 @@ base:
   'roles:vpn_server':
     - match: grain
     - unpro-openvpn
+    - bind
   'roles:aws_nat':
     - match: grain
     - aws.nat

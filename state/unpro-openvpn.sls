@@ -1,9 +1,9 @@
-{% id = grains['id'] %}
-{% openvpn = salt['pillar.get']('openvpn:server') %}
+{% set id = grains['id'] %}
+{% set openvpn = salt['pillar.get']('openvpn:server') %}
 include:
   - openvpn
 
-/etc/openvpn/{{openvpn['ca']}:
+/etc/openvpn/{{openvpn['ca']}}:
   file.managed:
     - source: s3://teamunpro/vpn_ca/{{openvpn['ca']}}
     - source_hash: s3://teamunpro/vpn_ca/{{openvpn['ca']}}.sha256
@@ -13,7 +13,7 @@ include:
     - watch_in:
       - service: openvpn
 
-/etc/openvpn/{{openvpn['cert']}:
+/etc/openvpn/{{openvpn['cert']}}:
   file.managed:
     - source: s3://teamunpro/vpn_ca/{{openvpn['cert']}}
     - source_hash: s3://teamunpro/vpn_ca/{{openvpn['cert']}}.sha256
