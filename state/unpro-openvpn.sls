@@ -68,7 +68,7 @@ vpn-forwarding:
     - jump: ACCEPT
     - destination: 10.0.0.0/16
 
-vpn-forwarding:
+eth0-forwarding:
   iptables.append:
     - chain: FORWARD
     - out-interface: tun+
