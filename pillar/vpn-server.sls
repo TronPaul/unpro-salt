@@ -9,10 +9,14 @@ openvpn:
       push:
         - route 10.0.0.0 255.255.255.0
         - route 10.0.1.0 255.255.255.0
+        - route 192.168.1.0 255.255.255.0
       ifconfig-pool-persist: ipp.txt
       client_to_client: True
       keepalive: '10 120'
       status: openvpn-status.log
+      client_config_dir: ccd
+      clients:
+        sjds-laptop: iroute 192.168.1.0 255.255.255.0
   lookup:
     dh_files: []
 bind:

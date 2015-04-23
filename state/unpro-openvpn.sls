@@ -4,8 +4,8 @@
 include:
   - openvpn
 
-{% if bucket %}
 {% for server in servers %}
+{% if bucket %}
 /etc/openvpn/{{server['ca']}}:
   file.managed:
     - source: s3://{{bucket}}/vpn_ca/{{server['ca']}}
@@ -45,8 +45,30 @@ include:
     - mode: 400
     - watch_in:
       - service: openvpn
+
+{% set ccd = server.get('client_config_dir') %}
+{% if ccd %}
+/etc/openvpn/{{ccd}}:
+  file.directory:
+    - user: root
+    - group: root
+    - require_in:
+      - service: openvpn
+
+{% for name, contents in server.get('clients') %}
+/etc/openvpn/{{ccd}}/{{name}}:
+  file.managed:
+    - user: root
+    - group: root
+    - contents: {{contents}}
+    - require_in:
+      - service: openvpn
+    - require:
+      file: /etc/openvpn/{{ccd}}
 {% endfor %}
 {% endif %}
+{% endif %}
+{% endfor %}
 
 net.ipv4.ip_forward:
   sysctl.present:
