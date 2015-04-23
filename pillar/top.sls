@@ -1,6 +1,7 @@
 base:
   '*':
     - users
+  'not G@domain:ec2.internal':
     - sensu
   'domain:ec2.internal':
     - match: grain
