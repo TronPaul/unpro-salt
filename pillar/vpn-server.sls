@@ -16,6 +16,8 @@ openvpn:
   lookup:
     dh_files: []
 bind:
+  lookup:
+    pkgs: ["bind9", "bind9utils"]
   configured_zones:
     teamunpro:
       type: forward

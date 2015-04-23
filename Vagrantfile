@@ -10,6 +10,13 @@ def config_vm(box, n)
   box.vm.synced_folder "formulas", "/srv/formulas"
   box.vm.synced_folder "pillar", "/srv/pillar/"
   box.vm.network :private_network, ip: "192.168.50.#{n}"
+  pre_bootstrap_script = "salt/pre-bootstrap/#{box.vm.box}.sh"
+  if File.file?(pre_bootstrap_script)
+    box.vm.provision :shell do |s|
+      s.path = pre_bootstrap_script
+      s.privileged = true
+    end
+  end
 end
 
 def config_salt(salt, hostname)
