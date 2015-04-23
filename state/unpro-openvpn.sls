@@ -56,7 +56,7 @@ net.ipv4.ip_forward:
 
 vpn-connections:
   iptables.append:
-    - table: FILTER
+    - table: filter
     - chain: INPUT
     - in-interface: tun+
     - jump: ACCEPT
@@ -64,7 +64,7 @@ vpn-connections:
 
 vpn-forwarding:
   iptables.append:
-    - table: FILTER
+    - table: filter
     - chain: FORWARD
     - in-interface: tun+
     - jump: ACCEPT
@@ -72,7 +72,7 @@ vpn-forwarding:
 
 eth0-forwarding:
   iptables.append:
-    - table: FILTER
+    - table: filter
     - chain: FORWARD
     - out-interface: tun+
     - jump: ACCEPT
