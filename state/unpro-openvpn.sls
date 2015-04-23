@@ -55,7 +55,7 @@ include:
     - require_in:
       - service: openvpn
 
-{% for name, contents in server.get('clients') %}
+{% for name, contents in server.get('clients', {}).items() %}
 /etc/openvpn/{{ccd}}/{{name}}:
   file.managed:
     - user: root
