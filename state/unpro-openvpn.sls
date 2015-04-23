@@ -64,7 +64,7 @@ include:
     - require_in:
       - service: openvpn
     - require:
-      file: /etc/openvpn/{{ccd}}
+      - file: /etc/openvpn/{{ccd}}
 {% endfor %}
 {% endif %}
 {% endif %}
