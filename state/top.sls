@@ -28,6 +28,7 @@ base:
     - match: grain
     - unpro-openvpn
     - bind
+    - bind.config
   'roles:aws_nat':
     - match: grain
     - aws.nat
