@@ -34,3 +34,6 @@ bind:
         teamunpro:
           type: forward
           forwarders: "10.0.0.2;"
+        ec2.internal:
+          type: forward
+          forwarders: "10.0.0.2;"
