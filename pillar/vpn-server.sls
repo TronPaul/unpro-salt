@@ -22,7 +22,11 @@ openvpn:
 bind:
   lookup:
     pkgs: ["bind9", "bind9utils"]
-  configured_zones:
-    teamunpro:
-      type: forward
-      forwarders: "10.0.0.2;"
+  configured_views:
+    internal:
+      match_clients:
+        - 10.0.0.0/8
+      configured_zones:
+        teamunpro:
+          type: forward
+          forwarders: "10.0.0.2;"
