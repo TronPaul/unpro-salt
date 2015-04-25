@@ -26,7 +26,7 @@ bind:
     internal:
       match_clients:
         - 10.0.0.0/8
-      allow-recursion:
+      allow-query:
         - 10.0.0.0/8
       recursion: yes
       configured_zones:
