@@ -34,7 +34,6 @@
 {% if user and password %}
                        :users {"{{user}}" {:pass "{{password}}", :privs :admin}}
 {% endif %}
-                       :autoreply {:autoreplies {"#clojure" {#".*(https?://)richhickey(.github.com/\S*).*" "Nooooo, that's so out of date! Please see instead $1clojure$2 and try to stop linking to rich's repo."}}}
                        :plugins plugins
                        :url-handlers #{"youtube"}
                        :http-info {:automatic? true}}})
