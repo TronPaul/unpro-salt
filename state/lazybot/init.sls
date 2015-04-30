@@ -8,6 +8,8 @@ lazybot:
     - require:
       - user: lazybot
       - file: /etc/init/lazybot.conf
+    - watch:
+      - file: /etc/lazybot/config.clj
 
 /usr/local/lazybot:
   file.directory:

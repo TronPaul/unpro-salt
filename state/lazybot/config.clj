@@ -1,7 +1,7 @@
 {% set youtube_api_key = salt['pillar.get']('lazybot:youtube:api-key') %}
 {% set user = salt['pillar.get']('lazybot:admin:user') %}
 {% set password = salt['pillar.get']('lazybot:admin:password') %}
-(let [plugins #{"http-info"
+(let [plugins #{"http-info" "sed"
                 ;; "github" how does this even work?
                 ;; "rotten-tomatoes", "lastfm" needs key to verify
                 ;; api broken -- "knowledge" "metacritic" (getting 403 error)
