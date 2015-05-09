@@ -35,7 +35,7 @@
                        :users {"{{user}}" {:pass "{{password}}", :privs :admin}}
 {% endif %}
                        :plugins plugins
-                       :url-handlers #{"youtube"}
+                       :url-handlers #{"youtube" "reddit"}
                        :http-info {:automatic? true}}})
 
 ; users is a series of username to password and privileges.
