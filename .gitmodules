@@ -20,3 +20,6 @@
 [submodule "formulas/bind-formula"]
 	path = formulas/bind-formula
 	url = https://github.com/TronPaul/bind-formula.git
+[submodule "formulas/ntp-formula"]
+	path = formulas/ntp-formula
+	url = https://github.com/saltstack-formulas/ntp-formula.git
