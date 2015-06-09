@@ -1,7 +1,7 @@
 {
   "checks": {
     "mumble": {
-      "command": "/etc/sensu/plugins/mumble-ping.py"
+      "command": "/etc/sensu/plugins/mumble-ping.py",
       "subscribers": [
         "voice_server"
       ],
