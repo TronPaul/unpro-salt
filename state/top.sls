@@ -1,7 +1,7 @@
 base:
   '*':
     - sensu
-    - sensu.client
+    - unpro-sensu.client
   '* and not G@virtual:VirtualBox':
     - match: compound
     - unpro_salt
@@ -14,8 +14,7 @@ base:
     - redis.server
   'roles:monitor_master':
     - match: grain
-    - sensu
-    - sensu.server
+    - unpro-sensu.server
     - sensu.api
     - sensu.uchiwa
   'roles:irc_bot':
