@@ -1,6 +1,7 @@
 base:
   '*':
     - sensu
+    - ntp
     - unpro-sensu.client
   '* and not G@virtual:VirtualBox':
     - match: compound
