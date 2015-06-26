@@ -407,6 +407,7 @@ file_roots:
     - /srv/formulas/openvpn-formula
     - /srv/formulas/bind-formula
     - /srv/formulas/ntp-formula
+    - /srv/formulas/nfs-formula
   production:
     - /dev/null
 
