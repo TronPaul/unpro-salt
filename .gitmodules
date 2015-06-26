@@ -14,3 +14,15 @@
 [submodule "formulas/nfs-formula"]
 	path = formulas/nfs-formula
 	url = https://github.com/TronPaul/nfs-formula.git
+[submodule "formulas/openvpn-formula"]
+	path = formulas/openvpn-formula
+	url = https://github.com/TronPaul/openvpn-formula.git
+[submodule "formulas/openvpn-client-formula"]
+	path = formulas/openvpn-client-formula
+	url = https://github.com/TronPaul/openvpn-client-formula.git
+[submodule "formulas/bind-formula"]
+	path = formulas/bind-formula
+	url = https://github.com/TronPaul/bind-formula.git
+[submodule "formulas/ntp-formula"]
+	path = formulas/ntp-formula
+	url = https://github.com/saltstack-formulas/ntp-formula.git

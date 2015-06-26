@@ -4,7 +4,7 @@ rabbitmq:
     rabbitmq_management:
       - enabled
   vhost:
-    sensu:
+    /sensu:
       - user: sensu
       - conf: .*
       - write: .*

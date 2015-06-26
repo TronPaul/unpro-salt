@@ -404,6 +404,9 @@ file_roots:
     - /srv/formulas/sensu-formula
     - /srv/formulas/rabbitmq-formula
     - /srv/formulas/redis-formula
+    - /srv/formulas/openvpn-formula
+    - /srv/formulas/bind-formula
+    - /srv/formulas/ntp-formula
   production:
     - /dev/null
 

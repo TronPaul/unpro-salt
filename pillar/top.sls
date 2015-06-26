@@ -1,6 +1,7 @@
 base:
   '*':
     - users
+  'not G@domain:ec2.internal':
     - sensu
   'domain:ec2.internal':
     - match: grain
@@ -13,10 +14,10 @@ base:
     - mumble
   'roles:vpn_server':
     - match: grain
-    - openvpn_server
+    - vpn-server
   'roles:vpn_client':
     - match: grain
-    - openvpn_client
+    - openvpn-client
   'nasus':
     - nasus_samba
     - nfs

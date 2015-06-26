@@ -1,7 +1,8 @@
 base:
   '*':
     - sensu
-    - sensu.client
+    - ntp
+    - unpro-sensu.client
   '* and not G@virtual:VirtualBox':
     - match: compound
     - unpro_salt
@@ -14,8 +15,7 @@ base:
     - redis.server
   'roles:monitor_master':
     - match: grain
-    - sensu
-    - sensu.server
+    - unpro-sensu.server
     - sensu.api
     - sensu.uchiwa
   'roles:irc_bot':
@@ -26,7 +26,9 @@ base:
     - znc
   'roles:vpn_server':
     - match: grain
-    - openvpn.server
+    - unpro-openvpn
+    - bind
+    - bind.config
   'roles:aws_nat':
     - match: grain
     - aws.nat
@@ -57,4 +59,4 @@ base:
     - nfs.client
   'roles:vpn_client':
     - match: grain
-    - openvpn.client
+    - unpro-openvpn-client
