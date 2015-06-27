@@ -405,6 +405,7 @@ file_roots:
     - /srv/formulas/rabbitmq-formula
     - /srv/formulas/redis-formula
     - /srv/formulas/openvpn-formula
+    - /srv/formulas/openvpn-client-formula
     - /srv/formulas/bind-formula
     - /srv/formulas/ntp-formula
     - /srv/formulas/nfs-formula
