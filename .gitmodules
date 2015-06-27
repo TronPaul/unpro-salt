@@ -13,7 +13,7 @@
 	branch = ubuntu-14.04
 [submodule "formulas/nfs-formula"]
 	path = formulas/nfs-formula
-	url = https://github.com/TronPaul/nfs-formula.git
+	url = https://github.com/saltstack-formulas/nfs-formula.git
 [submodule "formulas/openvpn-formula"]
 	path = formulas/openvpn-formula
 	url = https://github.com/TronPaul/openvpn-formula.git

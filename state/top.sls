@@ -47,7 +47,7 @@ base:
   'roles:nas':
     - match: grain
     - samba
-    - unpro_nfs.server
+    - unpro-nfs.server
   'roles:htpc':
     - match: grain
     - xbmc
