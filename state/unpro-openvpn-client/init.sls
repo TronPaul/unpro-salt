@@ -1,19 +1,22 @@
 {% set id = grains['id'] %}
+{% set bucket = salt['pillar.get']('unpro-openvpn-client:bucket') %}
 
 include:
   - openvpn-client
 
 extend:
-  openvpn-client:
-    /etc/openvpn/ca.crt:
-      file.managed:
-        source: s3://{{bucket}}/vpn_ca/ca.crt
-    /etc/openvpn/{{id}}.crt:
-      file.managed:
-        source: s3://{{bucket}}/vpn_ca/{{id}}.crt
-    /etc/openvpn/{{id}}.key:
-      file.managed:
-        source: s3://{{bucket}}/vpn_ca/{{id}}.key
+  /etc/openvpn/ca.crt:
+    file.managed:
+      - source: s3://{{bucket}}/vpn/ca.crt
+      - source_hash: s3://{{bucket}}/vpn/ca.crt.sha256
+  /etc/openvpn/{{id}}.crt:
+    file.managed:
+      - source: s3://{{bucket}}/vpn/{{id}}/{{id}}.crt
+      - source_hash: s3://{{bucket}}/vpn/{{id}}/{{id}}.crt.sha256
+  /etc/openvpn/{{id}}.key:
+    file.managed:
+      - source: s3://{{bucket}}/vpn/{{id}}/{{id}}.key
+      - source_hash: s3://{{bucket}}/vpn/{{id}}/{{id}}.key.sha256
 
 openresolv:
   pkg:
