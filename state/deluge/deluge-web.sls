@@ -21,6 +21,7 @@ deluge-web:
     - require:
       - pkgrepo: deluge-ppa
   service.running:
+    - enable: True
     - require:
       - file: /etc/default/deluge-web
       - file: /etc/init.d/deluge-web

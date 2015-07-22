@@ -28,6 +28,7 @@ deluged:
     - require:
       - pkgrepo: deluge-ppa
   service.running:
+    - enable: True
     - require:
       - file: /var/log/deluge
       - file: /etc/init.d/deluged
