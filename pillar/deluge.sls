@@ -1,5 +1,4 @@
 deluge:
-  config_dir: /var/lib/deluge/.config/deluge
   config:
     download_location: /srv/deluge/downloading
     move_completed_path: /srv/deluge/completed
