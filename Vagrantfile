@@ -29,7 +29,7 @@ def config_salt(salt, hostname)
       salt.grains(YAML.load_file vagrant_grain_file_path)
     end
   end
-  salt.install_args = "-X -g https://github.com/TronPaul/salt.git git v2014.7.2"
+  salt.install_args = "-P -X git v2015.8.0rc2"
   salt.minion_config = "salt/minion"
   salt.verbose = true
   salt.colorize = true
