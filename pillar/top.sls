@@ -18,6 +18,9 @@ base:
   'roles:vpn_client':
     - match: grain
     - openvpn-client
+  'roles:torrentserver':
+    - match: grain
+    - deluge
   'nasus':
     - nasus_samba
     - nfs

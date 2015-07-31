@@ -26,3 +26,6 @@
 [submodule "formulas/ntp-formula"]
 	path = formulas/ntp-formula
 	url = https://github.com/saltstack-formulas/ntp-formula.git
+[submodule "formulas/deluge-formula"]
+	path = formulas/deluge-formula
+	url = https://github.com/TronPaul/deluge-formula.git

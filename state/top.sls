@@ -43,7 +43,6 @@ base:
     - match: grain
     - deluge.deluged
     - deluge.deluge-web
-    - deluge.proxy
   'roles:nas':
     - match: grain
     - samba
