@@ -31,7 +31,6 @@ def config_salt(salt, hostname)
   end
   salt.install_args = "-P -X git v2015.8.0rc2"
   salt.minion_config = "salt/minion"
-  salt.verbose = true
   salt.colorize = true
   salt.run_highstate = true
 end
