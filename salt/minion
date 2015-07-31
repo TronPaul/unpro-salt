@@ -409,6 +409,7 @@ file_roots:
     - /srv/formulas/bind-formula
     - /srv/formulas/ntp-formula
     - /srv/formulas/nfs-formula
+    - /srv/formulas/deluge-formula
   production:
     - /dev/null
 
