@@ -41,8 +41,7 @@ base:
     - openssh.config
   'roles:torrentserver':
     - match: grain
-    - deluge.deluged
-    - deluge.deluge-web
+    - unpro-deluge
   'roles:nas':
     - match: grain
     - samba
