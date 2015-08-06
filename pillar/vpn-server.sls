@@ -1,28 +1,23 @@
 openvpn:
   server:
     vpn.teamunpro.com:
-      server: 10.1.0.0 255.255.255.0
-      ca: ca.crt
-      cert: vpn.teamunpro.com.crt
-      key: vpn.teamunpro.com.key
-      dh: dh2048.pem
-      push:
-        - route 10.0.0.0 255.255.255.0
-        - route 10.0.1.0 255.255.255.0
-        - route 192.168.1.0 255.255.255.0
-        - dhcp-option DNS 10.1.0.1
-      ifconfig-pool-persist: ipp.txt
-      client_to_client: True
-      keepalive: '10 120'
-      status: openvpn-status.log
-      client_config_dir: ccd
-      clients:
-        sjds-laptop: iroute 192.168.1.0 255.255.255.0
+      remote: teamunpro.ddns.net
+      float: True
+      ifconfig: 10.99.99.2 10.99.99.1
+      secret: secret
+      route: 10.0.0.0 255.255.0.0
+      ping: 15
+      ping_restart: 20
+      persist_local_ip: True
+      persist_remote_ip: True
   lookup:
     dh_files: []
+
 bind:
   lookup:
-    pkgs: ["bind9", "bind9utils"]
+    pkgs: 
+      - bind9
+      - bind9utils
   configured_views:
     internal:
       match_clients:
