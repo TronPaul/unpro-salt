@@ -5,7 +5,7 @@ openvpn:
       float: True
       ifconfig: 10.99.99.2 10.99.99.1
       secret: secret
-      route: 10.0.0.0 255.255.0.0
+      route: 192.168.1.0 255.255.255.0
       ping: 15
       ping_restart: 20
       persist_local_ip: True
