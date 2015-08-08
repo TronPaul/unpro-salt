@@ -1,6 +1,7 @@
 openvpn:
   server:
     vpn.teamunpro.com:
+      port: 8001
       remote: teamunpro.ddns.net
       float: True
       ifconfig: 10.99.99.2 10.99.99.1
