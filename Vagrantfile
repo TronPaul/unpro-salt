@@ -6,9 +6,6 @@ require 'yaml'
 VAGRANTFILE_API_VERSION = "2"
 
 def config_vm(box, n)
-  box.vm.synced_folder "state", "/srv/salt/"
-  box.vm.synced_folder "formulas", "/srv/formulas"
-  box.vm.synced_folder "pillar", "/srv/pillar/"
   box.vm.network :private_network, ip: "192.168.50.#{n}"
   pre_bootstrap_script = "salt/pre-bootstrap/#{box.vm.box}.sh"
   if File.file?(pre_bootstrap_script)
@@ -19,20 +16,24 @@ def config_vm(box, n)
   end
 end
 
-def config_salt(salt, hostname)
+def config_salt(salt, hostname, type = :minion)
   vagrant_grain_file_path = "salt/vagrant-grains/#{hostname}"
   grain_file_path = "salt/grains/#{hostname}"
-  if Vagrant.has_plugin?("salty-vagrant-grains")
+  if Vagrant.has_plugin?('salty-vagrant-grains')
     if File.file?(grain_file_path)
-      salt.grains(YAML.load_file grain_file_path)
+      salt.grains_config = grain_file_path
     elsif File.file?(vagrant_grain_file_path)
-      salt.grains(YAML.load_file vagrant_grain_file_path)
+      salt.grains_config = vagrant_grain_file_path
     end
   end
-  salt.install_args = "-P -X git v2015.8.0rc2"
-  salt.minion_config = "salt/minion"
+  salt.install_args = '-P -g https://github.com/TronPaul/salt.git git 2015.8.unpro'
   salt.colorize = true
+  #salt.verbose = true
+  #salt.log_level = 'info'
   salt.run_highstate = true
+  salt.minion_config = 'salt/minion'
+  salt.minion_key = "salt/key/#{hostname}.pem"
+  salt.minion_pub = "salt/key/#{hostname}.pub"
 end
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -77,9 +78,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define :'rabbitmq-01' do |box|
+  # Private subnet
+
+  config.vm.define :sensu do |box|
     box.vm.box = "ubuntu/trusty64"
-    box.vm.hostname = 'rabbitmq-01'
+    box.vm.hostname = 'sensu'
 
     config_vm(box, 7)
     box.vm.provision :salt do |salt|
@@ -87,13 +90,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define :sensu do |box|
+  config.vm.define :'salt-master' do |box|
     box.vm.box = "ubuntu/trusty64"
-    box.vm.hostname = 'sensu'
+    box.vm.hostname = 'salt-master'
 
     config_vm(box, 8)
+    box.vm.provision :shell do |s|
+      s.path = 'salt/pre-bootstrap/master.sh'
+      s.privileged = true
+    end
     box.vm.provision :salt do |salt|
       config_salt(salt, box.vm.hostname)
+      salt.install_master = true
+      minions = Dir["salt/key/*.pub"].map {|f| File.basename(f, '.pub')}.reject { |f| f == 'master' }
+      salt.seed_master = Hash[minions.collect {|m| [m, "salt/key/#{m}.pub"]}]
+      salt.master_config = 'salt/master'
     end
   end
 
@@ -102,17 +113,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     box.vm.box = "ubuntu/trusty64"
     box.vm.hostname = 'nasus'
 
-    config_vm(box, 7)
-    box.vm.provision :salt do |salt|
-      config_salt(salt, box.vm.hostname)
-    end    
-  end
-
-  config.vm.define :'sjds-laptop' do |box|
-    box.vm.box = "ubuntu/trusty64"
-    box.vm.hostname = 'sjds-laptop'
-
-    config_vm(box, 8)
+    config_vm(box, 9)
     box.vm.provision :salt do |salt|
       config_salt(salt, box.vm.hostname)
     end    
@@ -122,7 +123,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     box.vm.box = "ubuntu/trusty64"
     box.vm.hostname = 'fednet'
 
-    config_vm(box, 9)
+    config_vm(box, 10)
     box.vm.provision :salt do |salt|
       config_salt(salt, box.vm.hostname)
     end    

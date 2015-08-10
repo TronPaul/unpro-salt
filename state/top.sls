@@ -3,9 +3,6 @@ base:
     - sensu
     - ntp
     - unpro-sensu.client
-  '* and not G@virtual:VirtualBox':
-    - match: compound
-    - unpro_salt
   'roles:rabbitmq':
     - match: grain
     - rabbitmq

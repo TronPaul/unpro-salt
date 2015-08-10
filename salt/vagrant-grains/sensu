@@ -1,2 +1,4 @@
 roles:
-  monitor_master
+  - monitor_master
+  - rabbitmq
+
