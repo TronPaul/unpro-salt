@@ -342,6 +342,9 @@ fileserver_backend:
 # When using the git fileserver backend at least one git remote needs to be
 # defined. The user running the salt master will need read access to the repo.
 #
+gitfs_env_whitelist:
+  - base
+
 gitfs_remotes:
   - https://github.com/TronPaul/unpro-salt.git:
     - root: state

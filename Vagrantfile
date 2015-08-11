@@ -26,7 +26,7 @@ def config_salt(salt, hostname, type = :minion)
       salt.grains_config = vagrant_grain_file_path
     end
   end
-  salt.install_args = '-P -g https://github.com/TronPaul/salt.git git 2015.8.unpro'
+  salt.install_args = '-P git 2015.8'
   salt.colorize = true
   #salt.verbose = true
   #salt.log_level = 'info'
