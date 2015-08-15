@@ -1,5 +1,0 @@
-roles:
-  - webserver
-  - torrentserver
-  - nas  
-  - vpn_client

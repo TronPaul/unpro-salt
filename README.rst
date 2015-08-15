@@ -1,5 +1,5 @@
 ==========
-unPRO-salt
+unpro-salt
 ==========
 
-Salt config for unPRO
+Salt states for unPRO
