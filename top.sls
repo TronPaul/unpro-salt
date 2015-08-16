@@ -7,9 +7,6 @@ base:
     - match: grain
     - rabbitmq
     - rabbitmq.config
-  'G@roles:monitor_master and G@virtual:VirtualBox':
-    - match: compound
-    - redis.server
   'roles:monitor_master':
     - match: grain
     - unpro-sensu.server
@@ -55,3 +52,16 @@ base:
   'roles:vpn_client':
     - match: grain
     - unpro-openvpn-client
+dev:
+  'G@roles:monitor_master and G@virtual:VirtualBox':
+    - match: compound
+    - redis.server
+production:
+  'G@roles:voice_server and G@ec2:instance_id':
+    - match: compound
+    - mumble_servers
+  'roles:vpn_server and G@ec2:instance_id':
+    - match: grain
+    - unpro-openvpn
+    - bind
+    - bind.config
