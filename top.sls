@@ -62,6 +62,4 @@ production:
     - mumble_servers.database
   'G@roles:vpn_server and G@ec2:instance_id':
     - match: grain
-    - unpro-openvpn
-    - bind
-    - bind.config
+    - unpro-openvpn.files
