@@ -1,5 +1,3 @@
-{% set db_path = "/var/lib/mumble-server" %}
-
 {% for name, mumble_server in pillar.get('mumble_servers', {}).items() %}
 {%- if mumble_server == None -%}
 {%- set mumble_server = {} -%}
@@ -61,16 +59,4 @@ mumble-server_{{name}}:
     - group: root
     - mode: 644
     - source: salt://mumble_servers/mumble-server.default
-
-{{db_path}}/{{db_file}}:
-  file.managed:
-    - user: mumble-server
-    - group: mumble-server
-    - mode: 600
-    - replace: False
-    - source: salt://mumble/{{name}}.sqlite
-    - watch_in:
-      - service: mumble-server_{{name}}
-    - require_in:
-      - service: mumble-server_{{name}}
 {% endfor %}
