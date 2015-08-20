@@ -1,6 +1,3 @@
-{% set id = grains['id'] %}
-{% set bucket = salt['pillar.get']('secrets:bucket') %}
-{% set servers = salt['pillar.get']('openvpn:server', {}).values() %}
 include:
   - openvpn
 
