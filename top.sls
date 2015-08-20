@@ -59,7 +59,7 @@ dev:
 production:
   'G@roles:voice_server and G@ec2:instance_id':
     - match: compound
-    - mumble_servers
+    - mumble_servers.database
   'G@roles:vpn_server and G@ec2:instance_id':
     - match: grain
     - unpro-openvpn
