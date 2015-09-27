@@ -1,5 +1,4 @@
 include:
-  - .init
   - .package
 
 {% for name in pillar.get('mumble_servers', {}).keys() %}
