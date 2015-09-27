@@ -52,11 +52,9 @@ base:
   'roles:vpn_client':
     - match: grain
     - unpro-openvpn-client
-dev:
   'G@roles:monitor_master and G@virtual:VirtualBox':
     - match: compound
     - redis.server
-production:
   'G@roles:voice_server and G@ec2:instance_id':
     - match: compound
     - mumble_servers.database
