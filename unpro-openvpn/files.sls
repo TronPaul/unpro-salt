@@ -7,3 +7,5 @@ include:
     - group: root
     - mode: 600
     - source: salt://openvpn/secret
+    - require_in:
+      - service: openvpn
