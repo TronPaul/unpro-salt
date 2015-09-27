@@ -59,5 +59,5 @@ base:
     - match: compound
     - mumble_servers.database
   'G@roles:vpn_server and G@ec2:instance_id':
-    - match: grain
+    - match: compound
     - unpro-openvpn.files
