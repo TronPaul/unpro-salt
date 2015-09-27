@@ -12,5 +12,5 @@ include:
     - watch_in:
       - service: mumble-server_{{name}}
     - require:
-      - pkg: mumble-server
+      - file: /var/lib/mumble-server
 {% endfor %}
