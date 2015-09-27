@@ -42,41 +42,14 @@ znc-subdirs:
 znc-config:
   file.managed:
     - name: /var/lib/znc/configs/znc.conf
-{% if bucket %}
-    - source: s3://{{bucket}}/znc/configs/znc.conf
-    - source_hash: s3://{{bucket}}/znc/configs/znc.conf.sha256
-{% else %}
     - template: jinja
     - source: salt://znc/znc.conf.jinja
-{% endif %}
     - replace: False
     - user: znc
     - group: znc
     - mode: 640
     - require:
       - file: znc-subdirs
-
-{% if bucket %}
-backup-znc-config:
-  cron.present:
-    - name: /usr/local/bin/backup-znc-config
-    - identifier: backup-znc-config
-    - user: root
-    - minute: random
-    - hour: 6
-    - require:
-      - file: /usr/local/bin/backup-znc-config
-
-/usr/local/bin/backup-znc-config:
-  file.managed:
-    - template: jinja
-    - source: salt://znc/backup-znc-config.jinja
-    - user: root
-    - group: root
-    - mode: 755
-    - context:
-      bucket: {{bucket}}
-{% endif %}
 
 adminlog-dir:
   file.directory:
@@ -97,12 +70,10 @@ adminlog-config:
     - require:
       - file: adminlog-dir
 
-{% if bucket %}
 znc-pem:
   file.managed:
     - name: /var/lib/znc/znc.pem
-    - source: s3://{{bucket}}/znc/znc.pem
-    - source_hash: s3://{{bucket}}/znc/znc.pem.sha256
+    - source: salt://znc/znc.pem
     - replace: False
     - user: znc
     - group: znc
@@ -111,23 +82,3 @@ znc-pem:
       - file: znc-subdirs
     - require_in:
       - service: znc
-{% else %}
-znc-pem:
-  cmd.run:
-    - name: znc -d /var/lib/znc -p
-    - user: znc
-    - creates: /var/lib/znc/znc.pem
-    - require:
-      - file: znc-subdirs
-  file.managed:
-    - name: /var/lib/znc/znc.pem
-    - create: False
-    - replace: False
-    - user: znc
-    - group: znc
-    - mode: 640
-    - require:
-      - file: znc-subdirs
-    - require_in:
-      - service: znc
-{% endif %}
