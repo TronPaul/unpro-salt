@@ -6,6 +6,6 @@ include:
     - owner: root
     - group: root
     - mode: 600
-    - source: salt://openvpn/secret
+    - source: salt://unpro-openvpn/secret
     - require_in:
       - service: openvpn
