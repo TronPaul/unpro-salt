@@ -5,7 +5,7 @@ include:
 
 {% for server in servers %}
 {% if 'secret' in server %}
-/etc/openvpn/{{server['secret'}}:
+/etc/openvpn/{{server['secret']}}:
   file.managed:
     - owner: root
     - group: root
