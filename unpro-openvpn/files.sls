@@ -10,7 +10,7 @@ include:
     - owner: root
     - group: root
     - mode: 600
-    - source: salt://unpro-openvpn/{{server['secret'}}
+    - source: salt://unpro-openvpn/{{server['secret']}}
     - require_in:
       - service: openvpn
 {% else %}
