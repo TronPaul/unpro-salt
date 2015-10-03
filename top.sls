@@ -46,6 +46,7 @@ base:
     - pcsx2
     - desmume
     - dolphin
+    - mupen64plus
   'roles:nas_client':
     - match: grain
     - nfs.client

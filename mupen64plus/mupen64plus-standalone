@@ -1,0 +1,8 @@
+#! /bin/sh
+
+setterm -blank 0 -powersave off -powerdown 0
+xset s off         # don't activate screensaver
+xset -dpms         # disable DPMS (Energy Star) features.
+xset s noblank     # don't blank the video device
+
+/usr/games/mupen64plus --fullscreen --gfx mupen64plus-video-glide64 "$1"
