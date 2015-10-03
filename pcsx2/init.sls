@@ -34,3 +34,10 @@ pcsx2:
     - group: root
     - mode: 755
     - source: salt://pcsx2/pcsx2-standalone
+
+/usr/local/bin/start-pcsx2:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: 755
+    - source: salt://pcsx2/start-pcsx2

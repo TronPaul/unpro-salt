@@ -20,3 +20,10 @@ dolphin-emu-master:
     - group: root
     - mode: 755
     - source: salt://dolphin/dolphin-standalone
+
+/usr/local/bin/start-dolphin:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: 755
+    - source: salt://dolphin/start-dolphin
