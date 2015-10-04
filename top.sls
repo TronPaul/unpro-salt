@@ -1,7 +1,8 @@
 base:
   '*':
-    - sensu
     - ntp
+  'not fednet':
+    - sensu
     - unpro-sensu.client
   'roles:rabbitmq':
     - match: grain
