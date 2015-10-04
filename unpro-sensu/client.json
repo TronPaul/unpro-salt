@@ -7,7 +7,7 @@
 {%- endif -%}
 {
   "client": {
-    "name": {{name|json}},
+    "name": {{name}},
     "address": {{addresses|first|json}},
     "subscriptions": {{roles|json}}
   }
