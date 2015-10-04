@@ -1,6 +1,6 @@
 {
   "checks": {
-    "mumble": {
+    "vpn": {
       "command": "/etc/sensu/plugins/ping.py --host 10.99.99.1",
       "subscribers": [
         "vpn_server"
