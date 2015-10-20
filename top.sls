@@ -13,9 +13,9 @@ base:
     - unpro-sensu.server
     - sensu.api
     - sensu.uchiwa
-  'roles:irc_bot':
+  'roles:logstash':
     - match: grain
-    - lazybot
+    - logstash
   'roles:irc_bouncer':
     - match: grain
     - znc
