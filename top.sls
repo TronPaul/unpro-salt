@@ -15,7 +15,7 @@ base:
     - sensu.uchiwa
   'roles:logstash':
     - match: grain
-    - logstash
+    - unpro-logstash
   'roles:irc_bouncer':
     - match: grain
     - znc
