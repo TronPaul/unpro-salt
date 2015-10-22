@@ -1,5 +1,6 @@
 include:
   - logstash
+  - java
 
 extend:
   /etc/logstash/conf.d:
