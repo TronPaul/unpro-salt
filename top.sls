@@ -1,6 +1,7 @@
 base:
   '*':
     - ntp
+    - logstash_forwarder
   'not fednet':
     - sensu
     - unpro-sensu.client
