@@ -1,6 +1,7 @@
 include:
   - logstash
   - sun-java
+  - sun-java.alternatives
 
 extend:
   /etc/logstash/conf.d:
