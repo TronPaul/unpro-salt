@@ -17,6 +17,7 @@ base:
   'roles:logstash':
     - match: grain
     - unpro-logstash
+    - kibana
   'roles:irc_bouncer':
     - match: grain
     - znc
