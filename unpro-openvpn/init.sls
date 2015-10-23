@@ -32,7 +32,7 @@ eth0-forwarding:
     - source: 10.0.0.0/16
     - destination: 172.20.254.0/24
 
-eth0-forwarding:
+site-to-site-forwarding:
   iptables.append:
     - table: filter
     - chain: FORWARD
