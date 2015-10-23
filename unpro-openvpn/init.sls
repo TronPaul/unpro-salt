@@ -7,7 +7,7 @@ net.ipv4.ip_forward:
     - require_in:
       - service: openvpn
 
-vpn-connections:
+vpn-aws-connections:
   iptables.append:
     - table: filter
     - chain: INPUT
@@ -15,7 +15,15 @@ vpn-connections:
     - jump: ACCEPT
     - destination: 10.0.0.0/16
 
-vpn-forwarding:
+vpn-chi-connections:
+  iptables.append:
+    - table: filter
+    - chain: INPUT
+    - in-interface: tun+
+    - jump: ACCEPT
+    - destination: 172.20.254.0/24
+
+vpn-aws-forwarding:
   iptables.append:
     - table: filter
     - chain: FORWARD
@@ -23,7 +31,7 @@ vpn-forwarding:
     - jump: ACCEPT
     - destination: 10.0.0.0/16
 
-eth0-forwarding:
+eth0-chi-forwarding:
   iptables.append:
     - table: filter
     - chain: FORWARD
@@ -32,7 +40,7 @@ eth0-forwarding:
     - source: 10.0.0.0/16
     - destination: 172.20.254.0/24
 
-site-to-site-forwarding:
+vpn-chi-forwarding:
   iptables.append:
     - table: filter
     - chain: FORWARD
