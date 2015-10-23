@@ -10,4 +10,13 @@ extend:
       - template: jinja
       - require:
         - pkg: logstash
+      - watch_in:
+        - service: logstash
 
+/opt/logstash/patterns:
+  file.recurse:
+    - source: salt://unpro-logstash/patterns
+    - require:
+      - pkg: logstash
+    - watch_in:
+      - service: logstash
