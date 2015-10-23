@@ -31,3 +31,12 @@ eth0-forwarding:
     - jump: ACCEPT
     - source: 10.0.0.0/16
     - destination: 172.20.254.0/24
+
+eth0-forwarding:
+  iptables.append:
+    - table: filter
+    - chain: FORWARD
+    - out-interface: tun+
+    - jump: ACCEPT
+    - source: 10.1.0.0/24
+    - destination: 172.20.254.0/24
