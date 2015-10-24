@@ -1,0 +1,11 @@
+MUMBLERELEASEVER [0-9]+\.[0-9]+\.[0-9]+
+MUMBLEFULLVER %{MUMBLERELEASEVER}(:?~[0-9a-z~]+)?
+MUMBLECONN New connection: %{HOSTPORT:host}
+MUMBLECHANNEL [^[]+
+MUMBLEONOFF (0|1)
+MUMBLEACTION (?:Kicked|Banned|Moved|Changed speak-state)
+MUMBLECLIENTVER Client version %{MUMBLERELEASEVER:version} \(%{WORD:os}: %{MUMBLEFULLVER:full_version}\)
+MUMBLETARGET %{USER:target_user}:%{INT:target_connection_id}\(%{INT:target_user_id}\)
+MUMBLEMOVE %{MUMBLEACTION:action} %{MUMBLETARGET} to %{MUMBLECHANNEL:channel}\[%{INT:to_channel_id}:%{INT:from_channel_id}]
+MUMBLEKICKBAN %{MUMBLEACTION:action} %{MUMBLETARGET} \(%{GREEDYDATA:reason}\)
+MUMBLEMUTEDEAFEN %{MUMBLEACTION:action} of %{MUMBLETARGET} \(%{MUMBLEONOFF:mute} %{MUMBLEONOFF:deafen} %{MUMBLEONOFF} %{MUMBLEONOFF:priority_speaker}\)

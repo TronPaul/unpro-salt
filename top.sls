@@ -1,6 +1,7 @@
 base:
   '*':
     - ntp
+    - logstash_forwarder
   'not fednet':
     - sensu
     - unpro-sensu.client
@@ -13,9 +14,10 @@ base:
     - unpro-sensu.server
     - sensu.api
     - sensu.uchiwa
-  'roles:irc_bot':
+  'roles:logstash':
     - match: grain
-    - lazybot
+    - unpro-logstash
+    - kibana
   'roles:irc_bouncer':
     - match: grain
     - znc
