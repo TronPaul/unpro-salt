@@ -53,6 +53,9 @@ base:
   'roles:nas_client':
     - match: grain
     - nfs.client
+  'roles:music_server':
+    - match: grain
+    - mopidy
   'G@roles:monitor_master and G@virtual:VirtualBox':
     - match: compound
     - redis.server
