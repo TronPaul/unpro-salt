@@ -1,6 +1,6 @@
 {%- set name = salt['grains.get']('ec2_tags:Name', salt['grains.get']('fqdn')) -%}
 {%- set addresses = salt['grains.get']('ipv4') -%}
-{%- do addresses.remove('127.0.0.1') -%}
+{%- do addresses.pop('127.0.0.1', None) -%}
 {%- set roles = salt['grains.get']('roles') -%}
 {%- if roles is string -%}
   {%- set roles = [roles] -%}
