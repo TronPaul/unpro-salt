@@ -2,7 +2,7 @@
 {% set welcometext = mumble_server.get('welcometext', '<br />Welcome to this server running <b>Murmur</b>.<br />Enjoy your stay!<br />') -%}
 {% set port = mumble_server.get('port', 64738) -%}
 {% set users = mumble_server.get('users', 100) -%}
-{% set bandwidth = mumble_server.get('bandwidth', 72000) -%}
+{% set bandwidth = mumble_server.get('bandwidth', 100000) -%}
 {% set serverpassword = mumble_server.get('serverpassword', '') -%}
 
 # Path to database. If blank, will search for
